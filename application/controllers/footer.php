@@ -11,7 +11,7 @@ class Footer extends MY_Controller
 	}
 	
 	//joojieman
-	// loads the "about" section
+	// sanoke
 	public function about()
 	{
 		$data['css'] = 'resources/footer.css';
