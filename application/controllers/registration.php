@@ -34,7 +34,7 @@ class Registration extends MY_Controller
 		$username = $this->input->post('username');
 		$firstname = $this->input->post('firstname');
 		$lastname = $this->input->post('lastname');
-		$password = $this->encrypt->encode($this->input->post('password'));
+		$password = $this->input->post('password');
 		$emailadd = $this->input->post('email');
 		
 		if (($this->form_validation->run() === FALSE) && ($termsandconditions != TRUE))

@@ -19,8 +19,15 @@ class Login extends MY_Controller
 		$data['validationErrors'] = " ";
 		$data['formDestination'] = "login/attemptLoginAdmin";
 		$this->loadpage('login',$data);
-		//sample
-		//ceraa cerraaaa
+	}
+	
+	public function login_hq()
+	{
+		$this->session->sess_destroy();
+		$data['css'] = "resources/splash.css";
+		$data['validationErrors'] = " ";
+		$data['formDestination'] = "login/attemptLoginHQ";
+		$this->loadpage('login',$data);
 	}
 	
 	public function login_restaurant()
@@ -63,9 +70,9 @@ class Login extends MY_Controller
 			{
 				if($dbResultsFromUsername != FALSE && ( $formData['password'] == $this->encrypt->decode($dbResultsFromUsername[0]->password) ) )
 				{
-					$this->setSessionCustomer($dbResultsFromEmail, $checked, "CUSTOMER");
+					$this->setSessionCustomer($dbResultsFromUsername, $checked, "CUSTOMER");
 					$data['formDestination'] = "/";
-					$this->loadpage('login',$data);
+					redirect('/','refresh');
 					
 				}//FROM EMAIL
 				else if ($dbResultsFromEmail != FALSE && ( $formData['password'] == $this->encrypt->decode($dbResultsFromEmail[0]->password) ) )
@@ -76,14 +83,14 @@ class Login extends MY_Controller
 				}
 				else
 				{
-					$data['validationErrors'] = "Invalid Username or Password; Please try again!";
+					$data['validationErrors'] = "Invalid Username or Password; Please try again! 1";
 					$data['formDestination'] = "login/attemptLoginCustomer";
 					$this->loadpage('login',$data);
 				}
 			}
 			else 
 			{
-				$data['validationErrors'] = "Invalid Username or Password; Please try again!";
+				$data['validationErrors'] = "Invalid Username or Password; Please try again! 2";
 				$data['formDestination'] = "login/attemptLoginCustomer";
 				$this->loadpage('login',$data);
 			}
@@ -91,7 +98,7 @@ class Login extends MY_Controller
 		}
 		else
 		{
-			$data['validationErrors'] = "Invalid Username or Password; Please try again!";
+			$data['validationErrors'] = "Invalid Username or Password; Please try again! 3";
 			$data['formDestination'] = "login/attemptLoginCustomer";
 			$this->loadpage('login',$data);
 		}
@@ -129,7 +136,7 @@ class Login extends MY_Controller
 				//FROM USERNAME
 				if($dbResultsFromUsername != FALSE && ( $formData['password'] == $this->encrypt->decode($dbResultsFromUsername[0]->password) ) )
 				{
-					$this->setSessionGeneric($dbResultsFromUsername, $checked, "ADMIN");
+					$this->setSessionAdmin($dbResultsFromUsername, $checked, "ADMIN");
 					$data['formDestination'] = "administrator/";
 					$this->loadpage('login',$data);
 				}
@@ -189,7 +196,66 @@ class Login extends MY_Controller
 				//FROM USERNAME
 				if($dbResultsFromUsername != FALSE && ( $formData['password'] ==$this->encrypt->decode($dbResultsFromUsername[0]->password)) )
 				{
-					$this->setSessionGeneric($dbResultsFromUsername, $checked, "RESTAURANT");
+					$this->setSessionRestaurant($dbResultsFromUsername, $checked, "RESTAURANT");
+					$data['formDestination'] = "restaurant/";
+					$this->loadpage('login',$data);
+				}
+				else
+				{
+					$data['validationErrors'] = "Invalid Username or Password; Please try again!";
+					$data['formDestination'] = "login/attemptLoginRestaurant";
+					$this->loadpage('login',$data);
+				}
+			}
+			else 
+			{
+				$data['validationErrors'] = "Invalid Username or Password; Please try again!";
+				$data['formDestination'] = "login/attemptLoginRestaurant";
+				$this->loadpage('login',$data);
+			}
+			
+		}
+		else
+		{
+			$data['validationErrors'] = "Invalid Username or Password; Please try again!";
+			$data['formDestination'] = "login/attemptLoginRestaurant";
+			$this->loadpage('login',$data);
+		}
+	}
+
+	public function attemptLoginHQ()
+	{
+		//INITIALIZE
+		$data['validationErrors'] = " ";
+		$data['css'] = "resources/splash.css";
+		$this->load->model("HQ_Model");
+		
+		//INITIALIZE AND CHECK VALUES
+		if($this->initializeValues() != false)
+		{
+			$formData = $this->initializeValues();
+			$this->session->set_flashdata('item', 'value');
+			
+			//GET USERNAME AND PASSWORD FROM DATABASE
+			$dbResultsFromUsername = $this->Restaurant_Model->getByUsername($formData['username']);
+			$checked = $this->input->post('stayloggedin');
+			
+			if($checked == "CHECKED")
+			{
+				$checked = TRUE;
+			}
+			else
+			{
+				$checked = FALSE;
+			}
+			
+			//CHECK IF EXISTS USERNAME/PASSWORD
+			if($dbResultsFromUsername != FALSE)
+			{
+				//FROM USERNAME
+				if($dbResultsFromUsername != FALSE && ( $formData['password'] ==$this->encrypt->decode($dbResultsFromUsername[0]->password)) )
+				{
+					$this->setSessionHQ($dbResultsFromUsername, $checked, "RESTAURANT");
 					$data['formDestination'] = "restaurant/";
 					$this->loadpage('login',$data);
 				}
@@ -219,7 +285,7 @@ class Login extends MY_Controller
 	private function setSessionCustomer($dataObjectArray, $rememberMe, $type)
 	{
 		$newdata = array(
-					'id'  => $dataObjectArray[0]->id,
+					'id'  => $dataObjectArray[0]->customer_id,
 					'username'  => $dataObjectArray[0]->username,
 					'firstname'     => $dataObjectArray[0]->firstname,
 					'lastname' => $dataObjectArray[0]->lastname,
@@ -233,10 +299,30 @@ class Login extends MY_Controller
 		$this->session->set_userdata($newdata);
 	}
 	
-	private function setSessionGeneric($dataObjectArray)
+	private function setSessionAdmin($dataObjectArray)
 	{
 		$newdata = array(
-			'id'  => $dataObjectArray[0]->id,
+			'id'  => $dataObjectArray[0]->admin_id,
+			'username'  => $dataObjectArray[0]->username
+               );
+
+		$this->session->set_userdata($newdata);
+	}
+	
+	private function setSessionRestaurant($dataObjectArray)
+	{
+		$newdata = array(
+			'id'  => $dataObjectArray[0]->restaurant_id,
+			'username'  => $dataObjectArray[0]->username
+               );
+
+		$this->session->set_userdata($newdata);
+	}
+	
+	private function setSessionHQ($dataObjectArray)
+	{
+		$newdata = array(
+			'id'  => $dataObjectArray[0]->hq_id,
 			'username'  => $dataObjectArray[0]->username
                );
 
