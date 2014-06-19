@@ -17,7 +17,7 @@ Class MY_Controller Extends CI_Controller{
 	
 	public function sessionSecurityInterceptor($typeOfAccount)
 	{
-		$currentSessionType = $this->session->userdata('type');
+		$currentSessionType = $this->session->userdata('usertype');
 		$currentSessionID = $this->session->userdata('id');
 		if(($currentSessionType == $typeOfAccount) && (isset($currentSessionID) == TRUE))
 		{

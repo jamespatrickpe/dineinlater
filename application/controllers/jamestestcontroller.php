@@ -4,6 +4,7 @@ class JamesTestController extends MY_Controller {
 
 	public function index()
 	{
-			loadpage();
+		$data['password'] = $this->encrypt->encode("flabbergasted");
+		$this->loadpage("viewtest",$data);
 	}
 }

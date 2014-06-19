@@ -1,6 +1,6 @@
 <div id="content-container">
 		<div id="body-container">
-			<div id="page-header"><h1><?php echo $test ?></h1></div>
+			<div id="page-header"><?php echo $password ?></div>
 			<p>
 			</p>
 		</div>

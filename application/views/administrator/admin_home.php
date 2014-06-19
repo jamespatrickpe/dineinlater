@@ -1,5 +1,15 @@
-<div id="content-container">
-	<div id="body-container">
+<div id="content-container"><div id="body-container">
+<h1>ADMINISTATOR MANAGEMENT SYSTEM</h1>
+<h2>
+	DASHBOARD | 
+	RESTAURANTS | 
+	BLOGGERS | 
+	CUSTOMERS 
+</h2>
+</div></div>
+<!--
+
+	
 		<div class="blurb-rows">
 			<blurb class="small">
 				<div class="blurb-header"><h2>Administrator</h2></div>
@@ -178,3 +188,4 @@
 				</div>
 	</div>
 </div>
+-->

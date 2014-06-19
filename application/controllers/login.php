@@ -137,8 +137,7 @@ class Login extends MY_Controller
 				if($dbResultsFromUsername != FALSE && ( $formData['password'] == $this->encrypt->decode($dbResultsFromUsername[0]->password) ) )
 				{
 					$this->setSessionAdmin($dbResultsFromUsername, $checked, "ADMIN");
-					$data['formDestination'] = "administrator/";
-					$this->loadpage('login',$data);
+					redirect('administrator/','refresh');
 				}
 				else
 				{
@@ -255,7 +254,7 @@ class Login extends MY_Controller
 				//FROM USERNAME
 				if($dbResultsFromUsername != FALSE && ( $formData['password'] ==$this->encrypt->decode($dbResultsFromUsername[0]->password)) )
 				{
-					$this->setSessionHQ($dbResultsFromUsername, $checked, "RESTAURANT");
+					$this->setSessionHQ($dbResultsFromUsername, $checked, "HQ");
 					$data['formDestination'] = "restaurant/";
 					$this->loadpage('login',$data);
 				}
@@ -289,7 +288,7 @@ class Login extends MY_Controller
 					'username'  => $dataObjectArray[0]->username,
 					'firstname'     => $dataObjectArray[0]->firstname,
 					'lastname' => $dataObjectArray[0]->lastname,
-					'type' => $type
+					'usertype' => $type
                );
 		if($rememberMe == TRUE)
 		{
@@ -299,13 +298,20 @@ class Login extends MY_Controller
 		$this->session->set_userdata($newdata);
 	}
 	
-	private function setSessionAdmin($dataObjectArray)
+	private function setSessionAdmin($dataObjectArray, $rememberMe, $type)
 	{
 		$newdata = array(
 			'id'  => $dataObjectArray[0]->admin_id,
-			'username'  => $dataObjectArray[0]->username
+			'username'  => $dataObjectArray[0]->username,
+			'usertype' => $type
                );
-
+			   
+		if($rememberMe == TRUE)
+		{
+			$data['new_expiration'] = 60*60*24*30;//30 days
+        	$this->session->sess_expiration = $data['new_expiration'];
+		}
+		
 		$this->session->set_userdata($newdata);
 	}
 	
@@ -313,7 +319,8 @@ class Login extends MY_Controller
 	{
 		$newdata = array(
 			'id'  => $dataObjectArray[0]->restaurant_id,
-			'username'  => $dataObjectArray[0]->username
+			'username'  => $dataObjectArray[0]->username,
+			'usertype' => $type
                );
 
 		$this->session->set_userdata($newdata);
@@ -323,7 +330,8 @@ class Login extends MY_Controller
 	{
 		$newdata = array(
 			'id'  => $dataObjectArray[0]->hq_id,
-			'username'  => $dataObjectArray[0]->username
+			'username'  => $dataObjectArray[0]->username,
+			'usertype' => $type
                );
 
 		$this->session->set_userdata($newdata);

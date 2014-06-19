@@ -6,14 +6,20 @@ class Administrator extends MY_Controller
 	{
 		parent::__construct();
 		$this->load->model('Admin_Model');
-		//$this->sessionSecurityInterceptor("ADMIN");
+		$this->sessionSecurityInterceptor("ADMIN");
 		$data['validationErrors'] = " ";
 	}
 	
-	//loads the admin home page
+	//Loads the Admin Home Page
 	public function index()
 	{
 		$data['css'] = 'resources/account.css';
-		$this->loadpage("admin_home",$data);	
+		$this->loadpage("administrator/admin_home",$data);	
 	}
+	
+	//Loads Restaurant Management System
+	
+	//Loads Blogger System
+	
+	//
 }
