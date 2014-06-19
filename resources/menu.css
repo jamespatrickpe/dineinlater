@@ -1,0 +1,36 @@
+.item-name {
+	font-weight: 700;
+}
+.item-price {
+	width: 30%;
+	text-align: right;
+	padding-right: 20px
+} 	
+
+.menu-stub {
+	height: auto;
+	padding: none;
+	display: -webkit-flex;	
+	display:		 flex;
+	margin-bottom: 10px;
+	margin-left: 10px;
+	margin-right: -10px;
+}
+.menu-stub .blurb-stacks {
+	width: 70%;
+}
+
+@media only screen and (max-device-width:768px) {
+	.blurb-rows {
+		-webkit-flex-flow: column;			
+			flex-flow: column;
+		-webkit-flex-direction: column;
+			flex-direction: column;
+	}
+	#footer .blurb-rows {
+		-webkit-flex-flow: row;			
+			flex-flow: row;
+		-webkit-flex-direction: row;
+			flex-direction: row;
+	}
+}

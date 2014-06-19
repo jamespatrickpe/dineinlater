@@ -1,0 +1,74 @@
+#manage {
+	margin-bottom: 0px;
+}
+
+#manage-links {
+	border: 1px solid #d8462d;
+	padding: 10px;
+}
+
+#manage-links a {
+	color: #6b5845;
+	font-size: 0.9em;
+	text-align: center;
+}
+
+#manage-links .action:hover {
+	background: #ccd7cd;
+}
+
+.small {
+	min-width: 15%;
+	max-width: 20%;
+}
+
+.half {
+	padding-left: 20px;
+}
+
+.half .blurb-header {
+	margin-left: -20px;
+	margin-bottom: 40px;
+}
+
+#footer {
+	position: fixed;
+	bottom: 0px;
+        left: -10px;
+	padding: 10px 20px 10px 20px;
+	width: 100%;
+	height: 20px;
+	background: #d8462b;
+	font-weight: 700;
+	box-shadow: 0px 0px 5px #6b5845;
+	text-align: center;
+	display: -webkit-flex;
+	display:		 flex;
+	-webkit-justify-content: center;
+			justify-content: center;
+	-webkit-align-items: center;
+	   		align-items: center;
+}
+
+#footer a {
+	margin-top: -10px;
+	color: #fffeee;
+}
+
+#rating {
+    width: 100%;
+    height: 20%;
+    min-height: 140px;
+    margin-bottom: 10px;
+    text-align: center;    
+    -webkit-justify-content: space-between;
+            justify-content: space-between;
+}
+    #rating div {
+        margin: 10px;
+    }
+    #rating h2 {
+       font-size: 3em;
+        margin: 0em;
+        color: #fffeee;
+    }

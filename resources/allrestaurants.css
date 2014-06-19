@@ -1,0 +1,64 @@
+/* restaurant */
+#restaurant-listing {
+	padding: 0;
+	background: none;
+}
+form {
+	text-align: left;
+}
+.sorter {
+	padding: 10px;
+	margin-bottom: 10px;
+	text-align: right;
+	background: #fffeee;
+}
+
+.sorter:last-child { margin-bottom: 0px;}
+.restaurant {
+	min-height: 240px;
+	padding: 10px;
+	padding-right: none;
+	background: #fffeee;
+	color: #6b5845;
+	margin-bottom: 10px;
+	display: -webkit-flex;
+	display:		 flex;
+	-webkit-flex-flow: row;
+		   -flex-flow: row;
+	-webkit-flex-direction: row;
+		   -flex-direction: row;
+
+}
+	ul {
+		margin-right: -10px;
+	}
+	.restaurant-info {
+		width: 75%;
+		padding: none;
+	}
+	.image-rate {
+		width: 25%;
+		text-align: center;
+	}
+	.restaurant-image {
+		margin: 0px;
+		max-width: 100%;
+		max-height: 240px;
+	}
+	.restaurant h3 {
+		line-height: 0.5em;
+		margin-bottom: .5em;
+	}
+	.restaurant:hover {
+		background: #fff3c6;
+	}
+	.rating{
+		margin-top: -10px;
+	}
+	.rating-stars img {
+		height: 25px;
+		margin: 0;
+	}	
+.check {
+	margin: 0px 10px -1px 0px;
+}

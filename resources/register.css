@@ -1,0 +1,122 @@
+html, body {
+	text-align: center;
+	height: 100%;
+	background-color: #ccd7cd;
+}
+
+.password_error
+{
+	font-size: 1em;
+    color: red;
+    font-family: 'Open Sans', sans-serif; 
+    border:3px;
+    align:center;
+}
+
+#termsandconditions {
+	font-size: 1em;
+    color: red;
+    font-family: 'Open Sans', sans-serif; 
+}
+
+#content-container {	
+	width: 100%;
+	border: none;
+	min-height: 100%;
+	display: -webkit-flex;
+	display: 		 flex;
+	-webkit-justify-content: center;
+	   		justify-content: center;
+	-webkit-align-items: center;
+	   		align-items: center;
+}
+#registration {
+	width: 300px;
+	background: #fffeee;
+	padding: 20px 35px 30px 30px;
+	margin-top: 60px;
+	margin-bottom: 40px;
+	box-shadow: 0px 0px 10px #99b09f;
+}
+
+.blurb-header {
+	margin-left: -30px;
+	margin-right: -35px;
+	margin-top: -30px;
+	margin-bottom: 20px;
+}
+
+#registration form {
+	text-align: left;
+}
+#registration input[type=text], #registration textarea {
+	-webkit-appearance: none;
+            appearance: none;
+    border: 1px solid #6b5845;
+    font-size: 1em;
+    color: #6b5845;
+    font-family: 'Open Sans', sans-serif; 
+    width: 100%;
+    resize: none;
+    padding: 5px;
+    margin: 5px 0px 0px -3px;
+}
+
+#registration input[type=password], #registration textarea {
+	-webkit-appearance: none;
+            appearance: none;
+    border: 1px solid #6b5845;
+    font-size: 1em;
+    color: #6b5845;
+    font-family: 'Open Sans', sans-serif; 
+    width: 100%;
+    resize: none;
+    padding: 5px;
+    margin: 5px 0px 0px -3px;
+}
+
+.check {
+	5px 5px -3px 10px;
+        background: #c0c0c0;
+}
+
+
+#registration textarea {
+	min-height: 200px;
+	border-right: 1px solid #6b5845;
+	width: 298px;
+}
+
+#footer {
+	position: fixed;
+	bottom: 0px;
+	left: -10px;
+	padding: 10px;
+	width: 100%;
+	height: 20px;
+	background: #d8462b;
+	font-weight: 700;
+	box-shadow: 0px 0px 5px #6b5845;
+	text-align: center;
+	display: -webkit-flex;
+	display:		 flex;
+	-webkit-justify-content: center;
+			justify-content: center;
+	-webkit-align-items: center;
+	   		align-items: center;
+}
+
+#footer a {
+	margin-top: -10px;
+	color: #fffeee;
+}
+
+.question {
+	font-style: italic;
+	font-size: 12pt;
+}
+
+/* Scrollbar + Selection*/
+	::-webkit-scrollbar { width: 10px; height: 10px; background: #fffeee; }	
+	::-webkit-scrollbar-thumb { background: #99b09f; }
+	::selection { background: #ccd7cd; }

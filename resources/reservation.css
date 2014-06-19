@@ -1,0 +1,33 @@
+h1{
+		margin-top: 0em;
+		margin-bottom: 0em;
+	}
+
+h3, p, form {
+	margin-left: 1em;
+}
+
+form {
+	text-align: left;
+}
+
+#personal-details input, #personal-details textarea {
+	-webkit-appearance: none;
+			appearance: none;
+	border: 1px solid #6b5845;
+	font-size: 1em;
+	color: #6b5845;
+	font-family: 'Open Sans', sans-serif;
+	margin: 5px 5px 5px 0px;
+	padding: 10px;
+}	
+
+textarea {
+	height: auto;
+	min-height: 100px;
+}
+
+button {
+	font-size: 1em;
+	margin: 10px 10px 10px 0px;
+}

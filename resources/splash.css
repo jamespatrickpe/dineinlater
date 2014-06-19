@@ -1,0 +1,95 @@
+html, body {
+	text-align: center;
+	overflow: hidden;
+        height: 100%;
+	width: 100%;
+}
+#content-container {
+	background-color: #ccd7cd;
+	background: url('images/splash.jpg') 50% 50%;
+	background-size: cover;
+	width: 100%;
+	border: none;
+	min-height: 100%;
+	display: -webkit-flex;
+	display: 		 flex;
+	-webkit-justify-content: center;
+	   		justify-content: center;
+	-webkit-align-items: center;
+	   		align-items: center;
+}
+#searchbar {
+	box-shadow: 0px 0px 5px #6b5845;
+	background-color: rgba(255,254,248,0.9	);
+	color: #6b5845;
+	width: 50%;	
+	padding: 5em 0em 5em 0em;
+	margin: auto;
+}
+	.search {
+		background: none;
+		border: none;
+		border-bottom: 1px solid #6b5845;
+		font-family: Trebuchet MS;
+		font-size: 1em;
+		color: #6b5845;
+		width: 7em;
+		-webkit-appearance: none;
+	}
+
+	button {
+		background: #6b5845;
+		border: 1px solid #6b5845;
+		padding: 5px;
+	}
+	input {
+		-webkit-appearance: none;
+		border: 1px solid #6b5845;
+		color: #6b5845;
+		font-size: 1em;
+	}
+	.splash  {
+		text-align: center;
+	}
+#footer {
+	position: fixed;
+	bottom: 0px;
+        left: -10px;
+	padding: 10px 20px 10px 20px;
+	width: 100%;
+	height: 20px;
+	background: #d8462b;
+	font-weight: 700;
+	box-shadow: 0px 0px 5px #6b5845;
+	text-align: center;
+	display: -webkit-flex;
+	display:		 flex;
+	-webkit-justify-content: center;
+			justify-content: center;
+	-webkit-align-items: center;
+	   		align-items: center;
+}
+
+#footer a {
+	margin-top: -10px;
+	color: #fffeee;
+}
+
+@media only screen and (max-device-width:768px) {
+	#footer {
+                position: absolute;
+                bottom: 0px;
+                left: -10px;
+		padding: 10px 0px 10px 0px;
+		box-shadow: none;
+		outline: 5px solid #d8462b;
+        }
+        #searchbar {
+		box-shadow: 0px 0px 5px #6b5845;
+		background-color: rgba(255,254,248,0.9	);
+		color: #6b5845;
+		width: 50%;	
+		padding: 4em 0em 4em 0em;
+		margin: auto;
+	}
+}

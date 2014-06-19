@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<html>
+<head> 
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+	<script src="resources/jquery.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="resources/main.css" type ="text/css">
+	<link rel="stylesheet" href="resources/reservation.css" type ="text/css">
+	<title>Online Reservation</title>
+</head>
+<body>
+		<!--navigation-->
+	<div id="navigation">
+		<a href="splash.html"><div class="logo"></div></a>
+		<a href="allrestaurants.html"><div class="navigation-stub">All Restaurants</div></a>
+		<a href="blogger-reviews.html"><div class="navigation-stub">Blogger Reviews</div></a>
+		<div class="navigation-stub"><form action="allrestaurants.html"><input id="navigation-search"></form></div>
+		<div id="account">
+			<span id="login">log in</span><span id="login-clicked">log in</span> | <a href="register.html"><span id="register">register</span></a>
+		</div>
+	</div>
+	<!--login popup-->
+	<div id="background-blur">
+		<div id="account-popup">
+			<div id="popup-header">
+				<h2>Log in</h2>
+				<div class="close"></div>	
+			</div>				
+			<form id="signin" action="account.html">
+				<div class="popup-row"><label for="username">Username</label>&nbsp;<input type="textarea" id="username"><br></div>
+				<div class="popup-row"><label for="user-password">Password</label>&nbsp;<input type="password" id="user-password"><br></div><br>
+				<div class="popup-row"><center><button type="submit" class="submit">Log In</button></center></div><br>				
+			</form>
+		</div>		
+	</div>
+	<!--content-->
+	<div id="content-container">		
+		<div id="body-container">
+			<div class="blurb-rows">
+				<blurb class="half">
+					<div class="blurb-header"><h2>Reservation Confirmation</h2></div>
+					<h3>Reservation Details</h3>
+					<p>Date of Reservation:<br>
+					Time:<br>
+					Adults: <br>
+					Children: <br></p>
+					<h3>Personal Details</h3>
+					<div>
+						<form id="personal-details">
+							<input placeholder="Name"><br>
+							<input placeholder="E-mail Address"><br>
+							<input placeholder="Mobile Number"><br>
+							<textarea placeholder="Special Requests"></textarea><br>
+							<button>Submit</button>
+						</form>
+					</div>
+				</blurb>
+					<blurb class="half"><div class="blurb-header"><h2>Restaurant Information</h2></div>
+						<h3>Restaurant Name</h3>
+						<ul>
+							<li class="restaurant-info" id="cuisine">[restaurant_cuisine]</li>
+							<li class="restaurant-info" id="operating-hours">[restaurant_hours]</li>
+							<li class="restaurant-info" id="phone-number">[restaurant_phone]</li>  
+							<li class="restaurant-info" id="address">[restaurant_address]</li>
+							<li class="restaurant-info" id="restaurant-highlights"><i>[restaurant_highlights]</i></li>
+							<li class="restaurant-info" id="budget">[restaurant_budget]</li>
+						</ul>
+					</blurb>
+			</div>
+			<div class="blurb-rows"></div>
+			
+		</div>	
+				<!--footer-->	
+		<div id="footer">
+			<div class="blurb-stacks">
+				<div class="blurb-rows">
+					<a href="about.html"><span>About</span></a>
+					<a href="faq.html"><span>FAQ</span></a>
+					<a href="contact.html"><span>For Inquiries</span></a>
+					<a href="privacy.html"><span>Privacy</span></a>
+				</div>
+				<span>(c) Dine In Later 2014</span>
+			</div>
+		</div>
+		<!--end footer-->
+	</div>
+</body>
+</html>

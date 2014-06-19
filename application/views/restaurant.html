@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+	<script src="resources/jquery.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>	
+	<link rel="stylesheet" href="resources/main.css" type ="text/css">
+	<link rel="stylesheet" href="resources/restaurant.css" type ="text/css">
+	<title>Restaurant</title>
+</head>
+<body>
+	<!--navigation-->
+	<div id="navigation">
+		<a href="splash.html"><div class="logo"></div></a>
+		<a href="allrestaurants.html"><div class="navigation-stub">All Restaurants</div></a>
+		<a href="blogger-reviews.html"><div class="navigation-stub">Blogger Reviews</div></a>
+		<div class="navigation-stub"><form action="allrestaurants.html"><input id="navigation-search"></form></div>
+		<div id="account">
+			<span id="login">log in</span><span id="login-clicked">log in</span> | <a href="register.html"><span id="register">register</span></a>
+		</div>
+	</div>
+	<!--login popup-->
+	<div id="background-blur">
+		<div id="account-popup">
+			<div id="popup-header">
+				<h2>Log in</h2>
+				<div class="close"></div>	
+			</div>				
+			<form id="signin" action="account.html">
+				<div class="popup-row"><label for="username">Username</label>&nbsp;<input type="textarea" id="username"><br></div>
+				<div class="popup-row"><label for="user-password">Password</label>&nbsp;<input type="password" id="user-password"><br></div><br>
+				<div class="popup-row"><center><button type="submit" class="submit">Log In</button></center></div><br>				
+			</form>
+		</div>		
+	</div>
+	<!--content-->
+	<div id="content-container">		
+		<div id="body-container">
+			<div class="blurb-rows">				
+				<div class="blurb-stacks">	
+					<blurb>
+						<div class="blurb-header"><h2>Restaurant</h2></div>
+							<ul>
+								<li class="restaurant-info" id="cuisine">[restaurant_cuisine]</li>
+								<li class="restaurant-info" id="operating-hours">[restaurant_hours]</li>
+								<li class="restaurant-info" id="phone-number">[restaurant_phone]</li>  
+								<li class="restaurant-info" id="address">[restaurant_address]</li>
+								<li class="restaurant-info" id="restaurant-highlights"><i>[restaurant_highlights]</i></li>
+								<li class="restaurant-info" id="budget">[restaurant_budget]</li>
+							</ul>
+					</blurb>
+					<blurb>
+						<div class="blurb-header"><h2>Image Gallery</h2></div>
+						<gallery>
+							<img src="resources/images/splash.jpg">
+							<img src="resources/images/splash.jpg">
+							<img src="resources/images/splash.jpg">
+							<img src="resources/images/splash.jpg">
+							<img src="resources/images/splash.jpg">			
+						</gallery>
+					</blurb>
+					</div>
+				<blurb id="commands">
+					<div class="blurb-stacks">
+						<div id="rating">
+							<div class="rate">1.0</div>
+							<div>12345 Review/s</div>
+						</div>
+						<a class="action" href="menu.html">View Menu</a>
+						<a class="action" id="review-trigger">Read Reviews</a>
+						<a class="action" id="new-review-trigger">Write a Review</a>
+						<a class="action" id="reservation-trigger">Reserve</a>
+						<div id="reservation-form">
+							<form action="reserve.html">
+								Date of Reservation:<br>
+								<select style="width: 100%"></select><br>
+								Time: 
+								<select>
+									<option>10:00AM</option>
+									<option>10:30AM</option>
+									<option>11:00AM</option>
+									<option>11:30AM</option>
+									<option>12:00PM</option>
+									<option>12:30PM</option>
+									<option>1:00PM</option>
+									<option>1:30PM</option>
+									<option>2:00PM</option>
+									<option>2:30PM</option>
+									<option>3:00PM</option>
+									<option>3:30PM</option>
+									<option>4:00PM</option>
+									<option>4:30PM</option>
+									<option>5:00PM</option>
+									<option>5:30PM</option>
+									<option>6:00PM</option>
+									<option>6:30PM</option>
+									<option>7:00PM</option>
+									<option>7:30PM</option>
+									<option>8:00PM</option>
+									<option>8:30PM</option>
+									<option>9:00PM</option>
+									<option>9:30PM</option>
+
+
+								</select>
+								<br>
+								Adults:
+								<select>
+									<option>1</option>
+									<option>2</option>
+									<option>3</option>
+									<option>4</option>
+									<option>5</option>
+									<option>6</option>
+									<option>7</option>
+									<option>8</option>
+									<option>9</option>
+									<option>10</option>
+									<option>11</option>
+									<option>12</option>
+									<option>13</option>
+									<option>14</option>
+									<option>15</option>
+									<option>16</option>
+									<option>17</option>
+									<option>18</option>
+									<option>19</option>
+									<option>20</option>
+									<option>21+</option>
+								</select>
+								<br>
+								Children:
+								<select>
+									<option>0</option>
+									<option>1</option>
+									<option>2</option>
+									<option>3</option>
+									<option>4</option>
+									<option>5</option>
+									<option>6</option>
+									<option>7</option>
+									<option>8</option>
+									<option>9</option>
+									<option>10</option>
+									<option>11</option>
+									<option>12</option>
+									<option>13</option>
+									<option>14</option>
+									<option>15</option>
+									<option>16</option>
+									<option>17</option>
+									<option>18</option>
+									<option>19</option>
+									<option>20</option>
+									<option>21+</option>
+								</select><br>
+								<button>Submit</button>
+							</form>
+						</div>
+					</div>
+				</blurb> 
+
+			</div>				
+				<!--new review-->
+				<blurb id="new-review">
+					<div class="blurb-header"><h2>Write a Review</h2></div>
+					<form action="submit">
+						<div class="blurb-stacks">
+							<div class="review-header">
+								<span>Review Title: <br><input></span>
+								<span>Rating: <br>
+								<select>
+									<option value="5.0">*****</option>
+									<option value="4.0">****</option>
+									<option value="3.0">***</option>
+									<option value="2.0">**</option>
+									<option value="1.0">*</option>
+								</select>
+								</span>
+							</div>
+							Review:<br>
+							<textarea class="review-body" placeholder="Write your review here"></textarea><br>
+							Suggestions:<input class="suggestions" placeholder="Food suggestions, table suggestions, etc.">
+						</div><br>
+						<button action="submit">Submit</button>
+					</form>
+				</blurb>
+				<!--review area-->
+				<blurb id="reviews">
+					<div class="blurb-header"><h2>[12345] Reviews</h2></div>
+				<!--review stub layout-->
+					<div class="review-stub">
+						<div class="blurb-stacks">
+							<div class="review-header">
+								<span class="review-details"><h3>[Review_Title]</h3>[Review_Date]</span> 
+								<span class="review-rating"><h3 class="rate">5.0</h3></span>
+							</div>
+							<div class="review-body">
+								<p>[Review]</p>								
+							</div>
+							<div class="review-suggestions">
+								<b>Suggestions: </b>[Review_Suggestion]
+							</div>
+
+						</div>
+					</div>
+				<!--end of stub-->
+				</blurb>
+			</div>
+		<!--footer-->	
+		<div id="footer">
+			<div class="blurb-stacks">
+				<div class="blurb-rows">
+					<a href="about.html"><span>About</span></a>
+					<a href="faq.html"><span>FAQ</span></a>
+					<a href="contact.html"><span>For Inquiries</span></a>
+					<a href="privacy.html"><span>Privacy</span></a>
+				</div>
+				<span>(c) Dine In Later 2014</span>
+			</div>
+		</div>
+		<!--end footer-->
+	</div>
+</body>
+</html>

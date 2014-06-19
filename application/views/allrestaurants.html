@@ -1,0 +1,140 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+	<script src="resources/jquery.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="resources/main.css" type="text/css">
+	<link rel="stylesheet" href="resources/allrestaurants.css" type="text/css">
+	<title>Dine-in Later</title>
+</head>
+<body>
+	<!--navigation-->
+	<div id="navigation">
+		<a href="splash.html"><div class="logo"></div></a>
+		<a href="allrestaurants.html"><div class="navigation-stub">All Restaurants</div></a>
+		<a href="blogger-reviews.html"><div class="navigation-stub">Blogger Reviews</div></a>
+		<div class="navigation-stub"><form action="allrestaurants.html"><input id="navigation-search"></form></div>
+		<div id="account">
+			<span id="login">log in</span><span id="login-clicked">log in</span> | <a href="register.html"><span id="register">register</span></a>
+		</div>
+	</div>
+	<!--login popup-->
+	<div id="background-blur">
+		<div id="account-popup">
+			<div id="popup-header">
+				<h2>Log in</h2>
+				<div class="close"></div>	
+			</div>				
+			<form id="signin" action="account.html">
+				<div class="popup-row"><label for="username">Username</label>&nbsp;<input type="textarea" id="username"><br></div>
+				<div class="popup-row"><label for="user-password">Password</label>&nbsp;<input type="password" id="user-password"><br></div><br>
+				<div class="popup-row"><center><button type="submit" class="submit">Log In</button></center></div><br>				
+			</form>
+		</div>		
+	</div>
+	<!--content-->
+	<div id="content-container">		
+		<div id="body-container">
+			<div class="blurb-rows">
+				<blurb class="small" id="filter">
+					<form>
+						<div class="blurb-header"><h2>Filter Results</h2></div>
+							<h3>Cuisine</h3>
+							<div class="options">
+									<input type="checkbox" class="check" id="American"><label for="American">American</label><br>
+									<input type="checkbox" class="check" id="Chinese"><label for="Chinese">Chinese</label><br>
+									<input type="checkbox" class="check" id="Filipino"><label for="Filipino">Filipino</label><br>
+									<input type="checkbox" class="check" id="French"><label for="French">French</label><br>
+									<input type="checkbox" class="check" id="Indian"><label for="Indian">Indian</label><br>
+									<input type="checkbox" class="check" id="Italian"><label for="Italian">Italian</label><br>
+									<input type="checkbox" class="check" id="Japanese"><label for="Japanese">Japanese</label><br>
+									<input type="checkbox" class="check" id="Korean"><label for="Korean">Korean</label><br>
+									<input type="checkbox" class="check" id="Mediterranean"><label for="Mediterranean">Mediterranean</label><br>
+									<input type="checkbox" class="check" id="Vietnamese"><label for="Vietnamese">Vietnamese</label>
+								</div>
+							<hr>
+							<h3>Type of Restaurant</h3>
+							<div class="options">
+									<input type="checkbox" class="check" id="Bar"><label for="Bar">Bar</label><br>
+									<input type="checkbox" class="check" id="Buffet"><label for="Buffet">Buffet</label><br>
+									<input type="checkbox" class="check" id="Cafe"><label for="Cafe">Cafe</label><br>
+									<input type="checkbox" class="check" id="Casual Dining"><label for="Casual Dining">Casual Dining</label><br>
+									<input type="checkbox" class="check" id="Fine Dining"><label for="Fine Dining">Fine Dining</label><br>
+									<input type="checkbox" class="check" id="Pastry Shop"><label for="Pastry Shop">Pastry Shop</label><br>
+								</div>
+							<hr>
+							<h3>Budget</h3>
+							<div class="options">
+									<input type="checkbox" class="check" id="1"><label for="1">P 1 - 150</label><br>
+									<input type="checkbox" class="check" id="2"><label for="2">P 151 - 300</label><br>
+									<input type="checkbox" class="check" id="3"><label for="3">P 301 - 450</label><br>
+									<input type="checkbox" class="check" id="4"><label for="4">P 451 - 600</label><br>
+									<input type="checkbox" class="check" id="5"><label for="5">P 601 - 750</label><br>
+									<input type="checkbox" class="check" id="6"><label for="6">P 751+ </label><br>									
+							<hr>
+							<h3>City</h3>
+							<div class="options">																		
+									<input type="checkbox" class="check" id="makati"><label for="makati">Makati</label><br>
+									<input type="checkbox" class="check" id="makati"><label for="makati">Mandaluyong</label><br>
+									<input type="checkbox" class="check" id="manila"><label for="manila">Manila</label><br>
+									<input type="checkbox" class="check" id="marikina"><label for="marikina">Marikina</label><br>
+									<input type="checkbox" class="check" id="paranaque"><label for="paranaque">Paranaque</label><br>
+									<input type="checkbox" class="check" id="pasay"><label for="pasay">Pasay</label><br>
+									<input type="checkbox" class="check" id="pasig"><label for="pasig">Pasig</label><br>
+									<input type="checkbox" class="check" id="san-juan"><label for="san-juan">San Juan</label><br>
+									<input type="checkbox" class="check" id="taguig"><label for="taguig">Taguig</label><br>
+									<input type="checkbox" class="check" id="quezon-city"><label for="quezon-city">Quezon City</label><br>
+									<input type="checkbox" class="check" id="outside"><label for="outside">Outside Metro Manila</label><br><br>
+								</div>
+							</div>
+					</form>
+				</blurb>				
+				<blurb id="restaurant-listing">
+					<div class="sorter">
+						Sort by: Name | <b>Rating</b> | Price&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Arrange by: Lowest to Highest | <b>Highest to Lowest</b>
+					</div>
+					<div class="sorter">Searching for [Keyword]</div>
+					<!--start restaurant stub-->
+					<a href="restaurant.html">
+					<div class="restaurant">
+						<div class="restaurant-info">
+							<h2>Restaurant Name</h2>
+							<ul>
+								<li class="restaurant-info" id="cuisine">Asian, Japanese</li>
+								<li class="restaurant-info" id="operating-hours">Tue - Sun: 9:00 AM - 10:30 PM <br> Closed on Mondays</li>
+								<li class="restaurant-info" id="phone-number">(02) 468 1012, (02) 358 1321</li>  
+								<li class="restaurant-info" id="address">123 Maginhawa Street, Teacher's Village, Diliman, Quezon City</li>
+								<li class="restaurant-info" id="restaurant-highlights"><i>Al Fresco Dining, Buffet</i></li>
+								<li class="restaurant-info" id="budget">P150 - 300 per person </li>
+							</ul>
+						</div>
+						<div class="image-rate">						
+							<img src="resources/images/splash.jpg" class="restaurant-image">
+							<div class="rating">
+								<span class="rate">5.0<span>
+							</div>						
+						</div>
+					</div>
+					</a>
+					<!--end restaurant stub-->
+					<div class="sorter">Page 1 of 6 ></div>
+				</blurb>
+			</div>
+		</div>
+		<!--footer-->	
+			<div id="footer">
+				<div class="blurb-stacks">
+					<div class="blurb-rows">
+						<a href="about.html"><span>About</span></a>
+						<a href="faq.html"><span>FAQ</span></a>
+						<a href="contact.html"><span>For Inquiries</span></a>
+						<a href="privacy.html"><span>Privacy</span></a>
+					</div>
+					<span>(c) Dine In Later 2014</span>
+				</div>
+			</div>
+		<!--end footer-->
+	</div>	
+</body>
+</html>

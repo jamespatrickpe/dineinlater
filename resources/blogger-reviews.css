@@ -1,0 +1,36 @@
+h3 {
+	margin: -5px -5px 0px -5px;	
+	font-size: 12px;
+}
+
+h4 {
+	margin: 0px 0px 5px 0px;
+	font-size: 20px;
+	font-weight: 400;
+}
+
+.user-info {
+	min-width: 160px;
+	max-width: 20%;
+	text-align: center;
+	margin-left: -10px;
+	margin-right: 5px;
+	display: -webkit-flex;
+	display: 		 flex;
+	-webkit-flex-flow: column;			
+			flex-flow: column;
+    -webkit-align-items: center;
+    		align-items: center;
+}
+
+@media (max-width: 1200px) {
+	.blurb-rows {
+	-webkit-flex-flow: column;			
+			flex-flow: column;		
+	}
+	blurb .blurb-rows, #footer .blurb-rows {
+	-webkit-flex-flow: row;			
+			flex-flow: row;		
+	}
+
+}

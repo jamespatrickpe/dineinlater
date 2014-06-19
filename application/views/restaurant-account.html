@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+	<script src="resources/jquery.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="resources/main.css" type ="text/css">
+	<link rel="stylesheet" href="resources/account.css" type ="text/css">
+</head>
+<body>
+	<!--navigation-->
+	<div id="navigation">
+		<a href="splash.html"><div class="logo"></div></a>
+		<a href="allrestaurants.html"><div class="navigation-stub">All Restaurants</div></a>
+		<a href="blogger-reviews.html"><div class="navigation-stub">Blogger Reviews</div></a>
+		<div class="navigation-stub"><form action="allrestaurants.html"><input id="navigation-search"></form></div>
+		<div id="account">
+			hi, <a href="account.html">Username</a>! | <a href="#">log out</a>
+		</div>
+	</div>	
+	<!--content-->
+	<div id="content-container">		
+		<div id="body-container">
+			<div class="blurb-rows">
+				<blurb class="small">
+					<div class="blurb-header"><h2>Profile</h2></div>				
+						<center><div class="user-photo"><img></div></center>
+						<div id="greeting"><span class="username">Restaurant Name</span></div>						
+					<div class="blurb-stacks" id="commands">
+						<a class="action" href="restaurant.html">Restaurant Page</a>
+						<a class="action" id="stats-trigger">Statistics</a>
+						<a class="action" id="review-trigger">Reviews</a>
+						<a class="action" id="reservation-trigger">Reservations <span class="unread">(10)</span></a>
+						<a class="action" href="menu.html">Menu</a>
+						<a class="action">Advertising</a>
+						<a class="action" id="manage">Manage Restaurant</a>
+						<div class="blurb-stacks" id="manage-links">
+							<a href="edit-restaurant">Edit Restaurant Page</a>
+							<a href="menu.html">Edit Menu</a>
+							<a href="manage-reservations.html">Manage Reservations</a>
+							<a href="manage-reviews.html">Manage Reviews</a>
+							<a href="manage-advertising.html">Manage Advertising</a>
+						</div>
+					</div>
+				</blurb>
+					<blurb class="half" id="stats"><div class="blurb-header"><h2>Restaurant Statistics</h2></div>
+						140 views this week <br><i>(Ave: 20 views/day)</i><br><br>
+						140 reviews this week <br><i>(Ave: 20 reviews/day)</i><br><br>						
+						You have: <span class="unread">10</span> <span class="unread-notifier">Unread Reservation Inquiries</span>
+					</blurb>					
+					<blurb class="half" id="reviews"><div class="blurb-header"><h2>Reviews</h2></div>
+						review stubs will load here
+					</blurb>					
+					<blurb class="half" id="reservations"><div class="blurb-header"><h2>Reservations</h2></div>
+						reservation stubs will load here
+					</blurb>					
+				</div>
+			</div>						
+		<!--footer-->	
+		<div id="footer">
+			<div class="blurb-stacks">
+				<div class="blurb-rows">
+					<a href="about.html"><span>About</span></a>
+					<a href="faq.html"><span>FAQ</span></a>
+					<a href="contact.html"><span>For Inquiries</span></a>
+					<a href="privacy.html"><span>Privacy</span></a>
+				</div>
+				<span>(c) Dine In Later 2014</span>
+			</div>
+		</div>
+		<!--end footer-->
+	</div>
+</body>
+</html>
