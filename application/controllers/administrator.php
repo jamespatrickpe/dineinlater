@@ -10,6 +10,7 @@ class Administrator extends MY_Controller
 		$data['validationErrors'] = " ";
 	}
 	
+	//loads the admin home page
 	public function index()
 	{
 		$data['css'] = 'resources/account.css';
