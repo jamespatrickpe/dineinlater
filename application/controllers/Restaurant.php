@@ -1,6 +1,39 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Restaurant extends MY_Controller {
+class Restaurant extends MY_Controller 
+{
+	
+	// loads local variables
+	public function __construct()
+	{
+	}
+	
+	//loads restaurant home page
+	public function index()
+	{
+		
+	}
+	
+	//loads the edit restaurant page
+	public function editRestaurant()
+	{
+		
+	} 
+	
+	//loads the edit restaurant page
+	public function attemptEditRestaurant()
+	{
+		
+	} 
+	
+	//loads the reservationDashboard
+	public function reservationDashboard()
+	{
+		
+	}
+	
+	//
+	public function 
 
 	// NOT SURE IF THIS SHOULD BE AT RESTAURANT MODEL. MAYBE IN CUSTOMER. 
 	/*
