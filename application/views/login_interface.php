@@ -5,5 +5,8 @@
 				<br></div>
 				<br><center>
 					<input type="submit" value="DINE IN LATER!" id="submit_login">
+				</br>
+					<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+					</fb:login-button>
 				</center>
 				<br>
