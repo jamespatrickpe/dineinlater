@@ -10,6 +10,7 @@ class Footer extends MY_Controller
 		$this->loadpage('about',$data);
 	}
 	
+	//joojieman
 	// loads the "about" section
 	public function about()
 	{
