@@ -12,6 +12,9 @@ class Footer extends MY_Controller
 	
 	//joojieman
 	// sanoke
+	//hortivor
+	// loads the "about" section
+
 	public function about()
 	{
 		$data['css'] = 'resources/footer.css';
