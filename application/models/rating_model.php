@@ -5,12 +5,14 @@ class Rating_Model extends MY_Model
 	{	
 	}
 	
+	// fetches all row data
 	public function getAll()
 	{
 		$query = $this->db->get('rating');
         return $this->multipleResults($query);
 	}
 	
+	// fetches row data by ID
 	public function getById($id)
 	{
 		$this->db->where('id', $id);
@@ -18,6 +20,7 @@ class Rating_Model extends MY_Model
         return $this->singularResults($query);
 	}
 	
+	// adds row
 	public function addRating($rating, $title, $review, $customer_ID, $resto_ID, $datetime)
 	{
 		$data = array(
@@ -30,11 +33,13 @@ class Rating_Model extends MY_Model
 		$this->db->insert('customer', $data); 
 	}
 	
+	// deletes rating by customer id
 	public function deleteRating($id)
 	{
 		$this->db->delete('customer', array('id' => $id)); 
 	}
 	
+	// fetches row by resto ID
 	public function getByRestoID($id)
 	{
 		$this->db->where('resto_ID', $id);
@@ -42,6 +47,7 @@ class Rating_Model extends MY_Model
         return $this->multipleResults($query);
 	}
 	
+	// fetches row by customer ID
 	public function getByCustomerID($id)
 	{
 		$this->db->where('customer_ID', $id);

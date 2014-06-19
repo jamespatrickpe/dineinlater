@@ -2,6 +2,8 @@
 
 class Restaurant extends MY_Controller {
 
+	// NOT SURE IF THIS SHOULD BE AT RESTAURANT MODEL. MAYBE IN CUSTOMER. 
+	/*
 	public function index()
 	{
 		$this->load->model('restaurant_model');
@@ -44,4 +46,5 @@ class Restaurant extends MY_Controller {
 		$result = $this->Restaurant_Model->searchResult($ids);
 		return $result;
 	}
+	 */
 }
