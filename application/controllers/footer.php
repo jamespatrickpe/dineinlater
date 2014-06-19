@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-// loads all possible footer items
+// loads all footer items
 class Footer extends MY_Controller 
 {
 	// loads the "about" section
@@ -10,6 +10,7 @@ class Footer extends MY_Controller
 		$this->loadpage('about',$data);
 	}
 	
+	//lala
 	// loads the "about" section
 	public function about()
 	{
