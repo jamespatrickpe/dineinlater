@@ -5,6 +5,10 @@
 */cache/!index.html
 */cache/!.htaccess
 .project
+<<<<<<< HEAD
+=======
+.settings
+>>>>>>> initial
 # =========================
 # Operating System Files
 # =========================

@@ -1,5 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+//Loads all Footer items
 class Footer extends MY_Controller 
 {
 	public function index()
