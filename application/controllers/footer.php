@@ -3,6 +3,7 @@
 // loads all possible footer items
 class Footer extends MY_Controller 
 {
+	// raymund's change
 	// loads the "about" section
 	public function index()
 	{
