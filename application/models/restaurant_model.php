@@ -13,7 +13,7 @@ class Restaurant_Model extends MY_Model
 	
 	public function getById($id)
 	{
-		$this->db->where('id', $id);
+		$this->db->where('restaurant_id', $id);
 		$query = $this->db->get('restaurant');
         return $this->singularResults($query);
 	}
@@ -27,7 +27,7 @@ class Restaurant_Model extends MY_Model
 	
 	public function getByCuisine($cuisine)
 	{
-		$this->db->select('id');		
+		$this->db->select('restaurant_id');		
 		$this->db->like('cuisine', $cuisine);
 		$query = $this->db->get('restaurant');
         return $this->multipleResults($query);
@@ -35,7 +35,7 @@ class Restaurant_Model extends MY_Model
 	
 	public function getByCity($city)
 	{
-		$this->db->select('id');	
+		$this->db->select('restaurant_id');	
 		$this->db->like('city', $city);
 		$query = $this->db->get('restaurant');
         return $this->multipleResults($query);
@@ -43,7 +43,7 @@ class Restaurant_Model extends MY_Model
 	
 	public function getByName($name)
 	{
-		$this->db->select('id');	
+		$this->db->select('restaurant_id');	
 		$this->db->like('name', $name);
 		$query = $this->db->get('restaurant');
         return $this->multipleResults($query);
@@ -51,8 +51,8 @@ class Restaurant_Model extends MY_Model
 	
 	public function searchById($id)
 	{
-		$this->db->select('id');	
-		$this->db->where('id', $id);
+		$this->db->select('restaurant_id');	
+		$this->db->where('restaurant_id', $id);
 		$query = $this->db->get('restaurant');
         return $this->singularResults($query);
 	}
@@ -71,8 +71,8 @@ class Restaurant_Model extends MY_Model
 		}
 		$query = $this->db->where_in("r.id",$in);
 		$query = $this->db->query("select r.id,r.name,r.address,r.description,r.logo_photo,rt.rating 
-									from restaurant r join (select resto_ID,avg(rating) as 'rating' from rating group by resto_ID) rt 
-									on r.id = rt.resto_ID
+									from restaurant r join (select restaurant_id,avg(rating) as 'rating' from rating group by restaurant_id) rt 
+									on r.id = rt.restaurant_id
 									where r.id in ($in)");
 		
 		return $this->multipleResults($query);
@@ -104,7 +104,7 @@ class Restaurant_Model extends MY_Model
 	
 	public function deleteReservation($id)
 	{
-		$this->db->delete('restaurant', array('id' => $id)); 
+		$this->db->delete('restaurant', array('restaurant_id' => $id)); 
 	}
 
 	public function updateReservation($id,$myReservationArray)

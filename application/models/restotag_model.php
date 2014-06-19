@@ -13,7 +13,7 @@ class Restotag_Model extends MY_Model
 	
 	public function getById($id)
 	{
-		$this->db->where('id', $id);
+		$this->db->where('restotag_id', $id);
 		$query = $this->db->get('restotag');
         return $this->singularResults($query);
 	}
@@ -22,13 +22,13 @@ class Restotag_Model extends MY_Model
 	{
 		$data = array(
 			   'tagname' => $tag,
-			   'resto_ID' => $restoID
+			   'restaurant_ID' => $restoID
 			);
 		$this->db->insert('restotag', $data); 
 	}
 	
 	public function deleteTag($id)
 	{
-		$this->db->delete('restotag', array('id' => $id)); 
+		$this->db->delete('restotag', array('restotag_id' => $id)); 
 	}
 }

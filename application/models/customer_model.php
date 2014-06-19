@@ -16,7 +16,7 @@ class Customer_Model extends MY_Model
 	// gets customer by Id
 	public function getById($id)
 	{
-		$this->db->where('id', $id);
+		$this->db->where('customer_id', $id);
 		$query = $this->db->get('customer');
         return $this->singularResults($query);
 	}
@@ -53,27 +53,27 @@ class Customer_Model extends MY_Model
 	// delete customer
 	public function deleteCustomer($id)
 	{
-		$this->db->delete('customer', array('id' => $id)); 
+		$this->db->delete('customer', array('customer_id' => $id)); 
 	}
 	
 	// update customer email
 	public function updateEmail($id)
 	{
-		$this->db->where('id', $id);
+		$this->db->where('customer_id', $id);
 		$this->db->update('emailadd', $emailadd); 
 	}
 	
 	// update customer username
 	public function updateUsername($id)
 	{
-		$this->db->where('id', $id);
+		$this->db->where('customer_id', $id);
 		$this->db->update('username', $username); 
 	}
 	
 	// update customer password
 	public function updatePassword($id)
 	{
-		$this->db->where('id', $id);
+		$this->db->where('customer_id', $id);
 		$this->db->update('password', $password); 
 	}
 }

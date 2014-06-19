@@ -16,7 +16,7 @@ class Admin_Model extends MY_Model
 	//Get ALL from a singular ID Result
 	public function getById($id)
 	{
-		$this->db->where('id', $id);
+		$this->db->where('admin_id', $id);
 		$query = $this->db->get('admin');
         return $this->singularResults($query);
 	}
@@ -42,6 +42,6 @@ class Admin_Model extends MY_Model
 	// Deletes an Admin based on ID
 	public function deleteAdmin($id)
 	{
-		$this->db->delete('admin', array('id' => $id)); 
+		$this->db->delete('admin', array('admin_id' => $id)); 
 	}
 }

@@ -13,7 +13,7 @@ class Restogallery_Model extends MY_Model
 	
 	public function getById($id)
 	{
-		$this->db->where('id', $id);
+		$this->db->where('restotag_id', $id);
 		$query = $this->db->get('restogallery');
         return $this->singularResults($query);
 	}
@@ -22,13 +22,13 @@ class Restogallery_Model extends MY_Model
 	{
 		$data = array(
 			   'picURL' => $picURL,
-			   'restoID' => $restoID
+			   'restaurant_id' => $restoID
 			);
 		$this->db->insert('restogallery', $data); 
 	}
 	
 	public function deletePicture($id)
 	{
-		$this->db->delete('restogallery', array('id' => $id)); 
+		$this->db->delete('restogallery', array('restotag_id' => $id)); 
 	}
 }

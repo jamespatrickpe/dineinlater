@@ -13,7 +13,7 @@ class Bloggers_Model extends MY_Model
 	
 	public function getById($id)
 	{
-		$this->db->where('id', $id);
+		$this->db->where('bloggers_id', $id);
 		$query = $this->db->get('bloggers');
         return $this->singularResults($query);
 	}
@@ -33,6 +33,6 @@ class Bloggers_Model extends MY_Model
 	
 	public function deleteBlog($id)
 	{
-		$this->db->delete('bloggers', array('id' => $id)); 
+		$this->db->delete('bloggers', array('bloggers_id' => $id)); 
 	}
 }
