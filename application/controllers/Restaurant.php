@@ -24,7 +24,7 @@ class Restaurant extends MY_Controller
 	public function attemptEditRestaurant()
 	{
 		
-	} 
+	}
 	
 	//loads the reservationDashboard
 	public function reservationDashboard()
@@ -32,8 +32,11 @@ class Restaurant extends MY_Controller
 		
 	}
 	
-	//
-	public function 
+	//responds to reservation through SHOWUP, STATUS
+	public function respondToReservation()
+	{
+		
+	} 
 
 	// NOT SURE IF THIS SHOULD BE AT RESTAURANT MODEL. MAYBE IN CUSTOMER. 
 	/*

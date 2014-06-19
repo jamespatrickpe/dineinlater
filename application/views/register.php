@@ -12,6 +12,7 @@
 				<input type="password" id="password" name="password" placeholder="Password"><br>
 				<input type="password" id="password_check" name="password_check" placeholder="Retype Password"><br>
 				<input type="text" name="email" placeholder="E-mail Address"><br>
+				<input type="text" name="cellphone" placeholder="Cell Phone Number"><br>
 				<br>
 		<center>
 			<input type="checkbox" name="termsandconditions" id="termsandconditions" class="check" required="required"> I have read the 

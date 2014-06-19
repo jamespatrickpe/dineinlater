@@ -38,14 +38,15 @@ class Customer_Model extends MY_Model
 	}
 	
 	// add customer
-	public function addCustomer($firstname,$lastname,$emailadd,$username,$password)
+	public function addCustomer($firstname,$lastname,$emailadd,$username,$password,$cellphone)
 	{
 		$data = array(
 			   'firstname' => $firstname,
 			   'lastname' => $lastname,
 			   'emailadd' => $emailadd,
 			   'username' => $username,
-			   'password' => $this->encrypt->encode($password)
+			   'password' => $this->encrypt->encode($password),
+			   'cellphone' => $cellphone
 			);
 		$this->db->insert('customer', $data); 
 	}
