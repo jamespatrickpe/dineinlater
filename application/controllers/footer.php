@@ -3,7 +3,11 @@
 // loads all possible footer items
 class Footer extends MY_Controller 
 {
+<<<<<<< HEAD
+	//james change
+=======
 	// raymund's change
+>>>>>>> 1011
 	// loads the "about" section
 	public function index()
 	{
