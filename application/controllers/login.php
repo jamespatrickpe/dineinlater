@@ -68,13 +68,6 @@ class Login extends MY_Controller
 	
 	public function attemptLoginCustomer()
 	{
-		$data['validationErrors'] = " ";
-		$data['css'] = "resources/splash.css";
-		$this->load->model("Customer_Model");
-	}
-	
-	public function attemptLoginCustomer()
-	{
 		//INITIALIZE
 		$data['validationErrors'] = " ";
 		$data['css'] = "resources/splash.css";
