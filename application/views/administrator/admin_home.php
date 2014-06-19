@@ -1,12 +1,4 @@
-<div id="content-container"><div id="body-container">
-<h1>ADMINISTATOR MANAGEMENT SYSTEM</h1>
-<h2>
-	DASHBOARD | 
-	RESTAURANTS | 
-	BLOGGERS | 
-	CUSTOMERS 
-</h2>
-</div></div>
+
 <!--
 
 	

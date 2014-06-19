@@ -4,13 +4,8 @@ if ( ! function_exists('echoMe'))
 {
     function echoMe($var)
     {
-    	if(isset($var) == true)
-		{
-			echo $var;
-		}
-		else 
-		{
-			
-		}
+		if(isset($var) == "TRUE")
+		{echo $var;}
     }   
+	
 }
