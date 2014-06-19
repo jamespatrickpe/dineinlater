@@ -1,10 +1,16 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Login extends MY_Controller 
-{		
+{
+	
+	public function __construct()
+	{
+		$data['css'] = "resources/splash.css";
+		$data['validationErrors'] = " ";
+	}
+			
 	public function index()
 	{
-		//CANT SHARE THESE VARIABLES FOR SOME REASONS!!!!
 		$this->session->sess_destroy();
 		$data['css'] = "resources/splash.css";
 		$data['validationErrors'] = " ";
@@ -372,6 +378,7 @@ class Login extends MY_Controller
 		redirect('/', 'refresh');
 	}
 	
+	// Set Rules for Username and Password
 	private function initializeValues()
 	{
 		//Validate Rules
