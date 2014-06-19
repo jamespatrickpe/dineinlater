@@ -34,7 +34,7 @@ class Admin_Model extends MY_Model
 	{
 		$data = array(
 			   'username' => $username,
-			   'password' => $password
+			   'password' => $this->encrypt->encode($password)
 			);
 		$this->db->insert('admin', $data); 
 	}

@@ -61,14 +61,14 @@ class Login extends MY_Controller
 			//CHECK IF EXISTS USERNAME/PASSWORD
 			if($dbResultsFromUsername != FALSE || $dbResultsFromEmail != FALSE)
 			{
-				if($dbResultsFromUsername != FALSE && ( $formData['password'] == $dbResultsFromUsername[0]->password ) )
+				if($dbResultsFromUsername != FALSE && ( $formData['password'] == $this->encrypt->decode($dbResultsFromUsername[0]->password) ) )
 				{
 					$this->setSessionCustomer($dbResultsFromEmail, $checked, "CUSTOMER");
 					$data['formDestination'] = "/";
 					$this->loadpage('login',$data);
 					
 				}//FROM EMAIL
-				else if ($dbResultsFromEmail != FALSE && ( $formData['password'] == $dbResultsFromEmail[0]->password ) )
+				else if ($dbResultsFromEmail != FALSE && ( $formData['password'] == $this->encrypt->decode($dbResultsFromEmail[0]->password) ) )
 				{
 					$this->setSessionCustomer($dbResultsFromEmail, $checked, "CUSTOMER");
 					$data['formDestination'] = "login/attemptLoginCustomer";
@@ -127,7 +127,7 @@ class Login extends MY_Controller
 			if($dbResultsFromUsername != FALSE)
 			{
 				//FROM USERNAME
-				if($dbResultsFromUsername != FALSE && ( $formData['password'] == $dbResultsFromUsername[0]->password ) )
+				if($dbResultsFromUsername != FALSE && ( $formData['password'] == $this->encrypt->decode($dbResultsFromUsername[0]->password) ) )
 				{
 					$this->setSessionGeneric($dbResultsFromUsername, $checked, "ADMIN");
 					$data['formDestination'] = "administrator/";
@@ -187,7 +187,7 @@ class Login extends MY_Controller
 			if($dbResultsFromUsername != FALSE)
 			{
 				//FROM USERNAME
-				if($dbResultsFromUsername != FALSE && ( $formData['password'] ==$dbResultsFromUsername[0]->password) )
+				if($dbResultsFromUsername != FALSE && ( $formData['password'] ==$this->encrypt->decode($dbResultsFromUsername[0]->password)) )
 				{
 					$this->setSessionGeneric($dbResultsFromUsername, $checked, "RESTAURANT");
 					$data['formDestination'] = "restaurant/";

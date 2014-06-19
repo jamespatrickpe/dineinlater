@@ -94,7 +94,7 @@ class Restaurant_Model extends MY_Model
 			   'description' => $myReservationArray['description'],
 			   'autoaccept' => $myReservationArray['autoaccept'],
 			   'username' => $myReservationArray['username'],
-			   'password' => $myReservationArray['password'],
+			   'password' => $this->encrypt->encode($myReservationArray['password']),
 			   'address' => $myReservationArray['address'],
 			   'city' => $myReservationArray['city'],
 			   'cuisine' => $myReservationArray['cuisine']

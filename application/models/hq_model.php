@@ -1,5 +1,5 @@
 <?php
-class RestaurantHQ_Model extends MY_Model 
+class hq_model extends MY_Model 
 {
 	public function __construct()
 	{	

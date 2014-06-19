@@ -45,7 +45,7 @@ class Customer_Model extends MY_Model
 			   'lastname' => $lastname,
 			   'emailadd' => $emailadd,
 			   'username' => $username,
-			   'password' => $password
+			   'password' => $this->encrypt->encode($password)
 			);
 		$this->db->insert('customer', $data); 
 	}
@@ -74,6 +74,6 @@ class Customer_Model extends MY_Model
 	public function updatePassword($id)
 	{
 		$this->db->where('customer_id', $id);
-		$this->db->update('password', $password); 
+		$this->db->update('password', $this->encrypt->encode($password)); 
 	}
 }
