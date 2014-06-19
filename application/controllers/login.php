@@ -39,6 +39,34 @@ class Login extends MY_Controller
 		$this->loadpage('login',$data);
 	}
 	
+	public function fbLoginCheck()
+	{
+		$fbcheck = $formData['fblogin'];
+		
+		if($fbcheck == "Yes")
+		{
+			$this->session->sess_destroy();
+			$data['css'] = "resources/splash.css";
+			$data['validationErrors'] = " ";
+			$data['formDestination'] = "login/attemptLoginFB";
+			$this->loadpage('login',$data);
+		}elseif($fbcheck == "No")
+		{
+			$this->session->sess_destroy();
+			$data['css'] = "resources/splash.css";
+			$data['validationErrors'] = " ";
+			$data['formDestination'] = "login/attemptLoginCustomer";
+			$this->loadpage('login',$data);
+		}
+	}
+	
+	public function attemptLoginCustomer()
+	{
+		$data['validationErrors'] = " ";
+		$data['css'] = "resources/splash.css";
+		$this->load->model("Customer_Model");
+	}
+	
 	public function attemptLoginCustomer()
 	{
 		//INITIALIZE

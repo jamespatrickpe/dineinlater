@@ -5,6 +5,7 @@
 				<br></div>
 				<br><center>
 					<input type="submit" value="DINE IN LATER!" id="submit_login">
+					<input type="hidden" name="fblogin" id="fblogin" value="No">
 				</br></br>
 					<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
 					</fb:login-button>
