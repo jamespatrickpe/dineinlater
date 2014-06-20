@@ -100,7 +100,7 @@ class Login extends MY_Controller
 			$this->setSessionFB($sessionData, $checked, "CUSTOMER");
 			
 			$data['formDestination'] = "/";
-			redirect('/','customer');
+			$this->loadpage('customer',$data);
 		}
 		else 
 		{
@@ -427,7 +427,7 @@ class Login extends MY_Controller
 	public function logout()
 	{
 		$this->session->sess_destroy();
-		redirect('/', 'welcome');
+		redirect('/', 'refresh');
 	}
 	
 	// Set Rules for Username and Password
