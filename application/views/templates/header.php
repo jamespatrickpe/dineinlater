@@ -1,6 +1,8 @@
 <!DOCTYPE HTML>
 <html>
 <head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no">
 	<base href="<?php echoMe( base_url() ); ?>">
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 	<script src="resources/jquery.js"></script>
