@@ -29,7 +29,7 @@ class Login extends MY_Controller
 	public function login_hq()
 	{
 		$this->session->sess_destroy();
-		$data['css'] = "resources/restaurant.css";
+		$data['css'] = "resources/splash.css";
 		$data['validationErrors'] = " ";
 		$data['formDestination'] = "login/attemptLoginHQ";
 		$this->loadpage('login',$data);
@@ -38,10 +38,10 @@ class Login extends MY_Controller
 	public function login_restaurant()
 	{
 		$this->session->sess_destroy();
-		$data['css'] = "resources/restaurant.css";
+		$data['css'] = "resources/splash.css";
 		$data['validationErrors'] = " ";
 		$data['formDestination'] = "login/attemptLoginRestaurant";
-		$this->loadpage('restoHome',$data);
+		$this->loadpage('login',$data);
 	}
 	
 	public function attemptLoginFB()
@@ -223,6 +223,7 @@ class Login extends MY_Controller
 			//CHECK IF EXISTS USERNAME/PASSWORD
 			if($dbResultsFromUsername != FALSE)
 			{
+				echo $this->encrypt->decode($dbResultsFromUsername[0]->password)."sddadadsd".$formData['username'];	
 				//FROM USERNAME
 				if($dbResultsFromUsername != FALSE && ( $formData['password'] ==$this->encrypt->decode($dbResultsFromUsername[0]->password)) )
 				{

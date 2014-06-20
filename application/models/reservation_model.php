@@ -63,6 +63,16 @@ class Reservation_Model extends MY_Model
 		$this->db->update('reservation', $data); 
 	}
 	
+	public function confirmReservation()
+	{
+		$data = array(
+				'reservation_id' => $id,
+			    'status' => $status
+			);
+		$this->db->where('reservation_id', $id);
+		$this->db->update('reservation', $data); 
+	}
+	
 	// fetches row data by restaurant ID
 	public function reservationByRestaurantID($resto_ID)
 	{

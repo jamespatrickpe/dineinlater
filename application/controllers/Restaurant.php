@@ -6,12 +6,14 @@ class Restaurant extends MY_Controller
 	// loads local variables
 	public function __construct()
 	{
+		parent::__construct();
 	}
 	
-	//loads restaurant home page
+	//loads the customer home page
 	public function index()
 	{
-		
+		$data['css'] = "resources/restaurant.css";
+		$this->loadpage('restaurant/',$data);
 	}
 	
 	//loads the edit restaurant page
