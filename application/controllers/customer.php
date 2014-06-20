@@ -5,11 +5,14 @@ class Customer extends MY_Controller
 	// loads local variables
 	public function __construct()
 	{
+		parent::__construct();
 	}
 	
 	//loads the customer home page
 	public function index()
 	{
+		$data['css'] = "resources/account.css";
+		$this->loadpage('customer',$data);
 	}
 	
 	//loads customer profile page

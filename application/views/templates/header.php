@@ -26,11 +26,11 @@
 					$mySession = $this->session->all_userdata();
 					if( isset( $mySession['firstname'] ) == TRUE && isset( $mySession['lastname'] ) == TRUE )
 					{
-						echo "<span>".$mySession['firstname']." ".$mySession['lastname']."</span> |";
+						echo anchor('customer', "<span>".$mySession['firstname']." ".$mySession['lastname']."</span> |", 'class="link-class"');
 					}
 					else 
 					{
-						echo "<span>".$mySession['username']."</span> |";
+						echo anchor('customer', "<span>".$mySession['username']."</span> |", 'class="link-class"');
 					}
 					echo anchor('login/logout', 'Log Out', 'class="link-class"');
 				}

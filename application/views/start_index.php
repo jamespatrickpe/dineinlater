@@ -77,10 +77,7 @@
 	      console.log('Successful login for: ' + response.name);
 	      signin = document.getElementById('signin');
 	      document.getElementById('signin').innerHTML = "<input type ='hidden' name='fbid' value='"+response.id+"'><input type ='hidden' name='email' value='"+response.email+"'><input type ='hidden' name='username' value='"+response.profile_name+"'> <input type ='hidden' name='firstname' value='"+response.first_name+"'> <input type ='hidden' name='lastname' value='"+response.last_name+"'>" + signin.innerHTML;
-	      document.getElementById('username').value = response.name; 
-	      document.getElementById('password').value = response.email;
 	      document.getElementById('fblogin').value = "Yes";
-	      document.getElementById('signin').submit();
 	      
 	    });
 	  }
