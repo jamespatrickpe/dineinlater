@@ -9,17 +9,24 @@
 ?>	
 </h3>
 
+<hr>
 <h3> Add Restaurant </h3>
 	<?php
-	/*
-		echo form_open('administrator/attemptAddAdmin',"style='text-align:left;'");	
+
+		echo form_open('administrator/attemptAddRestaurant',"style='text-align:left;'");	
+		echo "NAME: ".form_input("username","");
+		echo "OWNER: ".form_input("username","");
+		echo "MOBILE: ".form_input("username","");
+		echo "LANDLINE: ".form_input("username","");
+		echo "LATITUDE (from Google): ".form_input("username","");
+		echo "LONGTITUDE (from Google): ".form_input("username","");
+		echo "NUMBER OF SLOTS FOR RESERVATION: ".form_input("username","");
 		echo "USERNAME: ".form_input("username","");
 		echo "PASSWORD: ".form_password("password","");
 		echo form_reset("reset","reset");
 		echo form_submit("submit","add");
 		echo form_close();
-	 * 
-	 */
+
 	?>
 
 <h3> Registered Restaurants </h3>
