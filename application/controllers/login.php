@@ -223,7 +223,6 @@ class Login extends MY_Controller
 			//CHECK IF EXISTS USERNAME/PASSWORD
 			if($dbResultsFromUsername != FALSE)
 			{
-				echo $this->encrypt->decode($dbResultsFromUsername[0]->password)."sddadadsd".$formData['username'];	
 				//FROM USERNAME
 				if($dbResultsFromUsername != FALSE && ( $formData['password'] ==$this->encrypt->decode($dbResultsFromUsername[0]->password)) )
 				{
