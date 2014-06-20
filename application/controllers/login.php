@@ -358,24 +358,35 @@ class Login extends MY_Controller
 		$this->session->set_userdata($newdata);
 	}
 	
-	private function setSessionRestaurant($dataObjectArray)
+	private function setSessionRestaurant($dataObjectArray, $rememberMe, $type)
 	{
 		$newdata = array(
 			'id'  => $dataObjectArray[0]->restaurant_id,
 			'username'  => $dataObjectArray[0]->username,
 			'usertype' => $type
                );
+		if($rememberMe == TRUE)
+		{
+			$data['new_expiration'] = 60*60*24*30;//30 days
+        	$this->session->sess_expiration = $data['new_expiration'];
+		}
 
 		$this->session->set_userdata($newdata);
 	}
 	
-	private function setSessionHQ($dataObjectArray)
+	private function setSessionHQ($dataObjectArray, $rememberMe, $type)
 	{
 		$newdata = array(
 			'id'  => $dataObjectArray[0]->hq_id,
 			'username'  => $dataObjectArray[0]->username,
 			'usertype' => $type
                );
+			   
+		if($rememberMe == TRUE)
+		{
+			$data['new_expiration'] = 60*60*24*30;//30 days
+        	$this->session->sess_expiration = $data['new_expiration'];
+		}
 
 		$this->session->set_userdata($newdata);
 	}

@@ -1,7 +1,7 @@
 <h3> Add Restaurant </h3>
 	<?php
 
-		echo form_open('administrator/attemptAddRestaurant',"style='text-align:left;'");	
+		echo form_open_multipart('administrator/attemptAddRestaurant',"style='text-align:left;'");	
 		echo "NAME: ".form_input("username","");
 		echo "OWNER: ".form_input("username","");
 		echo "MOBILE: ".form_input("username","");
@@ -9,6 +9,9 @@
 		echo "LATITUDE (from Google): ".form_input("username","");
 		echo "LONGTITUDE (from Google): ".form_input("username","");
 		echo "NUMBER OF SLOTS FOR RESERVATION: ".form_input("username","");
+		echo "Logo Photo"."<input type='file' name='logo_photo' size='20' />";
+		echo "Menu Photo"."<input type='file' name='menu_photo' size='20' />";
+		echo 
 		echo "USERNAME: ".form_input("username","");
 		echo "PASSWORD: ".form_password("password","");
 		echo form_reset("reset","reset");
