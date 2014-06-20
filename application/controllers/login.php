@@ -97,15 +97,13 @@ class Login extends MY_Controller
 				if($dbResultsFromUsername != FALSE && ( $formData['password'] == $this->encrypt->decode($dbResultsFromUsername[0]->password) ) )
 				{
 					$this->setSessionCustomer($dbResultsFromUsername, $checked, "CUSTOMER");
-					$data['formDestination'] = "/";
 					redirect('/','refresh');
 					
 				}//FROM EMAIL
 				else if ($dbResultsFromEmail != FALSE && ( $formData['password'] == $this->encrypt->decode($dbResultsFromEmail[0]->password) ) )
 				{
-					$this->setSessionCustomer($dbResultsFromEmail, $checked, "CUSTOMER");
-					$data['formDestination'] = "login/attemptLoginCustomer";
-					$this->loadpage('login',$data);
+					$this->setSessionCustomer($dbResultsFromUsername, $checked, "CUSTOMER");
+					redirect('/','refresh');
 				}
 				else
 				{
