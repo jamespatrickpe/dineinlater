@@ -228,8 +228,7 @@ class Login extends MY_Controller
 				if($dbResultsFromUsername != FALSE && ( $formData['password'] ==$this->encrypt->decode($dbResultsFromUsername[0]->password)) )
 				{
 					$this->setSessionRestaurant($dbResultsFromUsername, $checked, "RESTAURANT");
-					$data['formDestination'] = "restaurant/";
-					$this->loadpage('login',$data);
+					redirect("restaurant/",'refresh');
 				}
 				else
 				{
@@ -287,8 +286,7 @@ class Login extends MY_Controller
 				if($dbResultsFromUsername != FALSE && ( $formData['password'] ==$this->encrypt->decode($dbResultsFromUsername[0]->password)) )
 				{
 					$this->setSessionHQ($dbResultsFromUsername, $checked, "HQ");
-					$data['formDestination'] = "restaurant/";
-					$this->loadpage('login',$data);
+					redirect("hq/",'refresh');
 				}
 				else
 				{
