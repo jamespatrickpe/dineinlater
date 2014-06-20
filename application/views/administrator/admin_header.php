@@ -4,7 +4,8 @@
 	<?php
 	echo anchor("administrator/", " DASHBOARD |");
 	echo anchor("administrator/admin_administrators", " ADMINISTRATORS |");
-	echo anchor("administrator/admin_restos", " RESTAURANT |");
+	echo anchor("administrator/admin_restos", " VIEW RESTAURANTS |");
+	echo anchor("administrator/admin_addrestos", " ADD RESTAURANT |");
 	echo anchor("administrator/admin_bloggers", " BLOGGERS |");
 	echo anchor("administrator/admin_hq", " HQ |");
 	?>

@@ -14,6 +14,12 @@ class Administrator extends MY_Controller
 		$data['validationErrors'] = " ";
 	}
 	
+	//Adds a Restaurant
+	public function attemptAddRestaurant()
+	{
+		$this->input->post('');
+	}
+	
 	//loadpage for Admin
 	public function loadpageAdmin($pageToBeLoaded,$data)
     {
@@ -63,6 +69,15 @@ class Administrator extends MY_Controller
 		$data['restaurantResults'] = $this->Restaurant_Model->getAll();
 		$data['css'] = 'resources/account.css';
 		$this->loadpageAdmin("administrator/admin_resto",$data);	
+	}
+	
+		//Loads Restaurant Management System
+	public function admin_addrestos()
+	{
+		$raw = $this->Restaurant_Model->getAll();
+		$data['restaurantResults'] = $this->Restaurant_Model->getAll();
+		$data['css'] = 'resources/account.css';
+		$this->loadpageAdmin("administrator/admin_addrestos",$data);	
 	}
 	
 	//Loads Restaurant Management System
