@@ -3,7 +3,10 @@
 ?>
 
 <h3> 
-<?php if(isset($validationErrors) == "TRUE"){echo $validationErrors;} ?>	
+<?php 
+	if(isset($validationErrors) == "TRUE"){echo $validationErrors;} 
+	
+?>	
 </h3>
 
 <h3> Current Administrators </h3>
@@ -26,11 +29,24 @@
 
 <h3> Add Administrator </h3>
 	<?php
-		echo form_open('administrator/admin_add');	
-		echo "USERNAME: ".form_input();
-		echo "PASSWORD: ".form_password();
+		echo form_open('administrator/attemptAddAdmin',"style='text-align:left;'");	
+		echo "USERNAME: ".form_input("username","");
+		echo "PASSWORD: ".form_password("password","");
 		echo form_reset("reset","reset");
-		echo form_submit("submit","submit");
+		echo form_submit("submit","add");
 		echo form_close();
 	?>
 <h3> Delete Administrator </h3>
+	<?php
+		echo form_open('administrator/attemptDeleteAdmin', "style='text-align:left;'");
+		
+		echo "<select name='selectedAdminToBeDeleted'>";
+		foreach($adminResults as $admin) 
+		{
+			echo "<option value=".$admin->admin_id.">".$admin->username."</option>";
+		}
+		echo "</select>";
+		
+		echo form_submit("submit","delete");
+		echo form_close();
+	?>

@@ -1,10 +1,15 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Login extends MY_Controller 
-{		
+{
+	
+	public function __construct() 
+	{        
+    	parent::__construct();
+	}
+			
 	public function index()
 	{
-		//CANT SHARE THESE VARIABLES FOR SOME REASONS!!!!
 		$this->session->sess_destroy();
 		$data['css'] = "resources/splash.css";
 		$data['validationErrors'] = " ";
@@ -123,15 +128,13 @@ class Login extends MY_Controller
 				if($dbResultsFromUsername != FALSE && ( $formData['password'] == $this->encrypt->decode($dbResultsFromUsername[0]->password) ) )
 				{
 					$this->setSessionCustomer($dbResultsFromUsername, $checked, "CUSTOMER");
-					$data['formDestination'] = "/";
 					redirect('/','refresh');
 					
 				}//FROM EMAIL
 				else if ($dbResultsFromEmail != FALSE && ( $formData['password'] == $this->encrypt->decode($dbResultsFromEmail[0]->password) ) )
 				{
-					$this->setSessionCustomer($dbResultsFromEmail, $checked, "CUSTOMER");
-					$data['formDestination'] = "login/attemptLoginCustomer";
-					$this->loadpage('login',$data);
+					$this->setSessionCustomer($dbResultsFromUsername, $checked, "CUSTOMER");
+					redirect('/','refresh');
 				}
 				else
 				{
@@ -391,11 +394,12 @@ class Login extends MY_Controller
 	
 	public function logout()
 	{
+		$this->load->library('session');
 		$this->session->sess_destroy();
-		$data['css'] = 'resources/splash.css';
 		redirect('/', 'refresh');
 	}
 	
+	// Set Rules for Username and Password
 	private function initializeValues()
 	{
 		//Validate Rules
