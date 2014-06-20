@@ -1,14 +1,3 @@
-<?php
-
-?>
-
-<h3> 
-<?php 
-	if(isset($validationErrors) == "TRUE"){echo $validationErrors;} 
-	
-?>	
-</h3>
-
 <h3> Current Administrators </h3>
 
 <table>

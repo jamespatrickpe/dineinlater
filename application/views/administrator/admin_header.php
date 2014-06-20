@@ -9,3 +9,7 @@
 	echo anchor("administrator/admin_hq", " HQ |");
 	?>
 </h2>
+
+<?php 
+	if(isset($validationErrors) == "TRUE"){echo $validationErrors;} 
+?>

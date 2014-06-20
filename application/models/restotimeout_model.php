@@ -15,7 +15,7 @@ class Restotimeout_Model extends MY_Model
 	// fetches row data by ID
 	public function getByID($id)
 	{
-		$this->db->where('holiday_id', $id);
+		$this->db->where('restotimeout_id', $id);
 		$query = $this->db->get('restotimeout');
         return $this->singularResults($query);
 	}
@@ -24,9 +24,10 @@ class Restotimeout_Model extends MY_Model
 	public function addHoliday($restaurant_id, $start_date, $end_date)
 	{
 		$data = array(
-			   'restaurant_id' => $restaurant_id,
+			   'restotimeout_id' => $restaurant_id,
 			   'start_date' => $start_date,
-			   'end_date' => $end_date
+			   'end_date' => $end_date,
+			   'end_date' => $remark
 			);
 		$this->db->insert('restotimeout', $data); 
 	}
@@ -34,7 +35,7 @@ class Restotimeout_Model extends MY_Model
 	// deletes rating by customer id
 	public function deleteHoliday($id)
 	{
-		$this->db->delete('restotimeout', array('holiday_id' => $id)); 
+		$this->db->delete('restotimeout', array('restotimeout_id' => $id)); 
 	}
 	
 	// fetches row by resto ID

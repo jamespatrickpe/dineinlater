@@ -1,15 +1,3 @@
-<?php
-
-?>
-
-<h3> 
-<?php 
-	if(isset($validationErrors) == "TRUE"){echo $validationErrors;} 
-	
-?>	
-</h3>
-
-<hr>
 <h3> Add Restaurant </h3>
 	<?php
 
