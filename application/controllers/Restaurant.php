@@ -7,19 +7,38 @@ class Restaurant extends MY_Controller
 	public function __construct()
 	{
 		parent::__construct();
+		$this->load->model('Admin_Model');
+		$this->load->model('Restaurant_Model');
+		$this->load->model('HQ_Model');
+		$this->load->model('Customer_Model');
+		$this->load->model('Bloggers_Model');
+		//$this->sessionSecurityInterceptor("RESTO");
+		$data['validationErrors'] = " ";
 	}
+	
+	public function loadpageResto($pageToBeLoaded,$data)
+    {
+        $this->load->view('templates/header', $data);
+		$this->load->view('restaurant/resto_header', $data);
+		$this->load->view($pageToBeLoaded, $data);
+		$this->load->view('restaurant/resto_footer', $data);
+		$this->load->view('templates/footer', $data);
+    }
 	
 	//loads the customer home page
 	public function index()
 	{
 		$data['css'] = "resources/restaurant.css";
-		$this->loadpage('restaurant/',$data);
+		$this->loadpageResto('restaurant/resto_home',$data);
+		
 	}
 	
 	//loads the edit restaurant page
 	public function editRestaurant()
 	{
-		
+		$data['restoProfile'] = $this->Restaurant_Model->getById($this->session->userdata('id'));
+		$data['css'] = "resources/restaurant.css";
+		$this->loadpageResto('restaurant/resto_profile',$data);
 	} 
 	
 	//loads the edit restaurant page
