@@ -51,10 +51,9 @@ class Customer_Model extends MY_Model
 		$this->db->insert('customer', $data); 
 	}
 	
-	public function addFBCustomer($customer_id,$firstname,$lastname,$emailadd,$username)
+	public function addFBCustomer($firstname,$lastname,$emailadd,$username)
 	{
 		$data = array(
-			   'customer_id' => $customer_id,
 			   'firstname' => $firstname,
 			   'lastname' => $lastname,
 			   'emailadd' => $emailadd,

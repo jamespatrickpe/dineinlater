@@ -44,71 +44,32 @@ class Login extends MY_Controller
 		$this->loadpage('login',$data);
 	}
 	
-	public function fbLoginCheck()
-	{
-		$formData = $this->initializeValuesFB();		
-		$fbcheck = $formData['fblogin'];
-		
-		if($fbcheck == "Yes")
-		{
-			$data['css'] = "resources/splash.css";
-			$data['validationErrors'] = " ";
-			$data['formDestination'] = "login/attemptLoginFB";
-			$this->attemptLoginFB();
-		}if($fbcheck == "No")
-		{
-			$data['css'] = "resources/splash.css";
-			$data['validationErrors'] = " ";
-			$data['formDestination'] = "login/attemptLoginCustomer";
-			$this->attemptLoginCustomer();
-		}
-	}
-	
 	public function attemptLoginFB()
 	{
-		$data['validationErrors'] = " ";
-		$data['css'] = "resources/splash.css";
-		$this->load->model("Customer_Model");
-		$formData = $this->initializeValuesFB();
-		$dbResultsFromFBID= $this->Customer_Model->getById($formData['fbid']);
-		$dbResultsFromEmail = $this->Customer_Model->getByEmail($formData['email']);
-		$customer_id = $formData['fbid'];
-		$firstname = $formData['firstname'];
-		$lastname = $formData['lastname'];
-		$emailadd = $formData['email'];
-		$username= $formData['username'];
-		$checked = $this->input->post('stayloggedin');
-			
-			if($checked == "CHECKED")
-			{
-				$checked = TRUE;
-			}
-			else
-			{
-				$checked = FALSE;
-			}
+		$this->load->model('Customer_Model');
+		$fb_id = $this->input->post('fb_id');
+		$fb_username = $this->input->post('fb_username');
+		$fb_firstname = $this->input->post('fb_firstname');
+		$fb_lastname = $this->input->post('fb_lastname');
+		$fb_email = $this->input->post('fb_email');
+		$type = "CUSTOMER";
 		
-		if($dbResultsFromFBID != FALSE || $dbResultsFromEmail != FALSE)
+		//check if Email Exists
+		if(($this->Customer_Model->getByEmail($fb_email)) == FALSE)
 		{
-			$sessionData = array(
-					'customer_id'  => $customer_id,
-					'username'  => $username,
-					'firstname'     => $firstname,
-					'lastname' => $lastname
-            );
-			
-			$this->setSessionFB($sessionData, $checked, "CUSTOMER");
-			
-			$data['formDestination'] = "/";
-			$this->loadpage('customer',$data);
+			//If not registered; register then login
+			try
+			{
+				$this->Customer_Model->addFBCustomer($fb_firstname,$fb_lastname,$fb_email,$fb_username);
+			}
+			catch(Exception $e)
+			{
+				redirect('/','refresh');
+			}
 		}
-		else 
-		{
-			$data['validationErrors'] = "Invalid Username or Password; Please try again! 2";
-			
-			$this->Customer_Model->addFBCustomer($customer_id,$firstname,$lastname,$emailadd,$username);
-			$this->attemptLoginFB();
-		}
+		
+		$this->setSessionFB($fb_id, $fb_username,$fb_firstname,$fb_lastname, $type);
+		redirect('/','refresh');
 	}
 	
 	public function attemptLoginCustomer()
@@ -368,20 +329,15 @@ class Login extends MY_Controller
 		$this->session->set_userdata($newdata);
 	}
 	
-	private function setSessionFB($dataObjectArray, $rememberMe, $type)
+	private function setSessionFB($fb_id, $username,$firstname,$lastname, $type)
 	{
 		$newdata = array(
-					'id'  => $dataObjectArray['customer_id'],
-					'username'  => $dataObjectArray['username'],
-					'firstname'     => $dataObjectArray['firstname'],
-					'lastname' => $dataObjectArray['lastname'],
+					'id'  => $fb_id,
+					'username'  => $username,
+					'firstname'     => $firstname,
+					'lastname' => $lastname,
 					'usertype' => $type
                );
-		if($rememberMe == TRUE)
-		{
-			$data['new_expiration'] = 60*60*24*30;//30 days
-        	$this->session->sess_expiration = $data['new_expiration'];
-		}
 		$this->session->set_userdata($newdata);
 	}
 	

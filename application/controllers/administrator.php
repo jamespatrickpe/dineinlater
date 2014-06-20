@@ -49,7 +49,7 @@ class Administrator extends MY_Controller
 	}
 	
 	//Loads the Admin Home Page
-	public function admin()
+	public function admin_administrators()
 	{
 		$data['adminResults'] = $this->Admin_Model->getAll();
 		$data['css'] = 'resources/account.css';
@@ -57,7 +57,7 @@ class Administrator extends MY_Controller
 	}
 	
 	//Loads Restaurant Management System
-	public function resto()
+	public function admin_restos()
 	{
 		$raw = $this->Restaurant_Model->getAll();
 		$data['restaurantResults'] = $this->Restaurant_Model->getAll();
