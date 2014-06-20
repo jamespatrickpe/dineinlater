@@ -49,7 +49,7 @@
 			</div>
 			<?php
 				$attributes = array('id' => 'signin');
-				echo form_open("Login/attemptLoginFB",$attributes);
+				echo form_open("Login/fbLoginCheck",$attributes);
 			?>
 			<?php $this->load->view("login_interface"); ?>			
 			</form>			

@@ -41,6 +41,7 @@ class Login extends MY_Controller
 	
 	public function fbLoginCheck()
 	{
+		$formData = $this->initializeValuesFB();		
 		$fbcheck = $formData['fblogin'];
 		
 		if($fbcheck == "Yes")
@@ -49,22 +50,45 @@ class Login extends MY_Controller
 			$data['css'] = "resources/splash.css";
 			$data['validationErrors'] = " ";
 			$data['formDestination'] = "login/attemptLoginFB";
-			$this->loadpage('login',$data);
-		}elseif($fbcheck == "No")
+			$this->attemptLoginFB();
+		}if($fbcheck == "No")
 		{
 			$this->session->sess_destroy();
 			$data['css'] = "resources/splash.css";
 			$data['validationErrors'] = " ";
 			$data['formDestination'] = "login/attemptLoginCustomer";
-			$this->loadpage('login',$data);
+			$this->attemptLoginCustomer();
 		}
 	}
 	
-	public function attemptLoginCustomer()
+	public function attemptLoginFB()
 	{
 		$data['validationErrors'] = " ";
 		$data['css'] = "resources/splash.css";
 		$this->load->model("Customer_Model");
+		$formData = $this->initializeValuesFB();
+		$dbResultsFromFBID= $this->Customer_Model->getById($formData['fbid']);
+		$dbResultsFromEmail = $this->Customer_Model->getByEmail($formData['email']);
+		
+		if($dbResultsFromFBID != FALSE || $dbResultsFromEmail != FALSE)
+		{
+			$this->setSessionCustomer($dbResultsFromUsername, $checked, "CUSTOMER");
+			$data['formDestination'] = "/";
+			redirect('/','customer');
+		}
+		else 
+		{
+			$data['validationErrors'] = "Invalid Username or Password; Please try again! 2";
+			$customer_id = $formData['fbid'];
+			$firstname = $formData['firstname'];
+			$lastname = $formData['lastname'];
+			$emailadd = $formData['email'];
+			$username= $formData['username'];
+			
+			$this->Customer_Model->addFBCustomer($customer_id,$firstname,$lastname,$emailadd,$username);
+			$this->setSessionCustomer($dbResultsFromEmail, $checked, "CUSTOMER");
+			$this->attemptLoginFB();
+		}
 	}
 	
 	public function attemptLoginCustomer()
@@ -388,8 +412,28 @@ class Login extends MY_Controller
 			$inputData['username'] = $this->input->post('username');
 			$inputData['password'] = $this->input->post('password');
 			$inputData['checkbox'] = $this->input->post('stayloggedin');
+			
+			$inputData['checkbox'] = $this->input->post('fblogin');
+			$inputData['checkbox'] = $this->input->post('stayloggedin');
+			$inputData['checkbox'] = $this->input->post('stayloggedin');
+			$inputData['checkbox'] = $this->input->post('stayloggedin');
+			$inputData['checkbox'] = $this->input->post('stayloggedin');
 			return $inputData;
 		}
+	}
+	
+	private function initializeValuesFB()
+	{
+		//Extract input data into array
+		$inputData = array();
+		$inputData['fbid'] = $this->input->post('fbid');
+		$inputData['firstname'] = $this->input->post('firstname');
+		$inputData['lastname'] = $this->input->post('lastname');
+		$inputData['email'] = $this->input->post('email');
+		$inputData['username'] = $this->input->post('username');
+		$inputData['fblogin'] = $this->input->post('fblogin');
+			
+		return $inputData;
 	}
 }
 

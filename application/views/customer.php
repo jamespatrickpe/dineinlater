@@ -11,7 +11,7 @@
 					</div>
 				</blurb><blurb class="half" id="customer_reservation"><div class="blurb-header"><h2>Reservations</h2></div>
 						<p>
-							Reservations made by the user will be made here
+							Reservations made by the user will be placed here
 							<div id="cus_edit_reserve">
 								<?php
 									$attributes3 = array('id' => 'signin');
