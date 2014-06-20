@@ -11,7 +11,6 @@
 		echo "NUMBER OF SLOTS FOR RESERVATION: ".form_input("username","");
 		echo "Logo Photo"."<input type='file' name='logo_photo' size='20' />";
 		echo "Menu Photo"."<input type='file' name='menu_photo' size='20' />";
-		echo 
 		echo "USERNAME: ".form_input("username","");
 		echo "PASSWORD: ".form_password("password","");
 		echo form_reset("reset","reset");
