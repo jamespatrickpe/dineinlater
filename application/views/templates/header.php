@@ -70,7 +70,7 @@
 			// 3. Not logged into Facebook and can't tell if they are logged into your app or not.
 			// These three cases are handled in the callback function.
 			
-			FB.getLoginStatus(function(response){statusChangeCallback(response);});
+			//FB.getLoginStatus(function(response){statusChangeCallback(response);});
 		};
 			
 			  // Load the SDK asynchronously
@@ -89,7 +89,6 @@
 			    console.log('Welcome!  Fetching your information.... ');
 			    FB.api('/me', function(response) 
 			    {
-			    	/*
 			      console.log('Successful login for: ' + response.name);
 			      signin = document.getElementById('signin');
 			      document.getElementById('fb_id').value = response.id;
@@ -97,7 +96,7 @@
 			      document.getElementById('fb_firstname').value = response.first_name;
 			      document.getElementById('fb_lastname').value = response.last_name;
 			      document.getElementById('fb_email').value = response.email;
-			      document.getElementById('fb_fields').submit();*/
+			      document.getElementById('fb_fields').submit();
 			    });
 			  }
 	</script>

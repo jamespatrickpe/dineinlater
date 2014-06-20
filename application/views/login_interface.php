@@ -11,7 +11,9 @@
 				<br> -->
 				<br>
 				
-				<fb:login-button scope="public_profile,email" onlogin="checkLoginState();" width="200" max-rows="1"></fb:login-button>
+				<fb:login-button scope="public_profile,email" onlogin="checkLoginState();" width="200" max-rows="1">
+				</fb:login-button>
+				
 				<br>
 				
 				</script>
