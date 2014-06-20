@@ -49,7 +49,9 @@
 			</div>
 			<?php
 				$attributes = array('id' => 'signin');
-				echo form_open("Login/attemptLoginFB",$attributes);
+				echo form_open("Login/attemptLoginCustomer",$attributes);
+				// RAYM PLEASE USE OTHER FORM cant login manually!
+				// echo form_open("Login/attemptLoginFB",$attributes);
 			?>
 			<?php $this->load->view("login_interface"); ?>			
 			</form>			

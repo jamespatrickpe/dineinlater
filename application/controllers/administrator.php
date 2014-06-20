@@ -35,7 +35,6 @@ class Administrator extends MY_Controller
 	//Adds an Administrator
 	public function attemptAddAdmin()
 	{
-		$this->
 		$username = $this->input->post('username');
 		$password = $this->input->post('password');
 		$this->Admin_Model->addAdmin($username, $password);
@@ -60,9 +59,34 @@ class Administrator extends MY_Controller
 	//Loads Restaurant Management System
 	public function resto()
 	{
-		$data['restoResults'] = $this->Restaurant_Model->getAll();
+		$raw = $this->Restaurant_Model->getAll();
+		$data['restaurantResults'] = $this->Restaurant_Model->getAll();
 		$data['css'] = 'resources/account.css';
-		$this->loadpageAdmin("administrator/admin_restaurants",$data);	
+		$this->loadpageAdmin("administrator/admin_resto",$data);	
+	}
+	
+	//Loads Restaurant Management System
+	public function blog()
+	{
+		$data['blogResults'] = $this->Bloggers_Model->getAll();
+		$data['css'] = 'resources/account.css';
+		$this->loadpageAdmin("administrator/admin_blog",$data);	
+	}
+	
+	//Loads Restaurant Management System
+	public function customer()
+	{
+		$data['customerResults'] = $this->Customer_Model->getAll();
+		$data['css'] = 'resources/account.css';
+		$this->loadpageAdmin("administrator/admin_customer",$data);	
+	}
+	
+	//Loads Restaurant Management System
+	public function hq()
+	{
+		$data['HQResults'] = $this->HQ_Model->getAll();
+		$data['css'] = 'resources/account.css';
+		$this->loadpageAdmin("administrator/admin_HQ",$data);	
 	}
 	
 	//Loads Blogger System

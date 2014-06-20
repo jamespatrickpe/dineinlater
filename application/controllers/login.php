@@ -3,10 +3,9 @@
 class Login extends MY_Controller 
 {
 	
-	public function __construct()
-	{
-		$data['css'] = "resources/splash.css";
-		$data['validationErrors'] = " ";
+	public function __construct() 
+	{        
+    	parent::__construct();
 	}
 			
 	public function index()
@@ -366,6 +365,7 @@ class Login extends MY_Controller
 	
 	public function logout()
 	{
+		$this->load->library('session');
 		$this->session->sess_destroy();
 		redirect('/', 'refresh');
 	}
