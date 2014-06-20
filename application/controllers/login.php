@@ -51,14 +51,12 @@ class Login extends MY_Controller
 		
 		if($fbcheck == "Yes")
 		{
-			$this->session->sess_destroy();
 			$data['css'] = "resources/splash.css";
 			$data['validationErrors'] = " ";
 			$data['formDestination'] = "login/attemptLoginFB";
 			$this->attemptLoginFB();
 		}if($fbcheck == "No")
 		{
-			$this->session->sess_destroy();
 			$data['css'] = "resources/splash.css";
 			$data['validationErrors'] = " ";
 			$data['formDestination'] = "login/attemptLoginCustomer";
@@ -74,24 +72,41 @@ class Login extends MY_Controller
 		$formData = $this->initializeValuesFB();
 		$dbResultsFromFBID= $this->Customer_Model->getById($formData['fbid']);
 		$dbResultsFromEmail = $this->Customer_Model->getByEmail($formData['email']);
+		$customer_id = $formData['fbid'];
+		$firstname = $formData['firstname'];
+		$lastname = $formData['lastname'];
+		$emailadd = $formData['email'];
+		$username= $formData['username'];
+		$checked = $this->input->post('stayloggedin');
+			
+			if($checked == "CHECKED")
+			{
+				$checked = TRUE;
+			}
+			else
+			{
+				$checked = FALSE;
+			}
 		
 		if($dbResultsFromFBID != FALSE || $dbResultsFromEmail != FALSE)
 		{
-			$this->setSessionCustomer($dbResultsFromUsername, $checked, "CUSTOMER");
+			$sessionData = array(
+					'customer_id'  => $customer_id,
+					'username'  => $username,
+					'firstname'     => $firstname,
+					'lastname' => $lastname
+            );
+			
+			$this->setSessionFB($sessionData, $checked, "CUSTOMER");
+			
 			$data['formDestination'] = "/";
-			redirect('/','customer');
+			$this->loadpage('customer',$data);
 		}
 		else 
 		{
 			$data['validationErrors'] = "Invalid Username or Password; Please try again! 2";
-			$customer_id = $formData['fbid'];
-			$firstname = $formData['firstname'];
-			$lastname = $formData['lastname'];
-			$emailadd = $formData['email'];
-			$username= $formData['username'];
 			
 			$this->Customer_Model->addFBCustomer($customer_id,$firstname,$lastname,$emailadd,$username);
-			$this->setSessionCustomer($dbResultsFromEmail, $checked, "CUSTOMER");
 			$this->attemptLoginFB();
 		}
 	}
@@ -343,6 +358,23 @@ class Login extends MY_Controller
 					'username'  => $dataObjectArray[0]->username,
 					'firstname'     => $dataObjectArray[0]->firstname,
 					'lastname' => $dataObjectArray[0]->lastname,
+					'usertype' => $type
+               );
+		if($rememberMe == TRUE)
+		{
+			$data['new_expiration'] = 60*60*24*30;//30 days
+        	$this->session->sess_expiration = $data['new_expiration'];
+		}
+		$this->session->set_userdata($newdata);
+	}
+	
+	private function setSessionFB($dataObjectArray, $rememberMe, $type)
+	{
+		$newdata = array(
+					'id'  => $dataObjectArray['customer_id'],
+					'username'  => $dataObjectArray['username'],
+					'firstname'     => $dataObjectArray['firstname'],
+					'lastname' => $dataObjectArray['lastname'],
 					'usertype' => $type
                );
 		if($rememberMe == TRUE)
