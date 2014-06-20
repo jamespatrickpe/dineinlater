@@ -29,7 +29,7 @@ class Login extends MY_Controller
 	public function login_hq()
 	{
 		$this->session->sess_destroy();
-		$data['css'] = "resources/splash.css";
+		$data['css'] = "resources/restaurant.css";
 		$data['validationErrors'] = " ";
 		$data['formDestination'] = "login/attemptLoginHQ";
 		$this->loadpage('login',$data);
@@ -38,10 +38,10 @@ class Login extends MY_Controller
 	public function login_restaurant()
 	{
 		$this->session->sess_destroy();
-		$data['css'] = "resources/splash.css";
+		$data['css'] = "resources/restaurant.css";
 		$data['validationErrors'] = " ";
 		$data['formDestination'] = "login/attemptLoginRestaurant";
-		$this->loadpage('login',$data);
+		$this->loadpage('restoHome',$data);
 	}
 	
 	public function attemptLoginFB()
