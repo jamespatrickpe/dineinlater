@@ -17,6 +17,20 @@ class Administrator extends MY_Controller
 	//Adds a Restaurant
 	public function attemptAddRestaurant()
 	{
+		
+		$this->form_validation->set_rules('name', 'Username', 'required');
+		$this->form_validation->set_rules('owner', 'Username', 'required');
+		$this->form_validation->set_rules('mobile', 'Username', 'required');
+		$this->form_validation->set_rules('landline', 'Username', 'required');
+		$this->form_validation->set_rules('google_lat', 'Username', 'required');
+		$this->form_validation->set_rules('google_long', 'Username', 'required');
+		$this->form_validation->set_rules('slots', 'Username', 'required');
+		$this->form_validation->set_rules('logo_photo', 'Username', 'required');
+		$this->form_validation->set_rules('menu_photo', 'Username', 'required');
+		$this->form_validation->set_rules('url', 'Username', 'required');
+		$this->form_validation->set_rules('username', 'Username', 'required');
+		$this->form_validation->set_rules('username', 'Username', 'required');
+		
 		$name = $this->input->post('name');
 		$owner = $this->input->post('owner');
 		$mobile = $this->input->post('mobile');
@@ -24,9 +38,6 @@ class Administrator extends MY_Controller
 		$google_lat = $this->input->post('google_lat');
 		$google_long = $this->input->post('google_long');
 		$slots = $this->input->post('slots');
-		
-		
-		
 		$logo_photo = $this->input->post('logo_photo');
 		$menu_photo = $this->input->post('menu_photo');
 		$url = $this->input->post('url');

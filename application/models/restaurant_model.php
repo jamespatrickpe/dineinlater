@@ -87,17 +87,23 @@ class Restaurant_Model extends MY_Model
 			   'landline' => $myReservationArray['landline'],
 			   'google_lat' => $myReservationArray['google_lat'],
 			   'google_long' => $myReservationArray['google_long'],
-			   'reservation_slots' => $myReservationArray['reservation_slots'],
+			   'slots' => $myReservationArray['slots'],
 			   'logo_photo' => $myReservationArray['logo_photo'],
 			   'menu_photo' => $myReservationArray['menu_photo'],
-			   'websiteurl' => $myReservationArray['websiteurl'],
+			   'websiteurl' => $myReservationArray['url'],
 			   'description' => $myReservationArray['description'],
 			   'autoaccept' => $myReservationArray['autoaccept'],
 			   'username' => $myReservationArray['username'],
 			   'password' => $this->encrypt->encode($myReservationArray['password']),
 			   'address' => $myReservationArray['address'],
 			   'city' => $myReservationArray['city'],
-			   'cuisine' => $myReservationArray['cuisine']
+			   'cuisine' => $myReservationArray['cuisine'],
+			   'hq' => $myReservationArray['hq'],
+			   'status' => $myReservationArray['status'],
+			   'open_time' => $myReservationArray['open_time'],
+			   'close_time' => $myReservationArray['close_time'],
+			   'rest_start' => $myReservationArray['rest_start'],
+			   'rest_end' => $myReservationArray['rest_end']
 			);
 		$this->db->insert('restaurant', $data); 
 	}
