@@ -3,39 +3,56 @@
 <table>
 	<tr>
 		<th>id</th>
-   		<th>username</th>
+		<th>title</th>
+   		<th>url</th>
+   		<th>urlpic</th>
+   		<th>blogdate</th>
+   		<th>author</th>
+   		<th>snippet</th>
    	</tr>
    		<?php
-   			foreach($adminResults as $admin) 
+   			foreach($blogResults as $blog) 
    			{
    				echo "<tr>";
-			    echo "<td>".$admin->admin_id."</td>";
-			    echo "<td>".$admin->username."</td>";
+			    echo "<td>".$blog->bloggers_id."</td>";
+				echo "<td>".$blog->title."</td>";
+			    echo "<td>".$blog->url."</td>";
+				echo "<td>".$blog->urlpic."</td>";
+			    echo "<td>".$blog->blogdate."</td>";
+				echo "<td>".$blog->author."</td>";
+			    echo "<td>".$blog->snippet."</td>";
 				echo "</tr>";
 			}
    		?>
 </table>
 
-<h3> Add Administrator </h3>
+<h3> Add Blog </h3>
 	<?php
-		echo form_open('administrator/attemptAddAdmin',"style='text-align:left;'");	
-		echo "USERNAME: ".form_input("username","");
-		echo "PASSWORD: ".form_password("password","");
+		echo form_open('administrator/attemptAddBlog',"style='text-align:left;'")."<br>";
+		echo "title : ".form_input("title","")."<br>";	
+		echo "bloggers_id : ".form_input("bloggers_id","")."<br>";
+		echo "url : ".form_input("url","")."<br>";
+		echo "urlpic : ".form_input("urlpic","")."<br>";
+		echo "blogdate : ".form_input("blogdate","")."<br>";
+		echo "author : ".form_input("author","")."<br>";
+		echo "snippet : ".form_textarea("snippet","")."<br>";
 		echo form_reset("reset","reset");
-		echo form_submit("submit","add");
+		echo form_submit("submit","add")."<br>";
 		echo form_close();
 	?>
-<h3> Delete Administrator </h3>
+	
+<h3> Delete Blog </h3>
 	<?php
-		echo form_open('administrator/attemptDeleteAdmin', "style='text-align:left;'");
+		echo form_open('administrator/attemptDeleteBlog', "style='text-align:left;'");
 		
-		echo "<select name='selectedAdminToBeDeleted'>";
-		foreach($adminResults as $admin) 
+		echo "<select name='selectedBlogToBeDeleted'>";
+		foreach($blogResults as $blog) 
 		{
-			echo "<option value=".$admin->admin_id.">".$admin->username."</option>";
+			echo "<option value=".$blog->blog_id.">".$blog->title."</option>";
 		}
 		echo "</select>";
 		
 		echo form_submit("submit","delete");
 		echo form_close();
 	?>
+<br><br><br>

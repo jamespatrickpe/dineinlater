@@ -19,6 +19,8 @@
    		<?php
    			foreach($restaurantResults as $restaurant) 
    			{
+				$rowData = $this->HQ_Model->getById($restaurant->hq_id);
+				
    				echo "<tr>";
 			    echo "<td>".$restaurant->restaurant_id."</td>";
 				echo "<td>".$restaurant->name."</td>";
@@ -29,11 +31,10 @@
 				echo "<td>".$restaurant->autoaccept."</td>";
 				echo "<td>".$restaurant->address."</td>";
 				echo "<td>".$restaurant->city."</td>";
-				echo "<td>".$restaurant->cuisine."</td>";
-				$rowData = $this->HQ_Model->getById($restaurant->hq_id);
+				echo "<td>".$restaurant->cuisine."</td>";	
 				echo "<td>". $rowData[0]->hqname ."</td>";
-				echo "<td>". anchor('administrator/edit_resto?id='.$restaurant->restaurant_id, 'edit') ."</td>";
-				echo "<td>". anchor('administrator/delete_resto?id='.$restaurant->restaurant_id, 'delete') ."</td>";
+				echo "<td>". anchor('administrator/editResto?id='.$restaurant->restaurant_id, 'edit') ."</td>";
+				echo "<td>". anchor('administrator/attemptDeleteRestaurant?id='.$restaurant->restaurant_id, 'delete') ."</td>";
 				echo "</tr>";
 			}
    		?>

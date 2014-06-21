@@ -8,7 +8,7 @@ class Bloggers_Model extends MY_Model
 	public function getAll()
 	{
 		$query = $this->db->get('bloggers');
-        return finalizeResults($query);
+        return $this->multipleResults($query);
 	}
 	
 	public function getById($id)

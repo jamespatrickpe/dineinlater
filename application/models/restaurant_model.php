@@ -11,11 +11,23 @@ class Restaurant_Model extends MY_Model
         return $this->multipleResults($query);
 	}
 	
+	public function deleteRestaurant($id)
+	{
+		$this->db->delete('restaurant', array('restaurant_id' => $id)); 
+	}
+	
 	public function getById($id)
 	{
 		$this->db->where('restaurant_id', $id);
 		$query = $this->db->get('restaurant');
         return $this->singularResults($query);
+	}
+	
+	public function updateResto($data, $id)
+	{
+		$data = array_filter($data);
+		$this->db->where('restaurant_id', $id);
+		$this->db->update('restaurant', $data); 
 	}
 	
 	public function getByUsername($username)
