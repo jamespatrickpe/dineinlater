@@ -4,7 +4,7 @@
 	<?php
 	echo anchor("restaurant/", " DASHBOARD |");
 	echo anchor("restaurant/reservations", " RESERVATIONS |");
-	echo anchor("restaurant/resto_profile", " UPDATE PROFILE |");
-	echo anchor("restaurant/reservations", " RESERVATIONS |");
+	echo anchor("restaurant/editRestaurant", " UPDATE PROFILE |");
+	echo anchor("restaurant/respondToReservation", " RESERVATIONS |");
 	?>
 </h2>
