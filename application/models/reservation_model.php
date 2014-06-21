@@ -73,11 +73,24 @@ class Reservation_Model extends MY_Model
 		$this->db->update('reservation', $data); 
 	}
 	
-	// fetches row data by restaurant ID
+	// fetches row data by restaurant ID 
 	public function reservationByRestaurantID($resto_ID)
 	{
-		$this->db->where('reservation_id', $resto_ID);
+		$this->db->where('restaurant_id', $resto_ID);
 		$query = $this->db->get('reservation');
+        return $this->multipleResults($query);
+	}
+	
+	// fetches row data by restaurant ID and Status O
+	public function reservationByRestaurantIDOpen($resto_ID)
+	{
+		$sql = "SELECT r.reservation_id, CONCAT(c.firstname,' ',c.lastname) as fullname, r.date, r.time, r.slots, r.reservationmade, r.note
+				FROM reservation r JOIN customer c
+				ON r.customer_id = c.customer_id
+				WHERE r.confirmed = 0
+				AND r.restaurant_id = ?
+				AND r.status NOT IN ('C','R')";
+		$query = $this->db->query($sql,array($resto_ID));
         return $this->multipleResults($query);
 	}
 

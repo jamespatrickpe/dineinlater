@@ -12,7 +12,8 @@ class Restaurant extends MY_Controller
 		$this->load->model('HQ_Model');
 		$this->load->model('Customer_Model');
 		$this->load->model('Bloggers_Model');
-		//$this->sessionSecurityInterceptor("RESTO");
+		$this->load->model('Reservation_Model');
+		$this->sessionSecurityInterceptor("RESTAURANT");
 		$data['validationErrors'] = " ";
 	}
 	
@@ -38,7 +39,7 @@ class Restaurant extends MY_Controller
 	{
 		$data['restoProfile'] = $this->Restaurant_Model->getById($this->session->userdata('id'));
 		$data['css'] = "resources/restaurant.css";
-		$this->loadpageResto('restaurant/resto_profile',$data);
+		$this->loadpageResto('restaurant/resto_editprofile',$data);
 	} 
 	
 	//loads the edit restaurant page
@@ -56,7 +57,10 @@ class Restaurant extends MY_Controller
 	//responds to reservation through SHOWUP, STATUS
 	public function respondToReservation()
 	{
-		
+		$data['reservations'] = $this->Reservation_Model->reservationByRestaurantIDOpen($this->session->userdata('id'));
+		$data['session'] = $this->session->userdata('id');
+		$data['css'] = "resources/restaurant.css";
+		$this->loadpageResto('restaurant/resto_reservations',$data);
 	} 
 
 	// NOT SURE IF THIS SHOULD BE AT RESTAURANT MODEL. MAYBE IN CUSTOMER. 
