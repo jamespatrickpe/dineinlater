@@ -17,7 +17,33 @@ class Administrator extends MY_Controller
 	//Adds a Restaurant
 	public function attemptAddRestaurant()
 	{
-		$this->input->post('');
+		$name = $this->input->post('name');
+		$owner = $this->input->post('owner');
+		$mobile = $this->input->post('mobile');
+		$landline = $this->input->post('landline');
+		$google_lat = $this->input->post('google_lat');
+		$google_long = $this->input->post('google_long');
+		$slots = $this->input->post('slots');
+		
+		
+		
+		$logo_photo = $this->input->post('logo_photo');
+		$menu_photo = $this->input->post('menu_photo');
+		$url = $this->input->post('url');
+		$description =$this->input->post('description');
+		$address =$this->input->post('address');
+		$city =$this->input->post('city');
+		$username = $this->input->post('username');
+		$password = $this->input->post('password');
+		$autoaccept = $this->input->post('autoaccept');
+		$status = $this->input->post('status');
+		$hq = $this->input->post('hq');
+		$open_time = $this->input->post('open_time');
+		$close_time = $this->input->post('close_time');
+		$rest_start = $this->input->post('rest_start');
+		$rest_end = $this->input->post('rest_end');
+		
+		
 	}
 	
 	//loadpage for Admin
@@ -71,10 +97,11 @@ class Administrator extends MY_Controller
 		$this->loadpageAdmin("administrator/admin_resto",$data);	
 	}
 	
-		//Loads Restaurant Management System
+	//Adds Restos Admin
 	public function admin_addrestos()
 	{
-		$raw = $this->Restaurant_Model->getAll();
+		
+		$data['hqOptions'] =  $this->HQ_Model->getAll();
 		$data['restaurantResults'] = $this->Restaurant_Model->getAll();
 		$data['css'] = 'resources/account.css';
 		$this->loadpageAdmin("administrator/admin_addrestos",$data);	
