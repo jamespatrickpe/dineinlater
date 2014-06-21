@@ -5,11 +5,7 @@
 */cache/!index.html
 */cache/!.htaccess
 .project
-/application/imageuploads/*
-<<<<<<< HEAD
-=======
-.settings
->>>>>>> initial
+imageuploads/
 # =========================
 # Operating System Files
 # =========================
