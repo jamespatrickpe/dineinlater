@@ -13,4 +13,7 @@
 
 <?php 
 	if(isset($validationErrors) == "TRUE"){echo $validationErrors;} 
+	if(isset($fileUploadError) == "TRUE"){print_r($fileUploadError);} 
 ?>
+
+

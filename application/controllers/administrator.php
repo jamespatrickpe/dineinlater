@@ -17,20 +17,47 @@ class Administrator extends MY_Controller
 	//Adds a Restaurant
 	public function attemptAddRestaurant()
 	{
+		//Configuration for File Upload
+		$config['upload_path'] = $_SERVER['DOCUMENT_ROOT'].'/dineinlater/application/imageuploads/';
+		$config['allowed_types'] = 'gif|jpg|png';
+		$config['max_size']	= '100';
+		$config['max_width']  = '1024';
+		$config['max_height']  = '768';
+		$config['encrypt_name']  = TRUE;
+		$this->upload->initialize($config);  
 		
-		$this->form_validation->set_rules('name', 'Username', 'required');
-		$this->form_validation->set_rules('owner', 'Username', 'required');
-		$this->form_validation->set_rules('mobile', 'Username', 'required');
-		$this->form_validation->set_rules('landline', 'Username', 'required');
-		$this->form_validation->set_rules('google_lat', 'Username', 'required');
-		$this->form_validation->set_rules('google_long', 'Username', 'required');
-		$this->form_validation->set_rules('slots', 'Username', 'required');
-		$this->form_validation->set_rules('logo_photo', 'Username', 'required');
-		$this->form_validation->set_rules('menu_photo', 'Username', 'required');
-		$this->form_validation->set_rules('url', 'Username', 'required');
-		$this->form_validation->set_rules('username', 'Username', 'required');
-		$this->form_validation->set_rules('username', 'Username', 'required');
+		// Form Validation Ruling
+		$this->form_validation->set_rules('name', '', 'required');
+		$this->form_validation->set_rules('owner', '', 'required');
+		$this->form_validation->set_rules('mobile', '', 'required');
+		$this->form_validation->set_rules('landline', '', 'required');
+		$this->form_validation->set_rules('google_lat', '', 'required');
+		$this->form_validation->set_rules('google_long', '', 'required');
+		$this->form_validation->set_rules('slots', '', 'required');
+		$this->form_validation->set_rules('url', '', 'required');
+		$this->form_validation->set_rules('description', '', 'required');
+		$this->form_validation->set_rules('address', '', 'required');
+		$this->form_validation->set_rules('city', '', 'required');
+		$this->form_validation->set_rules('username', '', 'required');
+		$this->form_validation->set_rules('password', '', 'required');
+		$this->form_validation->set_rules('autoaccept', '', 'required');
+		$this->form_validation->set_rules('status', '', 'required');
+		$this->form_validation->set_rules('hq', '', 'required');
+		$this->form_validation->set_rules('open_time', '', 'required');
+		$this->form_validation->set_rules('close_time', '', 'required');
+		$this->form_validation->set_rules('rest_start', '', 'required');
+		$this->form_validation->set_rules('rest_end', '', 'required');
 		
+		//Form Validation
+		if ($this->form_validation->run() == FALSE)
+		{
+			$data['css'] = 'resources/account.css';
+			$data['validationErrors'] = validation_errors();
+			$data[''] = validation_errors();
+			$this->loadpageAdmin("administrator/admin_addrestos",$data);
+		}
+		
+		//Form Validation Check
 		$name = $this->input->post('name');
 		$owner = $this->input->post('owner');
 		$mobile = $this->input->post('mobile');
@@ -38,8 +65,6 @@ class Administrator extends MY_Controller
 		$google_lat = $this->input->post('google_lat');
 		$google_long = $this->input->post('google_long');
 		$slots = $this->input->post('slots');
-		$logo_photo = $this->input->post('logo_photo');
-		$menu_photo = $this->input->post('menu_photo');
 		$url = $this->input->post('url');
 		$description =$this->input->post('description');
 		$address =$this->input->post('address');
@@ -54,7 +79,70 @@ class Administrator extends MY_Controller
 		$rest_start = $this->input->post('rest_start');
 		$rest_end = $this->input->post('rest_end');
 		
+		//SAMPLE
+		$data['css'] = 'resources/account.css';
+		$this->upload->do_upload("menu_photo");
+		$dataLogoPhoto = array('upload_data' => $this->upload->data());
+		$data['fileUploadErrorOne'] = array('menu_photo' => $this->upload->display_errors(), 'stuff' => $dataLogoPhoto, 'dfas' => $config['upload_path']);
+		$this->loadpageAdmin("administrator/admin_addrestos",$data);
+		/*
+		//DO IMAGE UPLOADS
+		if(!$this->upload->do_upload("menu_photo"))
+		{
+			$data['validationErrors'] = array('menu_photo' => $this->upload->display_errors());
+			$this->loadpageAdmin("administrator/admin_addrestos",$data);
+		}
+		else
+		{
+			$dataMenuPhoto = array('upload_data' => $this->upload->data());
+			$fileNameMenuPhoto = $dataMenuPhoto['file_name'];
+			$fullPathMenuPhoto = $dataMenuPhoto['full_path'];
+			$menu_photo = $fullPathMenuPhoto;
+		}
 		
+		//DO IMAGE UPLOADS
+		if(!$this->upload->do_upload("logo_photo"))
+		{
+			$data['validationErrors'] = array('logo_photo' => $this->upload->display_errors());
+			$this->loadpageAdmin("administrator/admin_addrestos",$data);
+		}
+		else
+		{
+			$dataLogoPhoto = array('upload_data' => $this->upload->data());
+			$fileNameLogoPhoto = $dataLogoPhoto['file_name'];
+			$fullPathLogoPhoto = $dataLogoPhoto['full_path'];
+			$logo_photo = $fullPathLogoPhoto;
+		}	
+		
+		$myDataArray = array(
+			   'name' => $name,
+			   'owner' => $owner,
+			   'mobile' => $mobile,
+			   'landline' => $landline,
+			   'google_lat' => $google_lat,
+			   'google_long' => $google_long,
+			   'slots' => $slots,
+			   'logo_photo' => $logo_photo,
+			   'menu_photo' => $menu_photo,
+			   'websiteurl' => $url,
+			   'description' => $description,
+			   'autoaccept' => $autoaccept,
+			   'username' => $username,
+			   'password' => $password,
+			   'address' => $address,
+			   'city' => $city,
+			   'cuisine' => $cuisine,
+			   'hq' => $hq,
+			   'status' => $status,
+			   'open_time' => $open_time,
+			   'close_time' => $close_time,
+			   'rest_start' => $rest_start,
+			   'rest_end' => $rest_end
+			);
+		
+		$this->Restaurant_Model->addRestaurant($myDataArray);
+		
+		$this->loadpageAdmin("administrator/admin_addrestos",$data);*/
 	}
 	
 	//loadpage for Admin

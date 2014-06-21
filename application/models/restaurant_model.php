@@ -87,7 +87,7 @@ class Restaurant_Model extends MY_Model
 			   'landline' => $myReservationArray['landline'],
 			   'google_lat' => $myReservationArray['google_lat'],
 			   'google_long' => $myReservationArray['google_long'],
-			   'slots' => $myReservationArray['slots'],
+			   'reservation_slots' => $myReservationArray['slots'],
 			   'logo_photo' => $myReservationArray['logo_photo'],
 			   'menu_photo' => $myReservationArray['menu_photo'],
 			   'websiteurl' => $myReservationArray['url'],

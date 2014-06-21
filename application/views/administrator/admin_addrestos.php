@@ -1,11 +1,9 @@
 <h3> Add Restaurant </h3>
 	<?php
-	
 			$options = array(
 		    'rows' => 10,
 		    'cols' => 10
 		);
-	
 		echo form_open_multipart('administrator/attemptAddRestaurant',"style='text-align:left;'")."<br>";	
 		echo "NAME : ".form_input("name","")."<br>";
 		echo "OWNER : ".form_input("owner","")."<br>";
