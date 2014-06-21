@@ -60,7 +60,29 @@ class Restaurant extends MY_Controller
 		$data['reservations'] = $this->Reservation_Model->reservationByRestaurantIDOpen($this->session->userdata('id'));
 		$data['session'] = $this->session->userdata('id');
 		$data['css'] = "resources/restaurant.css";
+		$this->session->userdata('confirmation', '');
 		$this->loadpageResto('restaurant/resto_reservations',$data);
+	}
+	
+	public function approveReservation()
+	{
+		$this->Reservation_Model->approveReservation($this->input->post('reservation_id'));
+		$this->session->userdata('confirmation', 'Approval Completed');
+		redirect("restaurant/respondToReservation","refresh");
+	}
+	
+	public function rejectReservation()
+	{
+		$this->Reservation_Model->rejectReservation($this->input->post('reservation_id'));
+		$this->session->userdata('confirmation', 'Rejection Completed');
+		redirect("restaurant/respondToReservation","refresh");
+	}
+	
+	public function reservationToday()
+	{
+		$data['reservations'] = $this->Reservation_Model->reservationRestoToday($this->session->userdata('id'));
+		$data['css'] = "resources/restaurant.css";
+		$this->loadpageResto('restaurant/resto_reservationToday',$data);
 	} 
 
 	// NOT SURE IF THIS SHOULD BE AT RESTAURANT MODEL. MAYBE IN CUSTOMER. 
