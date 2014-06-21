@@ -12,7 +12,7 @@ class Restaurant extends MY_Controller
 		$this->load->model('HQ_Model');
 		$this->load->model('Customer_Model');
 		$this->load->model('Bloggers_Model');
-		//$this->sessionSecurityInterceptor("RESTO");
+		$this->sessionSecurityInterceptor("RESTAURANT");
 		$data['validationErrors'] = " ";
 	}
 	
