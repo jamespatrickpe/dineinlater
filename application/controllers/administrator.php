@@ -18,7 +18,7 @@ class Administrator extends MY_Controller
 	public function attemptAddRestaurant()
 	{
 		//Configuration for File Upload
-		$config['upload_path'] = $_SERVER['DOCUMENT_ROOT'].'/dineinlater/application/imageuploads/';
+		$config['upload_path'] =$_SERVER['DOCUMENT_ROOT'].'/dineinlater/application/imageuploads/';
 		$config['allowed_types'] = 'gif|jpg|png';
 		$config['max_size']	= '100';
 		$config['max_width']  = '1024';
@@ -37,6 +37,7 @@ class Administrator extends MY_Controller
 		$this->form_validation->set_rules('url', '', 'required');
 		$this->form_validation->set_rules('description', '', 'required');
 		$this->form_validation->set_rules('address', '', 'required');
+		$this->form_validation->set_rules('cuisine', '', 'required');
 		$this->form_validation->set_rules('city', '', 'required');
 		$this->form_validation->set_rules('username', '', 'required');
 		$this->form_validation->set_rules('password', '', 'required');
@@ -53,11 +54,10 @@ class Administrator extends MY_Controller
 		{
 			$data['css'] = 'resources/account.css';
 			$data['validationErrors'] = validation_errors();
-			$data[''] = validation_errors();
 			$this->loadpageAdmin("administrator/admin_addrestos",$data);
 		}
 		
-		//Form Validation Check
+		//Insert Form Values
 		$name = $this->input->post('name');
 		$owner = $this->input->post('owner');
 		$mobile = $this->input->post('mobile');
@@ -67,6 +67,7 @@ class Administrator extends MY_Controller
 		$slots = $this->input->post('slots');
 		$url = $this->input->post('url');
 		$description =$this->input->post('description');
+		$cuisine =$this->input->post('cuisine');
 		$address =$this->input->post('address');
 		$city =$this->input->post('city');
 		$username = $this->input->post('username');
@@ -79,14 +80,7 @@ class Administrator extends MY_Controller
 		$rest_start = $this->input->post('rest_start');
 		$rest_end = $this->input->post('rest_end');
 		
-		//SAMPLE
-		$data['css'] = 'resources/account.css';
-		$this->upload->do_upload("menu_photo");
-		$dataLogoPhoto = array('upload_data' => $this->upload->data());
-		$data['fileUploadErrorOne'] = array('menu_photo' => $this->upload->display_errors(), 'stuff' => $dataLogoPhoto, 'dfas' => $config['upload_path']);
-		$this->loadpageAdmin("administrator/admin_addrestos",$data);
-		/*
-		//DO IMAGE UPLOADS
+		//UPLOAD MENU_PHOTO
 		if(!$this->upload->do_upload("menu_photo"))
 		{
 			$data['validationErrors'] = array('menu_photo' => $this->upload->display_errors());
@@ -94,13 +88,13 @@ class Administrator extends MY_Controller
 		}
 		else
 		{
-			$dataMenuPhoto = array('upload_data' => $this->upload->data());
+			$dataMenuPhoto = $this->upload->data();
 			$fileNameMenuPhoto = $dataMenuPhoto['file_name'];
 			$fullPathMenuPhoto = $dataMenuPhoto['full_path'];
 			$menu_photo = $fullPathMenuPhoto;
 		}
 		
-		//DO IMAGE UPLOADS
+		//UPLOAD LOGO_PHOTO
 		if(!$this->upload->do_upload("logo_photo"))
 		{
 			$data['validationErrors'] = array('logo_photo' => $this->upload->display_errors());
@@ -108,7 +102,7 @@ class Administrator extends MY_Controller
 		}
 		else
 		{
-			$dataLogoPhoto = array('upload_data' => $this->upload->data());
+			$dataLogoPhoto = $this->upload->data();
 			$fileNameLogoPhoto = $dataLogoPhoto['file_name'];
 			$fullPathLogoPhoto = $dataLogoPhoto['full_path'];
 			$logo_photo = $fullPathLogoPhoto;
@@ -137,12 +131,13 @@ class Administrator extends MY_Controller
 			   'open_time' => $open_time,
 			   'close_time' => $close_time,
 			   'rest_start' => $rest_start,
-			   'rest_end' => $rest_end
+			   'rest_end' => $rest_end,
+			   'url' => $url
 			);
 		
+		$data['css'] = 'resources/account.css';
 		$this->Restaurant_Model->addRestaurant($myDataArray);
-		
-		$this->loadpageAdmin("administrator/admin_addrestos",$data);*/
+		$this->loadpageAdmin("administrator/admin_addrestos",$data);
 	}
 	
 	//loadpage for Admin

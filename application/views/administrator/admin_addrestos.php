@@ -12,6 +12,7 @@
 		echo "LATITUDE (from Google): ".form_input("google_lat","")."<br>";
 		echo "LONGTITUDE (from Google): ".form_input("google_long","")."<br>";
 		echo "NUMBER OF SLOTS FOR RESERVATION : ".form_input("slots","")."<br>";
+		echo "Cuisine : ".form_input("cuisine","")."<br>";
 		echo "Logo Photo : "."<input type='file' name='logo_photo' size='20' />"."<br>";
 		echo "Menu Photo : "."<input type='file' name='menu_photo' size='20' />"."<br>";
 		echo "Website URL : ".form_textarea("url")."<br>";
@@ -20,6 +21,7 @@
 		echo "CITY : ".form_textarea("city","")."<br>";
 		echo "USERNAME : ".form_input("username","")."<br>";
 		echo "PASSWORD : ".form_password("password","")."<br>";
+		
 		
 		//AUTOACCEPT
 		$optionsThree = array(
