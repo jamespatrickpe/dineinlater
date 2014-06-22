@@ -25,7 +25,7 @@ class HQ_Model extends MY_Model
 			   'password' => $password,
 			   'hqname' => $hqname
 			);
-		$this->db->insert('customer', $data); 
+		$this->db->insert('hq', $data); 
 	}
 	
 	public function deleteHQ($id)

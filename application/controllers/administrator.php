@@ -422,15 +422,30 @@ class Administrator extends MY_Controller
 		$this->loadpageAdmin("administrator/admin_customer",$data);	
 	}
 	
-	//Loads Restaurant Management System
-	public function hq()
+	//Loads HQ Management System
+	public function admin_hq()
 	{
-		$data['HQResults'] = $this->HQ_Model->getAll();
+		$data['hqResults'] = $this->HQ_Model->getAll();
 		$data['css'] = 'resources/account.css';
 		$this->loadpageAdmin("administrator/admin_HQ",$data);	
 	}
 	
-	//Loads Blogger System
+	//Adds an Administrator
+	public function attemptAddHQ()
+	{
+		
+		$username = $this->input->post('username');
+		$password = $this->input->post('password');
+		$hqname = $this->input->post('hqname');
+		$this->HQ_Model->addHQ($username, $password, $hqname);
+		redirect("administrator/admin_hq","refresh");
+	}
 	
-	//
+	//Deletes an Administrator
+	public function attemptDeleteHQ()
+	{
+		$id = $this->input->post('selectedHQToBeDeleted');
+		$this->HQ_Model->deleteHQ($id);
+		redirect("administrator/admin_hq","refresh");
+	}
 }
