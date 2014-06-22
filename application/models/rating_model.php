@@ -57,7 +57,7 @@ class Rating_Model extends MY_Model
 	
 	public function getRatingByRestaurant($id)
 	{
-		$sql = "SELECT restaurant_id,AVG(rating) 
+		$sql = "SELECT restaurant_id,AVG(rating) as rating
 				FROM dineinlater.rating
 				WHERE restaurant_id = ?
 				GROUP BY restaurant_id;";
