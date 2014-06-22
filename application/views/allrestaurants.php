@@ -37,7 +37,7 @@
 					</form>
 				</blurb>				
 				<blurb id="restaurant-listing">
-					
+					<!--
 					<a href="restaurant.html">
 					<div class="restaurant">
 						<div class="restaurant-info">
@@ -58,10 +58,10 @@
 							</div>						
 						</div>
 					</div>
-					</a>
+					</a>-->
 					
 					<?php
-					/*
+					
 					foreach($restaurantResults as $resto)
 					{
 						echo "<a href=dashboard/restaurant?id=".$resto->restaurant_id.">";
@@ -77,11 +77,12 @@
 						echo "</ul>";
 						echo "</div>";
 						echo "<div class='image-rate'>";
-						echo "<img src='resources/images/splash.jpg' class='restaurant-image'>"."<div class='rating'>"."<span class='rate'><div class='rating'>";
-						//echo $this->Restaurant_Model->getRatingById("");
+						echo "<img src='".$resto->logo_photo."' width='200' height='200' class='restaurant-image'>"."<div class='rating'>"."<span class='rate'>";
+						$rating = $this->Rating_Model->getRatingByRestaurant($resto->restaurant_id);
+						echo $rating[0]->average;
 						echo "<span></div></div></div></a>";
 
-					}*/
+					}
 
 					?>
 				</blurb>

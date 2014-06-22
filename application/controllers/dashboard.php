@@ -11,6 +11,7 @@ class Dashboard extends MY_Controller
 		$this->load->model('Customer_Model');
 		$this->load->model('Bloggers_Model');
 		$this->load->model('Reservation_Model');
+		$this->load->model('Rating_Model');
 		
 	}
 	
