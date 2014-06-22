@@ -78,7 +78,21 @@ class Restaurant_Model extends MY_Model
 	
 	public function searchResult($id)
 	{
-		
+		$in = '';
+		foreach($id as $rows)
+		{
+			foreach($rows as $cells)
+			{
+				$in = $in.$cells;
+			}
+			break;
+			$in = $in.',';
+		}
+		$sql = "select r.id,r.name,r.address,r.description,r.logo_photo,rt.rating 
+									from restaurant r join (select restaurant_id,avg(rating) as 'rating' from rating group by restaurant_id) rt 
+									on r.id = rt.restaurant_id
+									where r.id in (?)";
+		$query = $this->db->query($sql,array($in));
 		return $this->multipleResults($query);
 	}
 	
@@ -87,7 +101,7 @@ class Restaurant_Model extends MY_Model
 		$sql = "SELECT city
 				FROM dineinlater.restaurant
 				GROUP BY city;";
-		$query = $this->db->query($sql,array($id));
+		$query = $this->db->query($sql);
         return $this->multipleResults($query);
 	}
 	
@@ -96,7 +110,7 @@ class Restaurant_Model extends MY_Model
 		$sql = "SELECT cuisine
 				FROM dineinlater.restaurant
 				GROUP BY cuisine;";
-		$query = $this->db->query($sql,array($id));
+		$query = $this->db->query($sql);
         return $this->multipleResults($query);
 	}
 	
