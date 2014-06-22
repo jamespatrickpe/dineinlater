@@ -21,7 +21,7 @@ class Rating_Model extends MY_Model
 	}
 	
 	// adds row
-	public function addRating($rating, $title, $review, $customer_id, $restaurant_id, $datetime)
+	public function addRating($rating, $title, $review, $customer_id, $restaurant_id)
 	{
 		$data = array(
 			   'rating' => $rating,
@@ -30,7 +30,7 @@ class Rating_Model extends MY_Model
 			   'customer_id' => $customer_id,
 			   'restaurant_id' => $restaurant_id
 			);
-		$this->db->insert('customer', $data); 
+		$this->db->insert('rating', $data); 
 	}
 	
 	// deletes rating by customer id

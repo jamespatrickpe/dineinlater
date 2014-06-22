@@ -25,7 +25,7 @@ class Reservation_Model extends MY_Model
 	public function addReservation($resto_ID, $customer_ID , $slots, $note, $date, $time)
 	{
 		$data = array(
-			   'resto_ID' => $resto_ID,
+			   'restaurant_id' => $resto_ID,
 			   'customer_ID' => $customer_ID,
 			   'slots' => $slots,
 			   'confirmed' => '0',

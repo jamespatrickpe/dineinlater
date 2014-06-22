@@ -1,0 +1,33 @@
+﻿Merge branch 'master' of https://github.com/joojieman/dineinlater
+
+Conflicts:
+	application/models/reservation_model.php
+#
+# It looks like you may be committing a merge.
+# If this is not correct, please remove the file
+#	.git/MERGE_HEAD
+# and try again.
+
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch and 'origin/master' have diverged,
+# and have 4 and 4 different commits each, respectively.
+#   (use "git pull" to merge the remote branch into yours)
+#
+# All conflicts fixed but you are still merging.
+#   (use "git commit" to conclude merge)
+#
+# Changes to be committed:
+#
+#	modified:   application/models/customer_model.php
+#	modified:   application/models/reservation_model.php
+#	modified:   application/models/restaurant_model.php
+#	new file:   application/views/customer/customer_footer.php
+#	new file:   application/views/customer/customer_header.php
+#	new file:   application/views/customer/customer_home.php
+#	modified:   application/views/restaurant/resto_header.php
+#	modified:   application/views/search_result.php
+#
+
