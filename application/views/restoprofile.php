@@ -4,6 +4,13 @@
 				<blurb class="small">
 					<div class="blurb-header"><h2><?php echo $restaurant[0]->name; ?></h2></div>
 						<div id="greeting"><span class="username"><img src="<?php echo $restaurant[0]->logo_photo; ?>" width="200" height="200"></span></div>
+												<?php
+							$stat = $this->input->get("stat");
+							if($stat == "DONE")
+							{
+								echo "<div align='center'><h2>RESERVED!</h2></div>";
+							}
+						?>
 					<div class="blurb-stacks" id="commands">
 						<a class="action" id="resto_home-trigger">Description</a>
 						<a class="action" id="resto_profile-trigger">Gallery</a>
