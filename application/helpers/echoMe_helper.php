@@ -7,5 +7,5 @@ if ( ! function_exists('echoMe'))
 		if(isset($var) == "TRUE")
 		{echo $var;}
     }   
-	
 }
+

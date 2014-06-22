@@ -266,7 +266,7 @@ class Login extends MY_Controller
 			$this->session->set_flashdata('item', 'value');
 			
 			//GET USERNAME AND PASSWORD FROM DATABASE
-			$dbResultsFromUsername = $this->Restaurant_Model->getByUsername($formData['username']);
+			$dbResultsFromUsername = $this->HQ_Model->getByUsername($formData['username']);
 			$checked = $this->input->post('stayloggedin');
 			
 			if($checked == "CHECKED")
@@ -289,14 +289,14 @@ class Login extends MY_Controller
 				}
 				else
 				{
-					$data['validationErrors'] = "Invalid Username or Password; Please try again!";
+					$data['validationErrors'] = "Invalid Username or Password; Please try again! 1";
 					$data['formDestination'] = "login/attemptLoginRestaurant";
 					$this->loadpage('login',$data);
 				}
 			}
 			else 
 			{
-				$data['validationErrors'] = "Invalid Username or Password; Please try again!";
+				$data['validationErrors'] = "Invalid Username or Password; Please try again! 2";
 				$data['formDestination'] = "login/attemptLoginRestaurant";
 				$this->loadpage('login',$data);
 			}
@@ -304,7 +304,7 @@ class Login extends MY_Controller
 		}
 		else
 		{
-			$data['validationErrors'] = "Invalid Username or Password; Please try again!";
+			$data['validationErrors'] = "Invalid Username or Password; Please try again! 3";
 			$data['formDestination'] = "login/attemptLoginRestaurant";
 			$this->loadpage('login',$data);
 		}
@@ -412,7 +412,6 @@ class Login extends MY_Controller
 			$inputData['username'] = $this->input->post('username');
 			$inputData['password'] = $this->input->post('password');
 			$inputData['checkbox'] = $this->input->post('stayloggedin');
-			
 			$inputData['checkbox'] = $this->input->post('fblogin');
 			$inputData['checkbox'] = $this->input->post('stayloggedin');
 			$inputData['checkbox'] = $this->input->post('stayloggedin');

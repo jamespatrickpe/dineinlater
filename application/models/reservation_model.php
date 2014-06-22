@@ -22,13 +22,12 @@ class Reservation_Model extends MY_Model
 	}
 	
 	// adds row
-	public function addReservation($resto_ID, $customer_ID, $date, $time, $slots, $confirmed, $note, $showup="NOTYET", $status="OTW")
+	public function addReservation($resto_ID, $customer_ID, $reservetime , $slots, $confirmed, $note, $showup="NOTYET", $status="OTW")
 	{
 		$data = array(
 			   'resto_ID' => $resto_ID,
 			   'customer_ID' => $customer_ID,
-			   'date' => $date,
-			   'time' => $time,
+			   'reservetime' => $reservetime,
 			   'slots' => $slots,
 			   'confirmed' => $confirmed,
 			   'note' => $note,
@@ -45,14 +44,12 @@ class Reservation_Model extends MY_Model
 	}
 	
 	// updates reservation
-	public function updateReservation($id,$resto_ID, $customer_ID, $date, $time, $slots, $confirmed, $note, $showup, $status)
+	public function updateReservation($resto_ID, $customer_ID, $reservetime, $slots, $confirmed, $note, $showup, $status)
 	{
 		$data = array(
-				'reservation_id' => $id,
-			   'restaurant_id' => $resto_ID,
-			   'customer_id' => $customer_ID,
-			   'date' => $date,
-			   'time' => $time,
+			   'resto_ID' => $resto_ID,
+			   'customer_ID' => $customer_ID,
+			   'reservetime' => $reservetime,
 			   'slots' => $slots,
 			   'confirmed' => $confirmed,
 			   'note' => $note,
@@ -84,7 +81,7 @@ class Reservation_Model extends MY_Model
 	// fetches row data by restaurant ID and Status O
 	public function reservationByRestaurantIDOpen($resto_ID)
 	{
-		$sql = "SELECT r.reservation_id, CONCAT(c.firstname,' ',c.lastname) as fullname, r.date, r.time, r.slots, r.reservationmade, r.note
+		$sql = "SELECT r.reservation_id, CONCAT(c.firstname,' ',c.lastname) as fullname, r.reservetime, r.slots, r.reservationmade, r.note
 				FROM reservation r JOIN customer c
 				ON r.customer_id = c.customer_id
 				WHERE r.confirmed = 0
@@ -128,13 +125,27 @@ class Reservation_Model extends MY_Model
 	
 	public function reservationRestoToday($resto_ID)
 	{
-		$sql = "SELECT r.reservation_id, CONCAT(c.firstname,' ',c.lastname) as fullname, r.date, r.time, r.slots, r.reservationmade, r.note
+		$sql = "SELECT r.reservation_id, CONCAT(c.firstname,' ',c.lastname) as fullname, r.reservetime, r.slots, r.reservationmade, r.note
 				FROM reservation r JOIN customer c
 				ON r.customer_id = c.customer_id
 				WHERE r.confirmed = 1
 				AND r.restaurant_id = ?
 				AND r.date = CURDATE()";
 		$query = $this->db->query($sql,array($resto_ID));
+        return $this->multipleResults($query);
+	}
+	
+	public function reservationByHQ($hqid, $limit = 250)
+	{
+		$sql = "SELECT restaurant.name, restaurant.reservation_slots, restaurant.restostatus, restaurant.autoaccept, customer.firstname, customer.lastname, customer.cellphone, reservation.slots, reservation.confirmed, reservation.note, reservation.reservetime, reservation.reservationmade, reservation.status, reservation.showup
+				FROM  `restaurant` 
+				INNER JOIN  `reservation` ON restaurant.restaurant_id = reservation.restaurant_id
+				INNER JOIN  `hq` ON restaurant.hq_id = hq.hq_id
+				INNER JOIN  `customer` ON reservation.customer_id = customer.customer_id
+				WHERE hq.hq_id = ".$hqid."
+				LIMIT 0 , ".$limit."";
+				
+		$query = $this->db->query($sql);
         return $this->multipleResults($query);
 	}
 }
