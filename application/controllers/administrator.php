@@ -18,7 +18,7 @@ class Administrator extends MY_Controller
 	public function attemptAddRestaurant()
 	{
 		//Configuration for File Upload
-		$config['upload_path'] =$_SERVER['DOCUMENT_ROOT'].'/dineinlater/application/imageuploads/';
+		$config['upload_path'] = $_SERVER['DOCUMENT_ROOT'].'/dineinlater/resources/uploads/';
 		$config['allowed_types'] = 'gif|jpg|png';
 		$config['max_size']	= '100';
 		$config['max_width']  = '1024';
@@ -91,7 +91,7 @@ class Administrator extends MY_Controller
 			$dataMenuPhoto = $this->upload->data();
 			$fileNameMenuPhoto = $dataMenuPhoto['file_name'];
 			$fullPathMenuPhoto = $dataMenuPhoto['full_path'];
-			$menu_photo = $fullPathMenuPhoto;
+			$menu_photo = "resources/uploads/".$fileNameMenuPhoto;
 		}
 		
 		//UPLOAD LOGO_PHOTO
@@ -105,7 +105,7 @@ class Administrator extends MY_Controller
 			$dataLogoPhoto = $this->upload->data();
 			$fileNameLogoPhoto = $dataLogoPhoto['file_name'];
 			$fullPathLogoPhoto = $dataLogoPhoto['full_path'];
-			$logo_photo = $fullPathLogoPhoto;
+			$logo_photo= "resources/uploads/".$fileNameLogoPhoto;
 		}	
 		
 		$myDataArray = array(
@@ -168,7 +168,7 @@ class Administrator extends MY_Controller
 	public function attemptEditResto()
 	{
 		//Configuration for File Upload
-		$config['upload_path'] =$_SERVER['DOCUMENT_ROOT'].'/dineinlater/application/imageuploads/';
+		$config['upload_path'] = $_SERVER['DOCUMENT_ROOT'].'/dineinlater/resources/uploads/';
 		$config['allowed_types'] = 'gif|jpg|png';
 		$config['max_size']	= '100';
 		$config['max_width']  = '1024';
@@ -242,7 +242,7 @@ class Administrator extends MY_Controller
 			$dataMenuPhoto = $this->upload->data();
 			$fileNameMenuPhoto = $dataMenuPhoto['file_name'];
 			$fullPathMenuPhoto = $dataMenuPhoto['full_path'];
-			$menu_photo = $fullPathMenuPhoto;
+			$menu_photo = "resources/uploads/".$fileNameMenuPhoto;
 		}
 		
 		//UPLOAD LOGO_PHOTO
@@ -256,7 +256,7 @@ class Administrator extends MY_Controller
 			$dataLogoPhoto = $this->upload->data();
 			$fileNameLogoPhoto = $dataLogoPhoto['file_name'];
 			$fullPathLogoPhoto = $dataLogoPhoto['full_path'];
-			$logo_photo = $fullPathLogoPhoto;
+			$logo_photo= "resources/uploads/".$fileNameLogoPhoto;
 		}	
 		
 		$myDataArray = array(

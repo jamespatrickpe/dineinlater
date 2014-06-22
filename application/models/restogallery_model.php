@@ -13,7 +13,7 @@ class Restogallery_Model extends MY_Model
 	
 	public function getById($id)
 	{
-		$this->db->where('restotag_id', $id);
+		$this->db->where('restogallery_id', $id);
 		$query = $this->db->get('restogallery');
         return $this->singularResults($query);
 	}
@@ -30,5 +30,11 @@ class Restogallery_Model extends MY_Model
 	public function deletePicture($id)
 	{
 		$this->db->delete('restogallery', array('restotag_id' => $id)); 
+	}
+	
+	// Gets all restaurants by ID
+	public function getAllByRestaurantID($id)
+	{
+		
 	}
 }

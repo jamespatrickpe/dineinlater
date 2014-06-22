@@ -6,6 +6,7 @@
 */cache/!.htaccess
 .project
 imageuploads/
+uploads/
 # =========================
 # Operating System Files
 # =========================

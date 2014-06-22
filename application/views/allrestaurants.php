@@ -55,9 +55,8 @@
 					
 					foreach($restaurantResults as $resto)
 					{
-						echo "<a href=dashboard/restaurant?id=".$resto->restaurant_id.">";
 						echo "<div class='restaurant'><div class='restaurant-info'>";
-						echo "<h2>".$resto->name."</h2>";
+						echo "<h2>".anchor("dashboard/restaurant?id=".$resto->restaurant_id, $resto->name)."</h2>";
 						echo "<ul>";
 						echo "<li class='restaurant-info' id='cuisine'>".$resto->cuisine."</li>";
 						echo "<li class='restaurant-info' id='operating-hours'>".$resto->open_time." to ".$resto->rest_start."</li>";

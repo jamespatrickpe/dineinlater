@@ -20,6 +20,7 @@ class Dashboard extends MY_Controller
 	{
 		$city = $this->input->get('city');
 		$cuisine = $this->input->get('cuisine');
+		
 		$data['cityResults'] = $this->Restaurant_Model->getCity();
 		$data['cuisineResults'] = $this->Restaurant_Model->getCuisine();
 		$data['restaurantResults'] = $this->Restaurant_Model->getAll();
@@ -29,6 +30,10 @@ class Dashboard extends MY_Controller
 	
 	public function restaurant()
 	{
+		$restaurant_id = $this->input->get('id');
+		$data['restaurant'] = $this->Restaurant_Model->getById($restaurant_id);
 		
+		$data['css'] = "resources/restaurant.css";
+		$this->loadPage("restoprofile",$data);
 	}
 }
