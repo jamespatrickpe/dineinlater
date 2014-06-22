@@ -21,16 +21,51 @@
 							
 								foreach($restoImage as $image)
 								{
-									echo "<img src=".$image.">";
+									echo "<img src=".$image->picURL.">"."<br>";
 								}
 							
 							?></p><br>						
 					</blurb>								
 					<blurb class="half" id="resto_reservation"><div class="blurb-header"><h2>DINE - IN- LATER!</h2></div>
-						<p><?php echo $restaurant[0]->name; ?></p><br>						
+						<p>
+							<?php
+								$this->load->library('session');
+								$userid = $this->session->userdata('id');
+								$usertype = $this->session->userdata('usertype');
+								if(isset($userid) == TRUE && $usertype == "CUSTOMER")
+								{
+									echo "";
+								}
+								else 
+								{
+									echo "<h4>YOU MUST BE LOGGED IN TO RESERVE!</h4>";
+								}
+							?>
+						</p><br>						
 					</blurb>
 					<blurb class="half" id="resto_reviews"><div class="blurb-header"><h2>Reviews</h2></div>
-						<p><?php echo $restaurant[0]->name; ?></p><br>						
+						<p>
+							<?php
+								foreach($restoReview as $review)
+								{
+									echo "<h3>".$review->title."</h3>".$review->datetime."<br>";
+									echo "<p>".$review->review."</p>";
+									
+								$this->load->library('session');
+								$userid = $this->session->userdata('id');
+								$usertype = $this->session->userdata('usertype');
+								
+								if(isset($userid) == TRUE && $usertype == "CUSTOMER")
+								{
+									echo "";
+								}
+								else 
+								{
+									echo "<h4>YOU MUST BE LOGGED IN TO REVIEW!</h4>";
+								}
+								}
+							?>
+						</p><br>						
 					</blurb>
 				</div>
 			</div>
