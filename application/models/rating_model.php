@@ -54,4 +54,14 @@ class Rating_Model extends MY_Model
 		$query = $this->db->get('rating');
         return $this->multipleResults($query);
 	}
+	
+	public function getRatingByRestaurant($id)
+	{
+		$sql = "SELECT restaurant_id,AVG(rating) 
+				FROM dineinlater.rating
+				WHERE restaurant_id = ?
+				GROUP BY restaurant_id;";
+		$query = $this->db->query($sql,array($id));
+        return $this->singularResults($query);
+	}
 }
