@@ -11,10 +11,8 @@
 							//?id=1
 							
 							foreach ($result as $row) {
-								echo "<a href='restaurant/?id=$row->restaurant_id'>
-										<div class='review-header'>
-										<input type='hidden' value='$row->restaurant_id' name='id'>
-										<span class='review-details' onclick='document.getElementById('$row->restaurant_id').submit()'><h3>$row->name</h3>
+								echo "<div class='review-header'>
+										<span class='review-details'><h3>".anchor('dashboard/restaurant?id='.$row->restaurant_id.'',$row->name)."</h3>
 											<div class='user-photo'><img href='$row->logo_photo'></div>
 										</span> 
 										</form>
@@ -29,8 +27,7 @@
 										<span class='float'>
 										</br>$row->description</br>
 										</span>
-									</div>
-									</a>";
+									</div>";
 							}
 						?>
 							<p class="hide">
