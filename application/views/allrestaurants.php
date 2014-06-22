@@ -3,14 +3,14 @@
 		<div id="body-container">
 			<div class="blurb-rows">
 				<blurb class="small" id="filter">
-					<form>
+					<?php form_open('dashboard') ?>
 						<div class="blurb-header"><h2>Filter Results</h2></div>
 							<h3>City</h3>
 							<div class="options">
 								<?php
 									foreach($cityResults as $city)
 									{
-										echo "<input type='checkbox' class='check' id='American'><label for='American'>".$city->city."</label><br>";
+										echo "<input name='city' type='checkbox' class='check' id='American' value=".$city->city."><label for='American'>".$city->city."</label><br>";
 									}
 								?> 
 							</div>
@@ -20,11 +20,11 @@
 								<?php
 									foreach($cuisineResults as $cuisine)
 									{
-										echo "<input type='checkbox' class='check' id='American'><label for='American'>".$cuisine->cuisine."</label><br>";
+										echo "<input name='cuisine' type='checkbox' class='check' id='American' value=".$cuisine->cuisine."><label for='American'>".$cuisine->cuisine."</label><br>";
 									}
 								?> 
 							</div>
-							
+						
 					</form>
 				</blurb>				
 				<blurb id="restaurant-listing">
