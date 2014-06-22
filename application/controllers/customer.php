@@ -99,6 +99,5 @@ class Customer extends MY_Controller
 		$restaurant_id = $this->input->post("restaurant_id");
 		$this->Reservation_Model->addReservation($restaurant_id, $customer_id, $reservetime , $slots, $note);
 		redirect("dashboard/restaurant?stat=done&id=".$restaurant_id,'refresh');
->>>>>>> origin/master
 	}
 }
