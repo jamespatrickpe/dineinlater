@@ -6,6 +6,13 @@ class Customer extends MY_Controller
 	public function __construct()
 	{
 		parent::__construct();
+		$this->load->model('Admin_Model');
+		$this->load->model('Restaurant_Model');
+		$this->load->model('HQ_Model');
+		$this->load->model('Customer_Model');
+		$this->load->model('Bloggers_Model');
+		$this->load->model('Rating_Model');
+		$this->sessionSecurityInterceptor("CUSTOMER");
 	}
 	
 	//loads the customer home page
@@ -37,5 +44,23 @@ class Customer extends MY_Controller
 	public function attemptSearch()
 	{
 		
+	}
+	
+	public function attemptCreateReview()
+	{
+		$title = $this->input->post("title");
+		$rating = $this->input->post("rating");
+		$review = $this->input->post("review");
+		$customer_id = $this->input->post("title");
+		$restaurant_id = $this->input->post("title");
+		
+		$this->Rating_Model->addRating($rating, $title, $review, $customer_id, $restaurant_id);
+		
+		redirect("dashboard/restaurant?id=".$id,'refresh');
+	}
+	
+	public function attemptCreateReservation()
+	{
+		redirect("dashboard/restaurant?id=".$id,'refresh');
 	}
 }

@@ -21,7 +21,7 @@ class Rating_Model extends MY_Model
 	}
 	
 	// adds row
-	public function addRating($rating, $title, $review, $customer_id, $restaurant_id, $datetime)
+	public function addRating($rating, $title, $review, $customer_id, $restaurant_id)
 	{
 		$data = array(
 			   'rating' => $rating,

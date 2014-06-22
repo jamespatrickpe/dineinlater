@@ -34,7 +34,8 @@
 								$usertype = $this->session->userdata('usertype');
 								if(isset($userid) == TRUE && $usertype == "CUSTOMER")
 								{
-									echo "";
+									echo form_open('customer/attemptCreateReservation');
+									echo 
 								}
 								else 
 								{
@@ -51,18 +52,18 @@
 									echo "<h3>".$review->title."</h3>".$review->datetime."<br>";
 									echo "<p>".$review->review."</p>";
 									
-								$this->load->library('session');
-								$userid = $this->session->userdata('id');
-								$usertype = $this->session->userdata('usertype');
+									$this->load->library('session');
+									$userid = $this->session->userdata('id');
+									$usertype = $this->session->userdata('usertype');
 								
-								if(isset($userid) == TRUE && $usertype == "CUSTOMER")
-								{
-									echo "";
-								}
-								else 
-								{
-									echo "<h4>YOU MUST BE LOGGED IN TO REVIEW!</h4>";
-								}
+									if(isset($userid) == TRUE && $usertype == "CUSTOMER")
+									{
+										echo "";
+									}
+									else 
+									{
+										echo "<h4>YOU MUST BE LOGGED IN TO REVIEW!</h4>";
+									}
 								}
 							?>
 						</p><br>						
