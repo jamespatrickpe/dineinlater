@@ -8,9 +8,11 @@
 					<div class="review-stub">
 						<div class="blurb-stacks">
 						<?php 
+							//?id=1
+							
 							foreach ($result as $row) {
-								echo "<div class='review-header'>
-										<form action='toResto' id='$row->restaurant_id'>
+								echo "<a href='restaurant/?id=$row->restaurant_id'>
+										<div class='review-header'>
 										<input type='hidden' value='$row->restaurant_id' name='id'>
 										<span class='review-details' onclick='document.getElementById('$row->restaurant_id').submit()'><h3>$row->name</h3>
 											<div class='user-photo'><img href='$row->logo_photo'></div>
@@ -27,7 +29,8 @@
 										<span class='float'>
 										</br>$row->description</br>
 										</span>
-									</div>";
+									</div>
+									</a>";
 							}
 						?>
 							<p class="hide">
