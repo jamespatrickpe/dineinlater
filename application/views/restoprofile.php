@@ -44,7 +44,8 @@
 									echo form_open('customer/attemptCreateReservation');
 									echo form_hidden("restaurant_id",$restaurant[0]->restaurant_id);
 									echo "For How Many? : ".form_input("slots","")."<br>";
-									echo "Opening Time: "."<input type='datetime-local' name='reservetime'>"."<br>";
+									echo "Reserve Time: "."<input type='time' name='reservetime'>"."<br>";
+									echo "Reserve Date: "."<input type='date' name='reservedate'>"."<br>";
 									echo "Note : ".form_input("note","")."<br>";
 									echo form_reset("reset","RESET");
 									echo form_submit("submit","ADD")."<br>";

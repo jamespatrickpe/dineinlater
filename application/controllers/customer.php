@@ -62,6 +62,7 @@ class Customer extends MY_Controller
 	public function attemptCreateReservation()
 	{
 		$slots = $this->input->post("slots");
+		$reservedate = $this->input->post("reservedate");
 		$reservetime = $this->input->post("reservetime");
 		$note = $this->input->post("note");		
 		$customer_id = $this->session->userdata('id');
