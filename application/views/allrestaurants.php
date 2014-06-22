@@ -19,25 +19,6 @@
 									<input type="checkbox" class="check" id="Vietnamese"><label for="Vietnamese">Vietnamese</label>
 								</div>
 							<hr>
-							<h3>Type of Restaurant</h3>
-							<div class="options">
-									<input type="checkbox" class="check" id="Bar"><label for="Bar">Bar</label><br>
-									<input type="checkbox" class="check" id="Buffet"><label for="Buffet">Buffet</label><br>
-									<input type="checkbox" class="check" id="Cafe"><label for="Cafe">Cafe</label><br>
-									<input type="checkbox" class="check" id="Casual Dining"><label for="Casual Dining">Casual Dining</label><br>
-									<input type="checkbox" class="check" id="Fine Dining"><label for="Fine Dining">Fine Dining</label><br>
-									<input type="checkbox" class="check" id="Pastry Shop"><label for="Pastry Shop">Pastry Shop</label><br>
-								</div>
-							<hr>
-							<h3>Budget</h3>
-							<div class="options">
-									<input type="checkbox" class="check" id="1"><label for="1">P 1 - 150</label><br>
-									<input type="checkbox" class="check" id="2"><label for="2">P 151 - 300</label><br>
-									<input type="checkbox" class="check" id="3"><label for="3">P 301 - 450</label><br>
-									<input type="checkbox" class="check" id="4"><label for="4">P 451 - 600</label><br>
-									<input type="checkbox" class="check" id="5"><label for="5">P 601 - 750</label><br>
-									<input type="checkbox" class="check" id="6"><label for="6">P 751+ </label><br>									
-							<hr>
 							<h3>City</h3>
 							<div class="options">																		
 									<input type="checkbox" class="check" id="makati"><label for="makati">Makati</label><br>
@@ -52,37 +33,34 @@
 									<input type="checkbox" class="check" id="quezon-city"><label for="quezon-city">Quezon City</label><br>
 									<input type="checkbox" class="check" id="outside"><label for="outside">Outside Metro Manila</label><br><br>
 								</div>
-							</div>
+							
 					</form>
 				</blurb>				
 				<blurb id="restaurant-listing">
-					<div class="sorter">
-						Sort by: Name | <b>Rating</b> | Price&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Arrange by: Lowest to Highest | <b>Highest to Lowest</b>
-					</div>
-					<div class="sorter">Searching for [Keyword]</div>
-					<!--start restaurant stub-->
-					<a href="restaurant.html">
-					<div class="restaurant">
-						<div class="restaurant-info">
-							<h2>Restaurant Name</h2>
-							<ul>
-								<li class="restaurant-info" id="cuisine">Asian, Japanese</li>
-								<li class="restaurant-info" id="operating-hours">Tue - Sun: 9:00 AM - 10:30 PM <br> Closed on Mondays</li>
-								<li class="restaurant-info" id="phone-number">(02) 468 1012, (02) 358 1321</li>  
-								<li class="restaurant-info" id="address">123 Maginhawa Street, Teacher's Village, Diliman, Quezon City</li>
-								<li class="restaurant-info" id="restaurant-highlights"><i>Al Fresco Dining, Buffet</i></li>
-								<li class="restaurant-info" id="budget">P150 - 300 per person </li>
-							</ul>
-						</div>
-						<div class="image-rate">						
-							<img src="resources/images/splash.jpg" class="restaurant-image">
-							<div class="rating">
-								<span class="rate">5.0<span>
-							</div>						
-						</div>
-					</div>
-					</a>
-					<!--end restaurant stub-->
+					<?php
+					
+					foreach($restaurantResults as $resto)
+					{
+						echo "<a href=dashboard/restaurant?id=".$resto->id.">";
+						echo "<div class='restaurant'>.<div class='restaurant-info'>";
+						echo "<h2>".$resto->name."</h2>";
+						echo "<ul>";
+						echo "<li class='restaurant-info' id='cuisine'>".$resto->cuisine."</li>";
+						echo "<li class='restaurant-info' id='cuisine'>".$resto->cuisine." to ".$resto->cuisine."</li>";
+						echo "<li class='restaurant-info' id='cuisine'>".$resto->mobile."</li>";
+						echo "<li class='restaurant-info' id='cuisine'>".$resto->landline."</li>";
+						echo "<li class='restaurant-info' id='cuisine'>".$resto->address."</li>";
+						echo "<li class='restaurant-info' id='cuisine'>".$resto->city."</li>";
+						echo "</ul>";
+						echo "</div>";
+						echo "<div class='image-rate'>";
+						echo "<img src='resources/images/splash.jpg' class='restaurant-image'>"."<div class='rating'>"."<span class='rate'><div class='rating'>";
+						//echo $this->Restaurant_Model->getRatingById("");
+						echo "<span></div></div></div></a>";
+					}
+
+					?>
+					
 					<div class="sorter">Page 1 of 6 ></div>
 				</blurb>
 			</div>

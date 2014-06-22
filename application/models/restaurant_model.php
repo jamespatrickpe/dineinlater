@@ -137,4 +137,9 @@ class Restaurant_Model extends MY_Model
 		$this->deleteReservation($id);
 		$this->addReservation($myReservationArray);
 	}
+	
+	public function getRatingByID()
+	{
+		//DO THIS RAYMS!
+	}
 }
