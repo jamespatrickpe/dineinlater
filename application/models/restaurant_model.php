@@ -174,8 +174,10 @@ class Restaurant_Model extends MY_Model
 		$this->addReservation($myReservationArray);
 	}
 	
-	public function getRatingByID()
+	public function getGalleryByResto($restaurant_id)
 	{
-		//DO THIS RAYMS!
+		$this->db->where('restoID', $restaurant_id);
+		$query = $this->db->get('restogallery');
+        return $this->multipleResults($query);
 	}
 }
