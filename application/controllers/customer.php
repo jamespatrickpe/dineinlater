@@ -51,16 +51,19 @@ class Customer extends MY_Controller
 		$title = $this->input->post("title");
 		$rating = $this->input->post("rating");
 		$review = $this->input->post("review");
-		$customer_id = $this->input->post("title");
-		$restaurant_id = $this->input->post("title");
+		$customer_id = $this->session->userdata('id');
+		$restaurant_id = $this->input->post("restaurant_id");
 		
 		$this->Rating_Model->addRating($rating, $title, $review, $customer_id, $restaurant_id);
 		
-		redirect("dashboard/restaurant?id=".$id,'refresh');
+		redirect("dashboard/restaurant?id=".$restaurant_id,'refresh');
 	}
 	
 	public function attemptCreateReservation()
 	{
-		redirect("dashboard/restaurant?id=".$id,'refresh');
+		
+		$customer_id = $this->session->userdata('id');
+		$restaurant_id = $this->input->post("restaurant_id");
+		redirect("dashboard/restaurant?id=".$restaurant_id,'refresh');
 	}
 }

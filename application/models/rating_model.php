@@ -30,7 +30,7 @@ class Rating_Model extends MY_Model
 			   'customer_id' => $customer_id,
 			   'restaurant_id' => $restaurant_id
 			);
-		$this->db->insert('customer', $data); 
+		$this->db->insert('rating', $data); 
 	}
 	
 	// deletes rating by customer id
