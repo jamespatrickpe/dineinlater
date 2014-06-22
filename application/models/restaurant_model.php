@@ -163,6 +163,35 @@ class Restaurant_Model extends MY_Model
 		$this->db->insert('restaurant', $data); 
 	}
 	
+	public function getBlockTime($id)
+	{
+		$this->db->select('open_time','close_time','rest_start','rest_end');	
+		$this->db->where('restaurant_id', $id);
+		$query = $this->db->get('restaurant');
+        return $this->singularResults($query);
+	}
+	
+	public function checkAvailableTime($id,$time)
+	{
+		$blocks = $this->getBlockTime($id);
+		$time = DateTime::createFromFormat('H:i a', $time);
+		$open = DateTime::createFromFormat('H:i a', $blocks->open_time);
+		$close = DateTime::createFromFormat('H:i a', $blocks->close_time);
+		$rest_start = DateTime::createFromFormat('H:i a', $blocks->rest_start);
+		$rest_end = DateTime::createFromFormat('H:i a', $blocks->rest_end);
+		
+		if($time < $open && $time > $close)
+		{
+			echo "BEYOND STORE HOURS";
+		}elseif($time > $rest_start && $time < $rest_end)
+		{
+			echo "WTF JAMES PE";
+		}else
+		{
+			echo "SUCCESS";
+		}
+	}
+	
 	public function deleteReservation($id)
 	{
 		$this->db->delete('restaurant', array('restaurant_id' => $id)); 
