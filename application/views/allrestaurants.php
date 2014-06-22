@@ -37,31 +37,53 @@
 					</form>
 				</blurb>				
 				<blurb id="restaurant-listing">
-					<?php
 					
+					<a href="restaurant.html">
+					<div class="restaurant">
+						<div class="restaurant-info">
+							<h2>Restaurant Name</h2>
+							<ul>
+								<li class="restaurant-info" id="cuisine">Asian, Japanese</li>
+								<li class="restaurant-info" id="operating-hours">Tue - Sun: 9:00 AM - 10:30 PM <br> Closed on Mondays</li>
+								<li class="restaurant-info" id="phone-number">(02) 468 1012, (02) 358 1321</li>  
+								<li class="restaurant-info" id="address">123 Maginhawa Street, Teacher's Village, Diliman, Quezon City</li>
+								<li class="restaurant-info" id="restaurant-highlights"><i>Al Fresco Dining, Buffet</i></li>
+								<li class="restaurant-info" id="budget">P150 - 300 per person </li>
+							</ul>
+						</div>
+						<div class="image-rate">						
+							<img src="resources/images/splash.jpg" class="restaurant-image">
+							<div class="rating">
+								<span class="rate">5.0<span>
+							</div>						
+						</div>
+					</div>
+					</a>
+					
+					<?php
+					/*
 					foreach($restaurantResults as $resto)
 					{
-						echo "<a href=dashboard/restaurant?id=".$resto->id.">";
-						echo "<div class='restaurant'>.<div class='restaurant-info'>";
+						echo "<a href=dashboard/restaurant?id=".$resto->restaurant_id.">";
+						echo "<div class='restaurant'><div class='restaurant-info'>";
 						echo "<h2>".$resto->name."</h2>";
 						echo "<ul>";
 						echo "<li class='restaurant-info' id='cuisine'>".$resto->cuisine."</li>";
-						echo "<li class='restaurant-info' id='cuisine'>".$resto->cuisine." to ".$resto->cuisine."</li>";
-						echo "<li class='restaurant-info' id='cuisine'>".$resto->mobile."</li>";
-						echo "<li class='restaurant-info' id='cuisine'>".$resto->landline."</li>";
-						echo "<li class='restaurant-info' id='cuisine'>".$resto->address."</li>";
-						echo "<li class='restaurant-info' id='cuisine'>".$resto->city."</li>";
+						echo "<li class='restaurant-info' id='operating-hours'>".$resto->cuisine." to ".$resto->cuisine."</li>";
+						echo "<li class='restaurant-info' id='phone-number'> ".$resto->landline." & ".$resto->mobile." </li>";
+						echo "<li class='restaurant-info' id='address'>".$resto->address."</li>";
+						echo "<li class='restaurant-info' id='restaurant-highlights'>".$resto->description."</li>";
+						echo "<li class='restaurant-info' id='city'>".$resto->city."</li>";
 						echo "</ul>";
 						echo "</div>";
 						echo "<div class='image-rate'>";
 						echo "<img src='resources/images/splash.jpg' class='restaurant-image'>"."<div class='rating'>"."<span class='rate'><div class='rating'>";
 						//echo $this->Restaurant_Model->getRatingById("");
 						echo "<span></div></div></div></a>";
-					}
+
+					}*/
 
 					?>
-					
-					<div class="sorter">Page 1 of 6 ></div>
 				</blurb>
 			</div>
 		</div>

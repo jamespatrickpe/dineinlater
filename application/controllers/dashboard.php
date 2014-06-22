@@ -5,12 +5,19 @@ class Dashboard extends MY_Controller
 	public function __construct()
 	{
 		parent::__construct();
+		$this->load->model('Admin_Model');
+		$this->load->model('Restaurant_Model');
+		$this->load->model('HQ_Model');
+		$this->load->model('Customer_Model');
+		$this->load->model('Bloggers_Model');
+		$this->load->model('Reservation_Model');
+		
 	}
 	
 	//loads the customer home page
 	public function index()
 	{
-		$data['restaurantResults'] = 
+		$data['restaurantResults'] = $this->Restaurant_Model->getAll();
 		$data['css'] = "resources/allrestaurants.css";
 		$this->loadPage("allrestaurants",$data);
 	}
