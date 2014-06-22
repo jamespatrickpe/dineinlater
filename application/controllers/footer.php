@@ -38,4 +38,18 @@ class Footer extends MY_Controller
 		$data['css'] = 'resources/footer.css';
 		$this->loadpage('privacy',$data);
 	}
+	
+	public function getBloggers()
+	{
+		
+	}
+	
+	//bloggers
+	public function bloggers()
+	{
+		$data['css'] = 'resources/blogger-reviews.css';
+		$this->load->model('Bloggers_Model');
+		$data['bloggers'] = $this->Bloggers_Model->getAll();
+		$this->loadpage('bloggerscorner',$data);
+	}
 }

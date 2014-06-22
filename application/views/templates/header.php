@@ -115,7 +115,7 @@
 	<div id="navigation">
 		<?php echo anchor('welcome/index', ' ', 'class="logo"') ?>
 		<a href="allrestaurants.html"><div class="navigation-stub">All Restaurants</div></a>
-		<a href="blogger-reviews.html"><div class="navigation-stub">Blogger Reviews</div></a>
+		<a href="blogger-reviews.html"><div class="navigation-stub"><?php echo anchor("footer/bloggers","Blogger Reviews","") ?></div></a>
 		<div class="navigation-stub"><?php	$attributes = array(); echo form_open("restaurant/search",$attributes); ?>
 			<input id="navigation-search" name="keyword" placeholder="Food/Restaurant/Place"><input type="submit" class="searchButton" value="Search"></form></div>
 		<div id="account">
