@@ -13,7 +13,7 @@ class Restaurant extends MY_Controller
 		$this->load->model('Customer_Model');
 		$this->load->model('Bloggers_Model');
 		$this->load->model('Reservation_Model');
-		$this->sessionSecurityInterceptor("RESTAURANT");
+//		$this->sessionSecurityInterceptor("RESTAURANT");
 		$data['validationErrors'] = " ";
 	}
 	
@@ -92,7 +92,7 @@ class Restaurant extends MY_Controller
 		$this->load->model('restaurant_model');
 		$this->load->model("restotag_model");
 	}
-	
+	*/
 	public function search()
 	{
 		$data['result'] = $this->searchAttempt();
@@ -104,30 +104,10 @@ class Restaurant extends MY_Controller
 	{
 		$this->load->model("Restaurant_Model");
 		$this->load->model("Restotag_Model");
-		$keyword = $this->input->post('keyword');
+		$keyword = $this->input->get('keyword');
 		
-		$output['name'] = array();
-		$output['city'] = array();
-		$output['cuisine'] = array();
-		$output['tag'] = array();
-		
-		if($this->Restaurant_Model->getByName($keyword))
-		{
-			$output['name'] = $this->Restaurant_Model->getByName($keyword);
-		}elseif($this->Restaurant_Model->getByCity($keyword))
-		{
-			$output['city'] = $this->Restaurant_Model->getByCity($keyword);
-		}elseif($this->Restaurant_Model->getByCuisine($keyword))
-		{
-			$output['cuisine'] = $this->Restaurant_Model->getByCuisine($keyword);
-		}elseif($this->Restotag_Model->searchTag($keyword))
-		{
-			$output['tag'] = $this->Restotag_Model->searchTag($keyword);
-		}
-
-		$ids = array_merge($output['name'],$output['city'],$output['cuisine'],$output['tag']);
-		$result = $this->Restaurant_Model->searchResult($ids);
+		$result = $this->Restaurant_Model->searchResult($keyword);
 		return $result;
 	}
-	 */
+	 
 }

@@ -46,9 +46,9 @@ class Restaurant_Model extends MY_Model
 	
 	public function searchByCuisine($cuisine)
 	{
-		$sql = "select r.id,r.name,r.address,r.city,r.description,r.logo_photo,rt.rating 
+		$sql = "select r.restaurant_id,r.name,r.address,r.city,r.description,r.logo_photo,rt.rating 
 									from restaurant r join (select restaurant_id,avg(rating) as 'rating' from rating group by restaurant_id) rt 
-									on r.id = rt.restaurant_id
+									on r.restaurant_id = rt.restaurant_id
 									where r.cuisine like (?)";
 		$query = $this->db->query($sql,array($cuisine));
 		return $this->multipleResults($query);
@@ -56,9 +56,9 @@ class Restaurant_Model extends MY_Model
 	
 	public function searchByCity($city)
 	{
-		$sql = "select r.id,r.name,r.address,r.city,r.description,r.logo_photo,rt.rating 
+		$sql = "select r.restaurant_id,r.name,r.address,r.city,r.description,r.logo_photo,rt.rating 
 									from restaurant r join (select restaurant_id,avg(rating) as 'rating' from rating group by restaurant_id) rt 
-									on r.id = rt.restaurant_id
+									on r.restaurant_id = rt.restaurant_id
 									where r.city like (?)";
 		$query = $this->db->query($sql,array($city));
 		return $this->multipleResults($query);
@@ -66,9 +66,9 @@ class Restaurant_Model extends MY_Model
 	
 	public function searchByName($name)
 	{
-		$sql = "select r.id,r.name,r.address,r.city,r.description,r.logo_photo,rt.rating 
+		$sql = "select r.restaurant_id,r.name,r.address,r.city,r.description,r.logo_photo,rt.rating 
 									from restaurant r join (select restaurant_id,avg(rating) as 'rating' from rating group by restaurant_id) rt 
-									on r.id = rt.restaurant_id
+									on r.restaurant_id = rt.restaurant_id
 									where r.name like (?)";
 		$query = $this->db->query($sql,array($name));
 		return $this->multipleResults($query);
@@ -84,11 +84,15 @@ class Restaurant_Model extends MY_Model
 	
 	public function searchResult($keyword)
 	{
-		$resultByCity = $this->searchByCity($keyword);
-		$resultByCuisine = $this->searchByCuisine($keyword);
-		$resultByName = $this->searchByName($keyword);
-		
-		
+		$keyword = '%'.$keyword.'%';
+		$sql = "select r.restaurant_id,r.name,r.address,r.city,r.description,r.logo_photo,rt.rating 
+									from restaurant r join (select restaurant_id,avg(rating) as 'rating' from rating group by restaurant_id) rt 
+									on r.restaurant_id = rt.restaurant_id
+									where r.name like ?
+									or r.city like ?
+									or r.cuisine like ?";
+		$query = $this->db->query($sql,array($keyword,$keyword,$keyword));
+		return $this->multipleResults($query);
 	}
 	
 	public function getCity()
@@ -100,12 +104,13 @@ class Restaurant_Model extends MY_Model
         return $this->multipleResults($query);
 	}
 	
-	public function getRestoByCity()
+	public function getRestoByCity($city)
 	{
 		$sql = "SELECT *
 				FROM dineinlater.restaurant
+				WHERE city IN (?)
 				GROUP BY city;";
-		$query = $this->db->query($sql);
+		$query = $this->db->query($sql,array($city));
         return $this->multipleResults($query);
 	}
 	
@@ -118,12 +123,13 @@ class Restaurant_Model extends MY_Model
         return $this->multipleResults($query);
 	}
 	
-	public function getRestoByCuisine()
+	public function getRestoByCuisine($cuisine)
 	{
 		$sql = "SELECT *
 				FROM dineinlater.restaurant
+				WHERE cuisine IN (?)
 				GROUP BY cuisine;";
-		$query = $this->db->query($sql);
+		$query = $this->db->query($sql,array($cuisine));
         return $this->multipleResults($query);
 	}
 	
