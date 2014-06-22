@@ -22,17 +22,19 @@ class Reservation_Model extends MY_Model
 	}
 	
 	// adds row
-	public function addReservation($resto_ID, $customer_ID, $reservetime , $slots, $confirmed, $note, $showup="NOTYET", $status="OTW")
+	public function addReservation($resto_ID, $customer_ID, $reservetime , $slots, $note, $date, $time)
 	{
 		$data = array(
 			   'resto_ID' => $resto_ID,
 			   'customer_ID' => $customer_ID,
 			   'reservetime' => $reservetime,
 			   'slots' => $slots,
-			   'confirmed' => $confirmed,
+			   'confirmed' => '0',
 			   'note' => $note,
-			   'showup' => $showup,
-			   'status' => $status
+			   'showup' => 'NOTYET',
+			   'status' => 'O',
+			   'date' => $date,
+			   'time' => $time
 			);
 		$this->db->insert('reservation', $data); 
 	}
