@@ -13,10 +13,18 @@
 				</blurb>
 					<blurb class="half" id="resto_home"><div class="blurb-header"><h2>Description</h2></div>
 						<p><?php echo $restaurant[0]->description; ?></p><br>
-						<p><?php echo $restaurant[0]->menu_photo; ?></p><br>						
+						<p><img src=<?php echo $restaurant[0]->menu_photo; ?>></p><br>						
 					</blurb>
 					<blurb class="half" id="resto_profile"><div class="blurb-header"><h2>Gallery</h2></div>
-						<p><?php echo $restaurant[0]->name; ?></p><br>						
+						<p>
+							<?php
+							
+								foreach($restoImage as $image)
+								{
+									echo "<img src=".$image.">";
+								}
+							
+							?></p><br>						
 					</blurb>								
 					<blurb class="half" id="resto_reservation"><div class="blurb-header"><h2>DINE - IN- LATER!</h2></div>
 						<p><?php echo $restaurant[0]->name; ?></p><br>						

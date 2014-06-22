@@ -32,7 +32,7 @@ class Dashboard extends MY_Controller
 	{
 		$restaurant_id = $this->input->get('id');
 		$data['restaurant'] = $this->Restaurant_Model->getById($restaurant_id);
-		
+		$data['$restoImage'] = $this->Restaurant_Model->
 		$data['css'] = "resources/restaurant.css";
 		$this->loadPage("restoprofile",$data);
 	}
