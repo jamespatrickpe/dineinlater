@@ -22,7 +22,6 @@ class Reservation_Model extends MY_Model
 	}
 	
 	// adds row
-
 	public function addReservation($resto_ID, $customer_ID , $slots, $note, $date, $time)
 	{
 		$data = array(
