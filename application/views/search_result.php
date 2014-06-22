@@ -10,9 +10,9 @@
 						<?php 
 							foreach ($result as $row) {
 								echo "<div class='review-header'>
-										<form action='toResto' id='$row->id'>
-										<input type='hidden' value='$row->id' name='id'>
-										<span class='review-details' onclick='document.getElementById('$row->id').submit()'><h3>$row->name</h3>
+										<form action='toResto' id='$row->restaurant_id'>
+										<input type='hidden' value='$row->restaurant_id' name='id'>
+										<span class='review-details' onclick='document.getElementById('$row->restaurant_id').submit()'><h3>$row->name</h3>
 											<div class='user-photo'><img href='$row->logo_photo'></div>
 										</span> 
 										</form>
