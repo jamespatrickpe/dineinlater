@@ -69,7 +69,8 @@
 						echo "<h2>".$resto->name."</h2>";
 						echo "<ul>";
 						echo "<li class='restaurant-info' id='cuisine'>".$resto->cuisine."</li>";
-						echo "<li class='restaurant-info' id='operating-hours'>".$resto->cuisine." to ".$resto->cuisine."</li>";
+						echo "<li class='restaurant-info' id='operating-hours'>".$resto->open_time." to ".$resto->rest_start."</li>";
+						echo "<li class='restaurant-info' id='operating-hours'>".$resto->rest_start." to ".$resto->close_time."</li>";
 						echo "<li class='restaurant-info' id='phone-number'> ".$resto->landline." & ".$resto->mobile." </li>";
 						echo "<li class='restaurant-info' id='address'>".$resto->address."</li>";
 						echo "<li class='restaurant-info' id='restaurant-highlights'>".$resto->description."</li>";
@@ -79,7 +80,10 @@
 						echo "<div class='image-rate'>";
 						echo "<img src='".$resto->logo_photo."' width='200' height='200' class='restaurant-image'>"."<div class='rating'>"."<span class='rate'>";
 						$rating = $this->Rating_Model->getRatingByRestaurant($resto->restaurant_id);
-						echo $rating[0]->average;
+						if(isset($rating) == TRUE)
+						{
+							//echo $rating[0]->rating;
+						}
 						echo "<span></div></div></div></a>";
 
 					}

@@ -22,4 +22,9 @@ class Dashboard extends MY_Controller
 		$data['css'] = "resources/allrestaurants.css";
 		$this->loadPage("allrestaurants",$data);
 	}
+	
+	public function restaurant()
+	{
+		
+	}
 }
