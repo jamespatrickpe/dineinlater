@@ -9,6 +9,8 @@
    		<th>blogdate</th>
    		<th>author</th>
    		<th>snippet</th>
+   		<th>edit</th>
+   		<th>delete</th>
    	</tr>
    		<?php
    			foreach($blogResults as $blog) 
@@ -21,6 +23,8 @@
 			    echo "<td>".$blog->blogdate."</td>";
 				echo "<td>".$blog->author."</td>";
 			    echo "<td>".$blog->snippet."</td>";
+				echo "<td>". anchor('administrator/editblog?id='.$blog->bloggers_id, 'edit') ."</td>";
+				echo "<td>". anchor('administrator/attemptDeleteblog?id='.$blog->bloggers_id, 'delete') ."</td>";
 				echo "</tr>";
 			}
    		?>
@@ -30,10 +34,9 @@
 	<?php
 		echo form_open('administrator/attemptAddBlog',"style='text-align:left;'")."<br>";
 		echo "title : ".form_input("title","")."<br>";	
-		echo "bloggers_id : ".form_input("bloggers_id","")."<br>";
 		echo "url : ".form_input("url","")."<br>";
 		echo "urlpic : ".form_input("urlpic","")."<br>";
-		echo "blogdate : ".form_input("blogdate","")."<br>";
+		echo "blogdate : "."<input name='blogdate' type='datetime-local'>"."<br>";
 		echo "author : ".form_input("author","")."<br>";
 		echo "snippet : ".form_textarea("snippet","")."<br>";
 		echo form_reset("reset","reset");

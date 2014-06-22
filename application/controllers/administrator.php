@@ -298,6 +298,48 @@ class Administrator extends MY_Controller
 		$this->Restaurant_Model->deleteRestaurant($id);
 		redirect("administrator/admin_restos","refresh");
 	}
+
+	public function attemptDeleteblog()
+	{
+		$id = $this->input->get('id');
+		$this->Bloggers_Model->deleteBlog($id);
+		redirect("administrator/admin_blog","refresh");
+	}
+
+	public function editblog()
+	{
+		$data['css'] = 'resources/account.css';
+		$id = $this->input->get('id');
+		$data['myUpdateID'] = $id;
+		$data['myBlog'] = $this->Bloggers_Model->getById($id);
+		$data['id'] = $id;
+		$this->loadpageAdmin("administrator/editBlog",$data);	
+	}
+	
+	//Deletes an Administrator
+	public function attemptEditBlog()
+	{
+		$myUpdateID = $this->input->post('myUpdateID');
+		$title = $this->input->post('title');
+		$url = $this->input->post('url');
+		$urlpic= $this->input->post('urlpic');
+		$blogdate = $this->input->post('blogdate');
+		$author = $this->input->post('author');
+		$snippet = $this->input->post('snippet');
+		
+		$data = array(
+			title => $title,
+			url => $url,
+			urlpic => $urlpic,
+			blogdate => $blogdate,
+			author => $author,
+			snippet => $snippet
+			
+		);
+	
+		$this->Bloggers_Model->editBlog($data,$id);
+		redirect("administrator/admin_blog","refresh");
+	}
 	
 	//Deletes an Administrator
 	public function attemptDeleteAdmin()
@@ -356,6 +398,20 @@ class Administrator extends MY_Controller
 		$data['blogResults'] = $this->Bloggers_Model->getAll();
 		$data['css'] = 'resources/account.css';
 		$this->loadpageAdmin("administrator/admin_blog",$data);	
+	}
+
+	public function attemptAddblog()
+	{
+		$title = $this->input->post("title");
+		$url = $this->input->post("url");
+		$urlpic = $this->input->post("urlpic");
+		$blogdate = $this->input->post("blogdate");
+		$author = $this->input->post("author");
+		$snippet = $this->input->post("snippet");
+		
+		$data['css'] = 'resources/account.css';
+		$this->Bloggers_Model->addBlog($title,$url,$urlpic,$blogdate,$author,$snippet);
+		redirect("administrator/admin_blog","refresh");
 	}
 	
 	//Loads Restaurant Management System

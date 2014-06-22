@@ -18,13 +18,20 @@ class Bloggers_Model extends MY_Model
         return $this->singularResults($query);
 	}
 	
+	public function editBlog($data, $id)
+	{
+		$data = array_filter($data);
+		$this->db->where('restaurant_id', $id);
+		$this->db->update('restaurant', $data); 
+	}
+	
 	public function addBlog($title,$url,$urlpic,$date,$author,$snippet)
 	{
 		$data = array(
 			   'title' => $title,
 			   'url' => $url,
 			   'urlpic' => $urlpic,
-			   'date' => $date,
+			   'blogdate' => $date,
 			   'author' => $author,
 			   'snippet' => $snippet,
 			);

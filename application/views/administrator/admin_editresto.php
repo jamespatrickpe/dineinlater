@@ -5,8 +5,9 @@
 		    'cols' => 10
 		);
 		
-		echo form_hidden("myUpdateID",$myUpdateID);
-		echo form_open_multipart('administrator/attemptEditResto',"style='text-align:left;'")."<br>";	
+		
+		echo form_open_multipart('administrator/attemptEditResto',"style='text-align:left;'")."<br>";
+		echo form_hidden("myUpdateID",$myresto[0]->restaurant_id);	
 		echo "NAME : ".form_input("name",$myresto[0]->name)."<br>";
 		echo "OWNER : ".form_input("owner",$myresto[0]->owner)."<br>";
 		echo "MOBILE : ".form_input("mobile",$myresto[0]->mobile)."<br>";
