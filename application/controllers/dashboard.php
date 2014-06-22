@@ -18,6 +18,8 @@ class Dashboard extends MY_Controller
 	//loads the customer home page
 	public function index()
 	{
+		$data['cityResults'] = $this->Restaurant_Model->getCity();
+		$data['cuisineResults'] = $this->Restaurant_Model->getCuisine();
 		$data['restaurantResults'] = $this->Restaurant_Model->getAll();
 		$data['css'] = "resources/allrestaurants.css";
 		$this->loadPage("allrestaurants",$data);

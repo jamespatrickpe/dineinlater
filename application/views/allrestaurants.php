@@ -5,34 +5,25 @@
 				<blurb class="small" id="filter">
 					<form>
 						<div class="blurb-header"><h2>Filter Results</h2></div>
-							<h3>Cuisine</h3>
-							<div class="options">
-									<input type="checkbox" class="check" id="American"><label for="American">American</label><br>
-									<input type="checkbox" class="check" id="Chinese"><label for="Chinese">Chinese</label><br>
-									<input type="checkbox" class="check" id="Filipino"><label for="Filipino">Filipino</label><br>
-									<input type="checkbox" class="check" id="French"><label for="French">French</label><br>
-									<input type="checkbox" class="check" id="Indian"><label for="Indian">Indian</label><br>
-									<input type="checkbox" class="check" id="Italian"><label for="Italian">Italian</label><br>
-									<input type="checkbox" class="check" id="Japanese"><label for="Japanese">Japanese</label><br>
-									<input type="checkbox" class="check" id="Korean"><label for="Korean">Korean</label><br>
-									<input type="checkbox" class="check" id="Mediterranean"><label for="Mediterranean">Mediterranean</label><br>
-									<input type="checkbox" class="check" id="Vietnamese"><label for="Vietnamese">Vietnamese</label>
-								</div>
-							<hr>
 							<h3>City</h3>
+							<div class="options">
+								<?php
+									foreach($cityResults as $city)
+									{
+										echo "<input type='checkbox' class='check' id='American'><label for='American'>".$city->city."</label><br>";
+									}
+								?> 
+							</div>
+							<hr>
+							<h3>Cuisine</h3>
 							<div class="options">																		
-									<input type="checkbox" class="check" id="makati"><label for="makati">Makati</label><br>
-									<input type="checkbox" class="check" id="makati"><label for="makati">Mandaluyong</label><br>
-									<input type="checkbox" class="check" id="manila"><label for="manila">Manila</label><br>
-									<input type="checkbox" class="check" id="marikina"><label for="marikina">Marikina</label><br>
-									<input type="checkbox" class="check" id="paranaque"><label for="paranaque">Paranaque</label><br>
-									<input type="checkbox" class="check" id="pasay"><label for="pasay">Pasay</label><br>
-									<input type="checkbox" class="check" id="pasig"><label for="pasig">Pasig</label><br>
-									<input type="checkbox" class="check" id="san-juan"><label for="san-juan">San Juan</label><br>
-									<input type="checkbox" class="check" id="taguig"><label for="taguig">Taguig</label><br>
-									<input type="checkbox" class="check" id="quezon-city"><label for="quezon-city">Quezon City</label><br>
-									<input type="checkbox" class="check" id="outside"><label for="outside">Outside Metro Manila</label><br><br>
-								</div>
+								<?php
+									foreach($cuisineResults as $cuisine)
+									{
+										echo "<input type='checkbox' class='check' id='American'><label for='American'>".$cuisine->cuisine."</label><br>";
+									}
+								?> 
+							</div>
 							
 					</form>
 				</blurb>				

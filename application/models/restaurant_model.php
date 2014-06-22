@@ -87,7 +87,7 @@ class Restaurant_Model extends MY_Model
 		$sql = "SELECT city
 				FROM dineinlater.restaurant
 				GROUP BY city;";
-		$query = $this->db->query($sql,array($id));
+		$query = $this->db->query($sql);
         return $this->multipleResults($query);
 	}
 	
@@ -96,7 +96,7 @@ class Restaurant_Model extends MY_Model
 		$sql = "SELECT cuisine
 				FROM dineinlater.restaurant
 				GROUP BY cuisine;";
-		$query = $this->db->query($sql,array($id));
+		$query = $this->db->query($sql);
         return $this->multipleResults($query);
 	}
 	
