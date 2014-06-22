@@ -1,10 +1,9 @@
 <div id="content-container"><div id="body-container">
-<h1>RESTAURANT MANAGEMENT</h1>
+<h1>CUSTOMER DASHBOARD</h1>
 <h2>
 	<?php
-	echo anchor("restaurant/", " DASHBOARD |");
-	echo anchor("restaurant/reservations", " RESERVATIONS |");
-	echo anchor("restaurant/editRestaurant", " UPDATE PROFILE |");
-	echo anchor("restaurant/respondToReservation", " RESERVATIONS |");
+	echo anchor("customer/", " DASHBOARD |");
+	echo anchor("customer/reservations", " UPDATE EMAIL |");
+	echo anchor("customer/editRestaurant", " UPDATE PHONE NUMBER |");
 	?>
 </h2>
