@@ -59,7 +59,7 @@ class Customer_Model extends MY_Model
 			   'emailadd' => $emailadd,
 			   'username' => $username,
 			   'password' => $this->encrypt->encode(rand(1000000,999999999)),
-			   'cellphone' => 00000000000
+			   'cellphone' => 0000000000
 			);
 		$this->db->insert('customer', $data); 
 	}
@@ -97,15 +97,6 @@ class Customer_Model extends MY_Model
 				'cellphone' => $phone
 			);
 		$this->db->where('customer_id', $id);
-		$this->db->update('customer', $data); 
-	}
-
-	public function updatePhoneFB($id,$phone)
-	{
-		$data = array(
-				'cellphone' => $phone
-			);
-		$this->db->where('emailadd', $id);
 		$this->db->update('customer', $data); 
 	}
 }

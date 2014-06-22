@@ -4,7 +4,7 @@
 	<?php
 	echo anchor("customer/", " DASHBOARD |");
 	echo anchor("customer/editPhone", " UPDATE PHONE NUMBER |");
-	echo anchor("customer/reviews", " REVIEWS |");
-	echo anchor("customer/reservations", " RESERVATIONS");
+	echo anchor("customer/customerReviews", " REVIEWS |");
+	echo anchor("customer/customerReservations", " RESERVATIONS");
 	?>
 </h2>

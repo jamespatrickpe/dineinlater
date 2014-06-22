@@ -8,7 +8,7 @@ $(document).ready(function(){
 			$("#login").hide();
 			$("#login-clicked").show();
 		});
-		$(".close, #login-clicked").click(function () {
+		$(".close").click(function () {
 			$("#background-blur").fadeOut();
 			$("#login-clicked").hide();
 			$("#login").show();

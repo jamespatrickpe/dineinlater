@@ -92,14 +92,6 @@ class Reservation_Model extends MY_Model
 		$query = $this->db->query($sql,array($resto_ID));
         return $this->multipleResults($query);
 	}
-
-	// fetches row data by Customer ID
-	public function reservationByCustomerID($customer_ID)
-	{
-		$this->db->where('customer_id', $customer_ID);
-		$query = $this->db->get('reservation');
-        return $this->multipleResults($query);
-	}
 	
 	// fetches row data by Customer and Restaurant ID
 	public function reservationByRestoIDandUserID($resto_ID,$customer_ID)
@@ -134,6 +126,25 @@ class Reservation_Model extends MY_Model
 				AND r.restaurant_id = ?
 				AND r.date = CURDATE()";
 		$query = $this->db->query($sql,array($resto_ID));
+        return $this->multipleResults($query);
+	}
+
+	// fetches row data by Customer ID
+	public function reservationByCustomerID($customer_ID)
+	{
+		$sql = "SELECT r.reservation_id, c.name,  r.time, r.date, r.slots, r.reservationmade, r.note,
+				CASE confirmed
+					WHEN 0 THEN 'NO'
+					WHEN 1 THEN 'YES'
+					ELSE -1
+				END AS confirmed 
+				FROM reservation r JOIN restaurant c
+				ON r.restaurant_id = c.restaurant_id
+				WHERE r.confirmed = 1
+				AND r.restaurant_id = ?
+				AND r.date = CURDATE()
+				ORDER BY r.reservationmade desc";
+		$query = $this->db->query($sql,array($customer_ID));
         return $this->multipleResults($query);
 	}
 	

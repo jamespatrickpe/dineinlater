@@ -50,8 +50,12 @@ class Rating_Model extends MY_Model
 	// fetches row by customer ID
 	public function getByCustomerID($id)
 	{
-		$this->db->where('customer_id', $id);
-		$query = $this->db->get('rating');
+		$sql = "SELECT c.name, r.rating, r.title, r.review
+				FROM rating r JOIN restaurant c
+				ON r.restaurant_id = c.restaurant_id
+				WHERE r.customer_id = ?
+				ORDER BY r.datetime desc;";
+		$query = $this->db->query($sql,array($id));
         return $this->multipleResults($query);
 	}
 	

@@ -58,6 +58,20 @@ class Customer extends MY_Controller
 		
 	}
 	
+	public function customerReviews()
+	{
+		$data['reviews'] = $this->Rating_Model->getByCustomerID($this->session->userdata('id'));
+		$data['css'] = "resources/account.css";
+		$this->loadpageCustomer('customer/customer_reviews',$data);
+	}
+	
+	public function customerReservations()
+	{
+		$data['reservations'] = $this->Reservation_Model->reservationByCustomerID($this->session->userdata('id'));
+		$data['css'] = "resources/account.css";
+		$this->loadpageCustomer('customer/customer_reservations',$data);
+	}
+	
 	public function editPhone()
 	{
 		$data['session'] = $this->session->userdata('id');
@@ -67,14 +81,9 @@ class Customer extends MY_Controller
 	
 	public function editPhoneNow()
 	{	
-		if(strcmp ( $this->input->post('fbuser') , 'Y' ))
-		{$this->Customer_Model->updatePhoneFB($this->session->userdata('emailadd'),$this->input->post('mobile'));}
-		if(strcmp ( $this->input->post('fbuser') , 'N' ))
-		{$this->Customer_Model->updatePhone($this->session->userdata('id'),$this->input->post('mobile'));}
-		
+		$this->Customer_Model->updatePhone($this->session->userdata('id'),$this->input->post('mobile'));
 		$this->session->userdata('confirmation', 'Update Successful');
 		redirect("customer/editPhone","refresh");
-		
 	}
 	
 	public function attemptCreateReview()

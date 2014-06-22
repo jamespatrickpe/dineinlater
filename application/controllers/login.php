@@ -54,8 +54,10 @@ class Login extends MY_Controller
 		$fb_email = $this->input->post('fb_email');
 		$type = "CUSTOMER";
 		
+		$dbResultsFromEmail = $this->Customer_Model->getByEmail($fb_email);
+		
 		//check if Email Exists
-		if(($this->Customer_Model->getByEmail($fb_email)) == FALSE)
+		if($dbResultsFromEmail == FALSE)
 		{
 			//If not registered; register then login
 			try
@@ -68,7 +70,9 @@ class Login extends MY_Controller
 			}
 		}
 		
-		$this->setSessionFB($fb_id, $fb_username,$fb_firstname,$fb_lastname, $type, $fb_email);
+//		$this->setSessionFB($fb_id, $fb_username,$fb_firstname,$fb_lastname, $type, $fb_email);
+		$this->setSessionCustomer($dbResultsFromEmail, $checked, "CUSTOMER");
+		
 		redirect('/','refresh');
 	}
 	

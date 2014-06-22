@@ -11,6 +11,7 @@ class Restaurant extends MY_Controller
 		$this->load->model('Restaurant_Model');
 		$this->load->model('HQ_Model');
 		$this->load->model('Customer_Model');
+		$this->load->model('Rating_Model');
 		$this->load->model('Bloggers_Model');
 		$this->load->model('Reservation_Model');
 //		$this->sessionSecurityInterceptor("RESTAURANT");
@@ -83,6 +84,13 @@ class Restaurant extends MY_Controller
 		$data['reservations'] = $this->Reservation_Model->reservationRestoToday($this->session->userdata('id'));
 		$data['css'] = "resources/restaurant.css";
 		$this->loadpageResto('restaurant/resto_reservationToday',$data);
+	} 
+
+	public function viewReviews()
+	{
+		$data['reviews'] = $this->Rating_Model->getByRestoID($this->session->userdata('id'));
+		$data['css'] = "resources/restaurant.css";
+		$this->loadpageResto('restaurant/resto_reviews',$data);
 	} 
 
 	// NOT SURE IF THIS SHOULD BE AT RESTAURANT MODEL. MAYBE IN CUSTOMER. 
