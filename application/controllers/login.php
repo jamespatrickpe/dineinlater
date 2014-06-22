@@ -68,7 +68,7 @@ class Login extends MY_Controller
 			}
 		}
 		
-		$this->setSessionFB($fb_id, $fb_username,$fb_firstname,$fb_lastname, $type);
+		$this->setSessionFB($fb_id, $fb_username,$fb_firstname,$fb_lastname, $type, $fb_email);
 		redirect('/','refresh');
 	}
 	
@@ -317,7 +317,8 @@ class Login extends MY_Controller
 					'username'  => $dataObjectArray[0]->username,
 					'firstname'     => $dataObjectArray[0]->firstname,
 					'lastname' => $dataObjectArray[0]->lastname,
-					'usertype' => $type
+					'usertype' => $type,
+					'fbuser' => 'N'
                );
 		if($rememberMe == TRUE)
 		{
@@ -327,14 +328,16 @@ class Login extends MY_Controller
 		$this->session->set_userdata($newdata);
 	}
 	
-	private function setSessionFB($fb_id, $username,$firstname,$lastname, $type)
+	private function setSessionFB($fb_id, $username,$firstname,$lastname, $type, $email)
 	{
 		$newdata = array(
 					'id'  => $fb_id,
 					'username'  => $username,
 					'firstname'     => $firstname,
 					'lastname' => $lastname,
-					'usertype' => $type
+					'usertype' => $type,
+					'fbuser' => 'Y',
+					'emailadd' => $email
                );
 		$this->session->set_userdata($newdata);
 	}

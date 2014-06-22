@@ -2,9 +2,9 @@
 <h1>RESTAURANT MANAGEMENT</h1>
 <h2>
 	<?php
-	echo anchor("restaurant/", " DASHBOARD |");
-	echo anchor("restaurant/reservations", " RESERVATIONS |");
-	echo anchor("restaurant/editRestaurant", " UPDATE PROFILE |");
-	echo anchor("restaurant/respondToReservation", " RESERVATIONS |");
+	echo anchor("customer/", " DASHBOARD |");
+	echo anchor("customer/editPhone", " UPDATE PHONE NUMBER |");
+	echo anchor("customer/reviews", " REVIEWS |");
+	echo anchor("customer/reservations", " RESERVATIONS");
 	?>
 </h2>

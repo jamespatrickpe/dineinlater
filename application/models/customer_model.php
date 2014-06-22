@@ -81,19 +81,31 @@ class Customer_Model extends MY_Model
 	public function updateUsername($id,$username)
 	{
 		$this->db->where('customer_id', $id);
-		$this->db->update('username', $username); 
+		$this->db->update('customer', $username); 
 	}
 	
 	// update customer password
 	public function updatePassword($id,$password)
 	{
 		$this->db->where('customer_id', $id);
-		$this->db->update('password', $this->encrypt->encode($password)); 
+		$this->db->update('customer', $this->encrypt->encode($password)); 
 	}
 	
 	public function updatePhone($id,$phone)
 	{
+		$data = array(
+				'cellphone' => $phone
+			);
 		$this->db->where('customer_id', $id);
-		$this->db->update('cellphone', $phone); 
+		$this->db->update('customer', $data); 
+	}
+
+	public function updatePhoneFB($id,$phone)
+	{
+		$data = array(
+				'cellphone' => $phone
+			);
+		$this->db->where('emailadd', $id);
+		$this->db->update('customer', $data); 
 	}
 }
