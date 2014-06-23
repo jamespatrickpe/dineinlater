@@ -150,21 +150,13 @@ class Restaurant_Model extends MY_Model
 		
 		// to make sure there is a default opening and closing time
 		if(isset( $myReservationArray['open_time'] ) != TRUE)
-		{
-			 $myReservationArray['open_time'] = "06:00:00";
-		}
+		{$myReservationArray['open_time'] = "06:00:00";}
 		if(isset( $myReservationArray['close_time'] ) != TRUE)
-		{
-			 $myReservationArray['close_time'] = "21:00:00";
-		}
+		{$myReservationArray['close_time'] = "21:00:00";}
 		if(isset( $myReservationArray['rest_start'] ) != TRUE)
-		{
-			 $myReservationArray['rest_start'] = "12:00:00";
-		}
+		{$myReservationArray['rest_start'] = "12:00:00";}
 		if(isset( $myReservationArray['rest_end'] ) != TRUE)
-		{
-			 $myReservationArray['rest_end'] = "01:00:00";
-		}
+		{$myReservationArray['rest_end'] = "01:00:00";}
 		
 		// data array
 		$data = array(
