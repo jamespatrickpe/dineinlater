@@ -141,18 +141,3 @@
 				?>
 		</div>
 	</div>
-	<!--login popup-->
-	<div id="background-blur">
-		<div id="account-popup">
-			<div id="popup-header">
-				<h2>Log in</h2>
-				<div class="close"></div>	
-			</div>
-			<?php
-				$attributes = array('id' => 'signin');
-				echo form_open("Login/attemptLoginCustomer",$attributes);
-			?>
-			<?php $this->load->view("login_interface"); ?>
-			</form>			
-		</div>		
-	</div>

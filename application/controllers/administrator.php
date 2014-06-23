@@ -11,12 +11,7 @@ class Administrator extends MY_Controller
 		$this->load->model('Customer_Model');
 		$this->load->model('Bloggers_Model');
 		$this->sessionSecurityInterceptor("ADMIN");
-		$data['validationErrors'] = " ";
-	}
-	
-	//Adds a Restaurant
-	public function attemptAddRestaurant()
-	{
+		
 		//Configuration for File Upload
 		$config['upload_path'] = $_SERVER['DOCUMENT_ROOT'].'/dineinlater/resources/uploads/';
 		$config['allowed_types'] = 'gif|jpg|png';
@@ -26,28 +21,39 @@ class Administrator extends MY_Controller
 		$config['encrypt_name']  = TRUE;
 		$this->upload->initialize($config);  
 		
+		$data['validationErrors'] = " ";
+		$data['hqOptions'] = $this->HQ_Model->getAll();
+	}
+	
+	//Adds a Restaurant
+	public function attemptAddRestaurant()
+	{
+		$data['hqOptions'] =  $this->HQ_Model->getAll();
+		
 		// Form Validation Ruling
-		$this->form_validation->set_rules('name', '', 'required');
-		$this->form_validation->set_rules('owner', '', 'required');
-		$this->form_validation->set_rules('mobile', '', 'required');
-		$this->form_validation->set_rules('landline', '', 'required');
-		$this->form_validation->set_rules('google_lat', '', 'required');
-		$this->form_validation->set_rules('google_long', '', 'required');
-		$this->form_validation->set_rules('slots', '', 'required');
-		$this->form_validation->set_rules('url', '', 'required');
-		$this->form_validation->set_rules('description', '', 'required');
-		$this->form_validation->set_rules('address', '', 'required');
-		$this->form_validation->set_rules('cuisine', '', 'required');
-		$this->form_validation->set_rules('city', '', 'required');
-		$this->form_validation->set_rules('username', '', 'required');
-		$this->form_validation->set_rules('password', '', 'required');
-		$this->form_validation->set_rules('autoaccept', '', 'required');
-		$this->form_validation->set_rules('status', '', 'required');
-		$this->form_validation->set_rules('hq', '', 'required');
-		$this->form_validation->set_rules('open_time', '', 'required');
-		$this->form_validation->set_rules('close_time', '', 'required');
-		$this->form_validation->set_rules('rest_start', '', 'required');
-		$this->form_validation->set_rules('rest_end', '', 'required');
+		$this->form_validation->set_rules('name', 'Name', 'required|min_length[5]|max_length[50]');
+		$this->form_validation->set_rules('owner', 'Owner', 'required|min_length[5]|max_length[50]');
+		$this->form_validation->set_rules('mobile', 'Mobile Number', 'required|min_length[5]|max_length[50]');
+		$this->form_validation->set_rules('landline', 'Landline', 'required|min_length[5]|max_length[50]');
+		$this->form_validation->set_rules('google_lat', 'Latitude', 'required');
+		$this->form_validation->set_rules('google_long', 'Longitude', 'required');
+		$this->form_validation->set_rules('logo_photo', 'Logo Photo or Main Photo');
+		$this->form_validation->set_rules('menu_photo', 'Menu Photo');
+		$this->form_validation->set_rules('slots', 'Number of Available Slots', 'required');
+		$this->form_validation->set_rules('url', ' Restaurants Website ');
+		$this->form_validation->set_rules('description', ' Description ', 'required');
+		$this->form_validation->set_rules('address', ' Address ', 'required');
+		$this->form_validation->set_rules('cuisine', ' Type of Cuisine ', 'required');
+		$this->form_validation->set_rules('city', ' City ', 'required');
+		$this->form_validation->set_rules('username', ' Username ', 'required');
+		$this->form_validation->set_rules('password', ' Password ', 'required');
+		$this->form_validation->set_rules('autoaccept', ' Auto Accept ', 'required');
+		$this->form_validation->set_rules('status', ' Status ', 'required');
+		$this->form_validation->set_rules('hq', ' Headquarters ', 'required');
+		$this->form_validation->set_rules('open_time', ' Open Time ', 'required');
+		$this->form_validation->set_rules('close_time', ' Close Time ', 'required');
+		$this->form_validation->set_rules('rest_start', ' Rest Start ');
+		$this->form_validation->set_rules('rest_end', ' Rest End ');
 		
 		//Form Validation
 		if ($this->form_validation->run() == FALSE)
@@ -55,6 +61,46 @@ class Administrator extends MY_Controller
 			$data['css'] = 'resources/account.css';
 			$data['validationErrors'] = validation_errors();
 			$this->loadpageAdmin("administrator/admin_addrestos",$data);
+		}
+	
+		//upload menu photo and checker
+		if(($_FILES['menu_photo']['name']))
+		{
+			if($this->upload->do_upload("menu_photo"))
+			{
+				$data_menuPhoto = $this->upload->data();
+				$fileName_menuPhoto = $data_menuPhoto['file_name'];
+				$menu_photo = "resources/uploads/".$fileName_menuPhoto;
+			}
+			else
+			{
+				$data['validationErrors'] = $this->upload->display_errors();
+				$this->loadpageAdmin("administrator/admin_addrestos",$data);
+			}
+		}
+		else
+		{
+			$menu_photo = "resources/uploads/something.jpg";
+		}
+		
+		//upload logo photo and checker
+		if(($_FILES['logo_photo']['name']))
+		{
+			if($this->upload->do_upload("logo_photo"))
+			{
+				$data_logoPhoto = $this->upload->data();
+				$fileName_logoPhoto = $data_logoPhoto['logo_name'];
+				$logo_photo = "resources/uploads/".$fileName_logoPhoto;
+			}
+			else
+			{
+				$data['validationErrors'] = $this->upload->display_errors();
+				$this->loadpageAdmin("administrator/admin_addrestos",$data);
+			}
+		}
+		else
+		{
+			$logo_photo = "resources/uploads/something.jpg";
 		}
 		
 		//Insert Form Values
@@ -79,34 +125,6 @@ class Administrator extends MY_Controller
 		$close_time = $this->input->post('close_time');
 		$rest_start = $this->input->post('rest_start');
 		$rest_end = $this->input->post('rest_end');
-		
-		//UPLOAD MENU_PHOTO
-		if(!$this->upload->do_upload("menu_photo"))
-		{
-			$data['validationErrors'] = array('menu_photo' => $this->upload->display_errors());
-			$this->loadpageAdmin("administrator/admin_addrestos",$data);
-		}
-		else
-		{
-			$dataMenuPhoto = $this->upload->data();
-			$fileNameMenuPhoto = $dataMenuPhoto['file_name'];
-			$fullPathMenuPhoto = $dataMenuPhoto['full_path'];
-			$menu_photo = "resources/uploads/".$fileNameMenuPhoto;
-		}
-		
-		//UPLOAD LOGO_PHOTO
-		if(!$this->upload->do_upload("logo_photo"))
-		{
-			$data['validationErrors'] = array('logo_photo' => $this->upload->display_errors());
-			$this->loadpageAdmin("administrator/admin_addrestos",$data);
-		}
-		else
-		{
-			$dataLogoPhoto = $this->upload->data();
-			$fileNameLogoPhoto = $dataLogoPhoto['file_name'];
-			$fullPathLogoPhoto = $dataLogoPhoto['full_path'];
-			$logo_photo= "resources/uploads/".$fileNameLogoPhoto;
-		}	
 		
 		$myDataArray = array(
 			   'name' => $name,
@@ -137,7 +155,7 @@ class Administrator extends MY_Controller
 		
 		$data['css'] = 'resources/account.css';
 		$this->Restaurant_Model->addRestaurant($myDataArray);
-		$this->loadpageAdmin("administrator/admin_addrestos",$data);
+		redirect("administrator/admin_addrestos",'refresh');
 	}
 	
 	//loadpage for Admin
@@ -346,7 +364,7 @@ class Administrator extends MY_Controller
 	{
 		$id = $this->input->post('selectedAdminToBeDeleted');
 		$this->Admin_Model->deleteAdmin($id);
-		redirect("administrator/admin","refresh");
+		redirect("administrator/admin_administrators","refresh");
 	}
 	
 	//Adds an Administrator
@@ -355,7 +373,7 @@ class Administrator extends MY_Controller
 		$username = $this->input->post('username');
 		$password = $this->input->post('password');
 		$this->Admin_Model->addAdmin($username, $password);
-		redirect("administrator/admin","refresh");
+		redirect("administrator/admin_administrators","refresh");
 	}
 	
 	//Loads the Admin Home Page
@@ -385,7 +403,6 @@ class Administrator extends MY_Controller
 	//Adds Restos Admin
 	public function admin_addrestos()
 	{
-		
 		$data['hqOptions'] =  $this->HQ_Model->getAll();
 		$data['restaurantResults'] = $this->Restaurant_Model->getAll();
 		$data['css'] = 'resources/account.css';
