@@ -157,7 +157,6 @@ class Restaurant_Model extends MY_Model
 		{$myReservationArray['rest_start'] = "12:00:00";}
 		if(isset( $myReservationArray['rest_end'] ) != TRUE)
 		{$myReservationArray['rest_end'] = "01:00:00";}
-
 		
 		// data array
 		$data = array(
