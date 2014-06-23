@@ -25,7 +25,7 @@ class Bloggers_Model extends MY_Model
 		$this->db->update('restaurant', $data); 
 	}
 	
-	public function addBlog($title,$url,$urlpic,$date,$author,$snippet)
+	public function addBlog($title,$url,$urlpic = "resources/uploads/something.jpg",$date,$author,$snippet)
 	{
 		$data = array(
 			   'title' => $title,

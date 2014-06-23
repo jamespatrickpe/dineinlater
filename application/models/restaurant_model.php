@@ -1,4 +1,5 @@
 <?php
+// Model for the Restaurant User
 class Restaurant_Model extends MY_Model 
 {
 	public function __construct()
@@ -135,6 +136,37 @@ class Restaurant_Model extends MY_Model
 	
 	public function addRestaurant($myReservationArray = array())
 	{
+		// to make sure there is an image attached for logo photo
+		if(isset( $myReservationArray['logo_photo'] ) != TRUE)
+		{
+			 $myReservationArray['logo_photo'] = "resources/uploads/something.jpg";
+		}
+		
+		// to make sure there is an image attached for logo photo
+		if(isset( $myReservationArray['menu_photo'] ) != TRUE)
+		{
+			 $myReservationArray['menu_photo'] = "resources/uploads/something.jpg";
+		}
+		
+		// to make sure there is a default opening and closing time
+		if(isset( $myReservationArray['open_time'] ) != TRUE)
+		{
+			 $myReservationArray['open_time'] = "06:00:00";
+		}
+		if(isset( $myReservationArray['close_time'] ) != TRUE)
+		{
+			 $myReservationArray['close_time'] = "21:00:00";
+		}
+		if(isset( $myReservationArray['rest_start'] ) != TRUE)
+		{
+			 $myReservationArray['rest_start'] = "12:00:00";
+		}
+		if(isset( $myReservationArray['rest_end'] ) != TRUE)
+		{
+			 $myReservationArray['rest_end'] = "01:00:00g";
+		}
+		
+		// data array
 		$data = array(
 			   'name' => $myReservationArray['name'],
 			   'owner' => $myReservationArray['owner'],
@@ -160,36 +192,20 @@ class Restaurant_Model extends MY_Model
 			   'rest_start' => $myReservationArray['rest_start'],
 			   'rest_end' => $myReservationArray['rest_end']
 			);
+		
+		//insert
 		$this->db->insert('restaurant', $data); 
 	}
 	
-	public function getBlockTime($id)
+	public function checkBlockTime($id,$time)
 	{
-		$this->db->select('open_time','close_time','rest_start','rest_end');	
-		$this->db->where('restaurant_id', $id);
-		$query = $this->db->get('restaurant');
+		$sql = "SELECT * 
+				FROM dineinlater.restaurant
+				WHERE restaurant_id = ?
+				AND ? BETWEEN open_time AND close_time
+				AND ? NOT BETWEEN rest_start AND rest_end;";
+		$query = $this->db->query($sql,array($id,$time,$time));
         return $this->singularResults($query);
-	}
-	
-	public function checkAvailableTime($id,$time)
-	{
-		$blocks = $this->getBlockTime($id);
-		$time = DateTime::createFromFormat('H:i a', $time);
-		$open = DateTime::createFromFormat('H:i a', $blocks->open_time);
-		$close = DateTime::createFromFormat('H:i a', $blocks->close_time);
-		$rest_start = DateTime::createFromFormat('H:i a', $blocks->rest_start);
-		$rest_end = DateTime::createFromFormat('H:i a', $blocks->rest_end);
-		
-		if($time < $open && $time > $close)
-		{
-			echo "BEYOND STORE HOURS";
-		}elseif($time > $rest_start && $time < $rest_end)
-		{
-			echo "WTF JAMES PE";
-		}else
-		{
-			echo "SUCCESS";
-		}
 	}
 	
 	public function deleteReservation($id)

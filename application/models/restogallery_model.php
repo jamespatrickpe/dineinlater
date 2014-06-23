@@ -18,7 +18,7 @@ class Restogallery_Model extends MY_Model
         return $this->singularResults($query);
 	}
 	
-	public function addPicture($picURL, $restoID)
+	public function addPicture($picURL  = "resources/uploads/something.jpg", $restoID)
 	{
 		$data = array(
 			   'picURL' => $picURL,

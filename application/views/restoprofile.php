@@ -1,9 +1,13 @@
-<div id="content-container">		
+<div class="row">
+  <div id="content-container">		
 		<div id="body-container">
 			<div class="blurb-rows">
 				<blurb class="small">
 					<div class="blurb-header"><h2><?php echo $restaurant[0]->name; ?></h2></div>
-						<div id="greeting"><span class="username"><img src="<?php echo $restaurant[0]->logo_photo; ?>" width="200" height="200"></span></div>
+						<div id="greeting">
+							<span class="username"><img src="<?php echo $restaurant[0]->logo_photo; ?>" width="200" height="200"></span>
+							<span class="rate"><?php echo $restoRating[0]->rating; ?>.0</span></p><br>
+						</div>
 												<?php
 							$stat = $this->input->get("stat");
 							if($stat == "DONE")
@@ -13,35 +17,21 @@
 						?>
 					<div class="blurb-stacks" id="commands">
 						<a class="action" id="resto_home-trigger">Description</a>
-						<a class="action" id="resto_profile-trigger">Gallery</a>
-						<a class="action" id="resto_reservation-trigger"> DINE-IN-LATER! ( Reserve ) </a>
-						<a class="action" id="resto_reviews-trigger">Reviews</a> <!--view your written reviews? will return stubs-->
+						<a class="action" id="resto_reviews-trigger">Reviews</a> 
+						<a class="action" id="resto_reservation-trigger"> DINE-IN-LATER! ( Reserve ) </a><!--view your written reviews? will return stubs-->
+						<?php
+							if(!empty($this->session->userdata('checkTime'))){echo $this->session->userdata('checkTime').'</br>';}
+						?>
 					</div>
-				</blurb>
-					<blurb class="half" id="resto_home"><div class="blurb-header"><h2>Description</h2></div>
-						<p><?php echo $restaurant[0]->description; ?></p><br>
-						<p><img src=<?php echo $restaurant[0]->menu_photo; ?>></p><br>						
-					</blurb>
-					<blurb class="half" id="resto_profile"><div class="blurb-header"><h2>Gallery</h2></div>
-						<p>
-							<?php
-							
-								foreach($restoImage as $image)
-								{
-									echo "<img src=".$image->picURL.">"."<br>";
-								}
-							
-							?></p><br>						
-					</blurb>								
-					<blurb class="half" id="resto_reservation" align"left"><div class="blurb-header"><h2>DINE - IN- LATER!</h2></div>
-						<p>
+					<div id="resto_reservation" class="rsvp_form">
+							<p>
 							<?php
 								$this->load->library('session');
 								$userid = $this->session->userdata('id');
 								$usertype = $this->session->userdata('usertype');
 								if(isset($userid) == TRUE && $usertype == "CUSTOMER")
 								{
-									echo form_open('customer/attemptCreateReservation');
+									echo form_open('customer/checkCreateReservation');
 									echo form_hidden("restaurant_id",$restaurant[0]->restaurant_id);
 									echo "For How Many? : ".form_input("slots","")."<br>";
 									echo "Reserve Time: "."<input type='time' name='reservetime'>"."<br>";
@@ -56,15 +46,58 @@
 									echo "<h4>YOU MUST BE LOGGED IN TO RESERVE!</h4>";
 								}
 							?>
-						</p><br>						
+						</p><br>			
+					</div>
+				</blurb>
+					<blurb class="half2" id="resto_home">
+						<div class="blurb-header"><h2>Description</h2></div>
+							<div class="info">
+								<span>
+									<ul>
+										<li class="restaurant-info" id="cuisine"><?php echo $restaurant[0]->cuisine; ?></li>
+										<li class="restaurant-info" id="operating-hours"><?php echo $restaurant[0]->open_time." to ".$restaurant[0]->close_time; ?></li>
+										<li class="restaurant-info" id="phone-number">Mobile <?php echo $restaurant[0]->mobile; ?></li> 
+										<li class="restaurant-info" id="phone-number">Landline <?php echo $restaurant[0]->landline; ?></li>  
+										<li class="restaurant-info" id="address"><?php echo $restaurant[0]->address.",".$restaurant[0]->city; ?></li>
+									</ul>
+									<p><?php echo $restaurant[0]->description; ?></p>
+								</span>
+								<span>
+									<iframe src="http://wikimapia.org/#lat=<?php echo $restaurant[0]->google_lat; ?>&lon=<?php echo $restaurant[0]->google_long; ?>&z=18&l=&ifr=1&m=b" width="300" height="300" frameborder="0"></iframe>
+								</span>
+							</br></br></br>
+							</div>
+					</br>
+						<div class="blurb-header"><h2>Gallery</h2></div>
+						<?php
+								if(is_array($restoImage)){$restoImage='';}
+								
+								try
+								{
+									if(is_array($restoImage))
+									{
+										foreach($restoImage as $image)
+										{
+											echo "<a href=".$image->picURL."><img src=".$image->picURL.">"."</a><br>";
+										}	
+									}
+									else
+									{
+										echo "No Photo Uploaded";
+									}
+								}catch(Exception $e)
+								{
+									echo "No Photo Uploaded";
+								}
+							?><br>
 					</blurb>
-					<blurb class="half" id="resto_reviews"><div class="blurb-header"><h2>Reviews</h2></div>
+					<blurb class="half2" id="resto_reviews"><div class="blurb-header"><h2>Reviews</h2></div>
 						<p>
 							<?php
 								foreach($restoReview as $review)
 								{
 									echo "<h3>".$review->title."</h3>".$review->datetime."<br>";
-									echo "<p>".$review->review."</p>";
+									echo "<p class='reviews'>".$review->review."</p>";
 									
 									$this->load->library('session');
 									$userid = $this->session->userdata('id');
@@ -98,6 +131,7 @@
 							?>
 						</p><br>						
 					</blurb>
-				</div>
 			</div>
+		</div>
 	</div>
+</div>

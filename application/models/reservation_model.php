@@ -150,7 +150,25 @@ class Reservation_Model extends MY_Model
 	
 	public function reservationByHQ($hqid, $limit = 250)
 	{
-		$sql = "SELECT restaurant.name, restaurant.reservation_slots, restaurant.restostatus, restaurant.autoaccept, customer.firstname, customer.lastname, customer.cellphone, reservation.slots, reservation.confirmed, reservation.note, reservation.reservetime, reservation.reservationmade, reservation.status, reservation.showup
+		$sql = "SELECT restaurant.name, restaurant.reservation_slots, 
+				CASE restaurant.restostatus
+				    WHEN 'O' THEN 'Open'
+				    WHEN 'F' THEN 'Full'
+				    ELSE -1
+				END as restostatus
+				, restaurant.autoaccept, customer.firstname, customer.lastname, customer.cellphone, reservation.slots, 
+				CASE reservation.confirmed
+				    WHEN 1 THEN 'Yes'
+				    WHEN 0 THEN 'No'
+				    ELSE -1
+				END as confirmed
+				, reservation.note, reservation.time, reservation.date, reservation.reservationmade, 
+				CASE reservation.status
+				    WHEN 'O' THEN 'On the List'
+				    WHEN 'C' THEN 'Completed'
+				    ELSE -1
+				END as status
+				, reservation.showup
 				FROM  `restaurant` 
 				INNER JOIN  `reservation` ON restaurant.restaurant_id = reservation.restaurant_id
 				INNER JOIN  `hq` ON restaurant.hq_id = hq.hq_id
