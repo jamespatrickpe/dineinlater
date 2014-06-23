@@ -193,7 +193,6 @@ class Restaurant_Model extends MY_Model
 			   'rest_end' => $myReservationArray['rest_end']
 			);
 		$data = array_filter($data);
-
 		//insert
 		$this->db->insert('restaurant', $data); 
 	}
