@@ -108,10 +108,7 @@ $(document).ready(function(){
 		});
 		
 		$("#resto_reservation-trigger").click(function() {		
-			$("#resto_reservation").show();
-			$("#resto_home").hide();
-			$("#resto_profile").hide();
-			$("#resto_reviews").hide();
+			$("#resto_reservation").toggle();
 		});
 		
 		$("#resto_reviews-trigger").click(function() {		

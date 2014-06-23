@@ -175,6 +175,28 @@
 	            flex: 2 0 auto;
     }
     
+    .half2 {
+    	-webkit-flex: 2 0 0;
+	            flex: 2 0 auto;
+    	
+    }
+    
+    .info {
+    	-webkit-flex: 2 0 0;
+	            flex: 2 0 auto;
+    	word-wrap:normal;
+    	display: flex;
+    }
+    
+    .reviews {
+    	width:800px;
+    	word-wrap:normal;
+    }
+    
+    .rsvp_form {
+    	text-align:left;
+    }
+    
     .block {
     	display: block;
     }

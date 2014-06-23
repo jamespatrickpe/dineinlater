@@ -98,15 +98,33 @@ class Customer extends MY_Controller
 		redirect("dashboard/restaurant?id=".$restaurant_id,'refresh');
 	}
 	
+	public function checkCreateReservation()
+	{
+		$reservetime = $this->input->post("reservetime");
+		$restaurant_id = $this->input->post("restaurant_id");
+		
+		$result = $this->Restaurant_Model->checkBlockTime($restaurant_id,$reservetime);
+		
+		if(is_array($result))
+		{
+			$this->attemptCreateReservation();
+		}
+		else
+		{
+			$this->session->set_userdata(array('checkTime'=>"Reservation time is out of Operating hours"));
+			redirect("dashboard/restaurant?stat=done&id=".$restaurant_id,'refresh');
+		}
+	}
+	
 	public function attemptCreateReservation()
 	{
-		$slots = $this->input->post("slots");
-		$reservedate = $this->input->post("reservedate");
 		$reservetime = $this->input->post("reservetime");
+		$reservedate = $this->input->post("reservedate");
+		$slots = $this->input->post("slots");
 		$note = $this->input->post("note");		
 		$customer_id = $this->session->userdata('id');
 		$restaurant_id = $this->input->post("restaurant_id");
-		$this->Reservation_Model->addReservation($restaurant_id, $customer_id, $reservetime , $slots, $note);
+		$this->Reservation_Model->addReservation($restaurant_id, $customer_id, $slots, $note, $reservedate, $reservetime);
 		redirect("dashboard/restaurant?stat=done&id=".$restaurant_id,'refresh');
 	}
 }
