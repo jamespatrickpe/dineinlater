@@ -160,6 +160,7 @@ class Restaurant_Model extends MY_Model
 			   'rest_start' => $myReservationArray['rest_start'],
 			   'rest_end' => $myReservationArray['rest_end']
 			);
+		$data = array_filter($data);
 		$this->db->insert('restaurant', $data); 
 	}
 	

@@ -135,7 +135,8 @@
 				}
 				else 
 				{
-					echo "<span id='login'>log in</span><span id='login-clicked'>log in</span> |";
+					echo anchor('login', 'login |', 'id="login"');
+					//echo "<span id='login'>log in</span><span id='login-clicked'>log in</span> |"; this is annoying
 					echo anchor('registration', 'register', 'class="link-class"');
 				}
 				?>
