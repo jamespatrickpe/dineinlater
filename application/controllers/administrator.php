@@ -56,11 +56,11 @@ class Administrator extends MY_Controller
 		$this->form_validation->set_rules('rest_end', ' Rest End ');
 		
 		//Form Validation
-		if ($this->form_validation->run() == FALSE)
+		if($this->form_validation->run() == FALSE)
 		{
 			$data['css'] = 'resources/account.css';
-			$data['validationErrors'] = validation_errors();
-			$this->loadpageAdmin("administrator/admin_addrestos",$data);
+			$this->session->set_flashdata('validationErrors', validation_errors());
+			redirect('administrator/admin_addrestos','refresh');
 		}
 	
 		//upload menu photo and checker
@@ -74,8 +74,8 @@ class Administrator extends MY_Controller
 			}
 			else
 			{
-				$data['validationErrors'] = $this->upload->display_errors();
-				$this->loadpageAdmin("administrator/admin_addrestos",$data);
+				$this->session->set_flashdata('validationErrors', validation_errors());
+				redirect('administrator/admin_addrestos','refresh');
 			}
 		}
 		else
@@ -94,14 +94,15 @@ class Administrator extends MY_Controller
 			}
 			else
 			{
-				$data['validationErrors'] = $this->upload->display_errors();
-				$this->loadpageAdmin("administrator/admin_addrestos",$data);
+				$this->session->set_flashdata('validationErrors', validation_errors());
+				redirect('administrator/admin_addrestos','refresh');
 			}
 		}
 		else
 		{
 			$logo_photo = "resources/uploads/something.jpg";
 		}
+		
 		
 		//Insert Form Values
 		$name = $this->input->post('name');
