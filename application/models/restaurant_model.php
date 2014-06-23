@@ -157,6 +157,7 @@ class Restaurant_Model extends MY_Model
 		{$myReservationArray['rest_start'] = "12:00:00";}
 		if(isset( $myReservationArray['rest_end'] ) != TRUE)
 		{$myReservationArray['rest_end'] = "01:00:00";}
+
 		
 		// data array
 		$data = array(
@@ -184,8 +185,8 @@ class Restaurant_Model extends MY_Model
 			   'rest_start' => $myReservationArray['rest_start'],
 			   'rest_end' => $myReservationArray['rest_end']
 			);
-		$data = array_filter($data);
 		//insert
+		$data = array_filter($data);
 		$this->db->insert('restaurant', $data); 
 	}
 	
