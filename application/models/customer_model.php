@@ -21,6 +21,14 @@ class Customer_Model extends MY_Model
         return $this->singularResults($query);
 	}
 	
+	public function getUsernameByID($id)
+	{
+		$this->db->select('username');
+		$this->db->where('customer_id', $id);
+		$query = $this->db->get('customer');
+        return $this->singularResults($query);
+	}
+	
 	// get customer by username
 	public function getByUsername($username)
 	{

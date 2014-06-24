@@ -2,6 +2,7 @@
 
 class Administrator extends MY_Controller 
 {
+	//loads constructor
 	public function __construct()
 	{
 		parent::__construct();
@@ -25,6 +26,13 @@ class Administrator extends MY_Controller
 		$data['hqOptions'] = $this->HQ_Model->getAll();
 	}
 	
+	//Loads the Admin Home Page
+	public function index()
+	{
+		$data['css'] = 'resources/account.css';
+		$this->loadpageAdmin("administrator/admin_home",$data);	
+	}
+	
 	//loadpage for Admin
 	public function loadpageAdmin($pageToBeLoaded,$data)
     {
@@ -34,6 +42,17 @@ class Administrator extends MY_Controller
 		$this->load->view('administrator/admin_footer', $data);
 		$this->load->view('templates/footer', $data);
     }
+	
+	//Form Validation
+	public function validateForm($returnPage)
+	{
+		if($this->form_validation->run() == FALSE)
+		{
+			$data['css'] = 'resources/account.css';
+			$this->session->set_flashdata('validationErrors', validation_errors());
+			redirect($returnPage,'refresh');
+		}
+	}
 	
 	//Adds a Restaurant
 	public function attemptAddRestaurant()
@@ -55,7 +74,7 @@ class Administrator extends MY_Controller
 		$this->form_validation->set_rules('address', ' Address ', 'required');
 		$this->form_validation->set_rules('cuisine', ' Type of Cuisine ', 'required');
 		$this->form_validation->set_rules('city', ' City ', 'required');
-		$this->form_validation->set_rules('username', ' Username ', 'required');
+		$this->form_validation->set_rules('username', ' Username ', 'required|unique[restaurants.username]');
 		$this->form_validation->set_rules('password', ' Password ', 'required');
 		$this->form_validation->set_rules('autoaccept', ' Auto Accept ', 'required');
 		$this->form_validation->set_rules('status', ' Status ', 'required');
@@ -66,12 +85,7 @@ class Administrator extends MY_Controller
 		$this->form_validation->set_rules('rest_end', ' Rest End ');
 		
 		//Form Validation
-		if($this->form_validation->run() == FALSE)
-		{
-			$data['css'] = 'resources/account.css';
-			$this->session->set_flashdata('validationErrors', validation_errors());
-			redirect('administrator/admin_addrestos','refresh');
-		}
+		$this->validateForm("administrator/admin_addrestos");
 	
 		//upload menu photo and checker
 		if(($_FILES['menu_photo']['name']))
@@ -318,13 +332,38 @@ class Administrator extends MY_Controller
 		redirect("administrator/admin_restos","refresh");
 	}
 
-	//deletes a blog
-	public function attemptDeleteblog()
+	//Loads Restaurant Management System
+	public function admin_blog()
 	{
-		$id = $this->input->get('id');
-		$this->Bloggers_Model->deleteBlog($id);
+		$data['blogResults'] = $this->Bloggers_Model->getAll();
+		$data['css'] = 'resources/account.css';
+		$this->loadpageAdmin("administrator/admin_blog",$data);	
+	}
+
+	//attempt to add blog
+	public function attemptAddblog()
+	{
+		$title = $this->input->post("title");
+		$url = $this->input->post("url");
+		$urlpic = $this->input->post("urlpic");
+		$blogdate = $this->input->post("blogdate");
+		$author = $this->input->post("author");
+		$snippet = $this->input->post("snippet");
+		
+		$this->form_validation->set_rules('title', ' Blog Title ', 'required');
+		$this->form_validation->set_rules('url', ' URL ', 'required');
+		$this->form_validation->set_rules('urlpic', ' External URL pic ');
+		$this->form_validation->set_rules('blogdate', ' Blog Date ');
+		$this->form_validation->set_rules('author', ' Author ', 'required');
+		$this->form_validation->set_rules('snippet', ' Snippet ', 'required');
+		
+		$this->validateForm("administrator/admin_blog");
+		
+		$data['css'] = 'resources/account.css';
+		$this->Bloggers_Model->addBlog($title,$url,$urlpic,$blogdate,$author,$snippet);
 		redirect("administrator/admin_blog","refresh");
 	}
+	
 
 	public function editblog()
 	{
@@ -339,6 +378,13 @@ class Administrator extends MY_Controller
 	//Deletes an Administrator
 	public function attemptEditBlog()
 	{
+		$this->form_validation->set_rules('title', ' Blog Title ', 'required');
+		$this->form_validation->set_rules('url', ' URL ', 'required');
+		$this->form_validation->set_rules('urlpic', ' External URL pic ');
+		$this->form_validation->set_rules('blogdate', ' Blog Date ');
+		$this->form_validation->set_rules('author', ' Author ', 'required');
+		$this->form_validation->set_rules('snippet', ' Snippet ', 'required');
+		
 		$myUpdateID = $this->input->post('myUpdateID');
 		$title = $this->input->post('title');
 		$url = $this->input->post('url');
@@ -347,6 +393,8 @@ class Administrator extends MY_Controller
 		$author = $this->input->post('author');
 		$snippet = $this->input->post('snippet');
 		
+		$this->validateForm("administrator/admin_blog");
+		
 		$data = array(
 			title => $title,
 			url => $url,
@@ -354,10 +402,17 @@ class Administrator extends MY_Controller
 			blogdate => $blogdate,
 			author => $author,
 			snippet => $snippet
-			
 		);
 	
 		$this->Bloggers_Model->editBlog($data,$id);
+		redirect("administrator/admin_blog","refresh");
+	}
+	
+	//deletes a blog
+	public function attemptDeleteblog()
+	{
+		$id = $this->input->get('id');
+		$this->Bloggers_Model->deleteBlog($id);
 		redirect("administrator/admin_blog","refresh");
 	}
 	
@@ -376,13 +431,6 @@ class Administrator extends MY_Controller
 		$password = $this->input->post('password');
 		$this->Admin_Model->addAdmin($username, $password);
 		redirect("administrator/admin_administrators","refresh");
-	}
-	
-	//Loads the Admin Home Page
-	public function index()
-	{
-		$data['css'] = 'resources/account.css';
-		$this->loadpageAdmin("administrator/admin_home",$data);	
 	}
 	
 	//Loads the Admin Home Page
@@ -410,29 +458,6 @@ class Administrator extends MY_Controller
 		$data['css'] = 'resources/account.css';
 		$this->loadpageAdmin("administrator/admin_addrestos",$data);	
 	}
-	
-	//Loads Restaurant Management System
-	public function admin_blog()
-	{
-		$data['blogResults'] = $this->Bloggers_Model->getAll();
-		$data['css'] = 'resources/account.css';
-		$this->loadpageAdmin("administrator/admin_blog",$data);	
-	}
-
-	public function attemptAddblog()
-	{
-		$title = $this->input->post("title");
-		$url = $this->input->post("url");
-		$urlpic = $this->input->post("urlpic");
-		$blogdate = $this->input->post("blogdate");
-		$author = $this->input->post("author");
-		$snippet = $this->input->post("snippet");
-		
-		$data['css'] = 'resources/account.css';
-		$this->Bloggers_Model->addBlog($title,$url,$urlpic,$blogdate,$author,$snippet);
-		redirect("administrator/admin_blog","refresh");
-	}
-	
 	//Loads Restaurant Management System
 	public function customer()
 	{
@@ -452,6 +477,11 @@ class Administrator extends MY_Controller
 	//Adds an Administrator
 	public function attemptAddHQ()
 	{
+		
+		$this->form_validation->set_rules('username', ' Username ', 'required');
+		$this->form_validation->set_rules('password', ' Password ', 'required');
+		$this->form_validation->set_rules('hqname', ' HQ Name ', 'required');
+		$this->validateForm("administrator/admin_hq");
 		
 		$username = $this->input->post('username');
 		$password = $this->input->post('password');

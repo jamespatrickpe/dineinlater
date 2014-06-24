@@ -45,7 +45,17 @@ class Restaurant_Model extends MY_Model
         return $this->singularResults($query);
 	}
 	
-	public function searchByCuisine($cuisine)
+	public function searchByDescription($description = "%")
+	{
+		$sql = "select r.restaurant_id,r.name,r.address,r.city,r.description,r.logo_photo,rt.rating 
+									from restaurant r join (select restaurant_id,avg(rating) as 'rating' from rating group by restaurant_id) rt 
+									on r.restaurant_id = rt.restaurant_id
+									where r.description like (?)";
+		$query = $this->db->query($sql,array($cuisine));
+		return $this->multipleResults($query);
+	}
+	
+	public function searchByCuisine($cuisine = "%")
 	{
 		$sql = "select r.restaurant_id,r.name,r.address,r.city,r.description,r.logo_photo,rt.rating 
 									from restaurant r join (select restaurant_id,avg(rating) as 'rating' from rating group by restaurant_id) rt 
@@ -55,7 +65,7 @@ class Restaurant_Model extends MY_Model
 		return $this->multipleResults($query);
 	}
 	
-	public function searchByCity($city)
+	public function searchByCity($city = "%")
 	{
 		$sql = "select r.restaurant_id,r.name,r.address,r.city,r.description,r.logo_photo,rt.rating 
 									from restaurant r join (select restaurant_id,avg(rating) as 'rating' from rating group by restaurant_id) rt 
@@ -65,7 +75,7 @@ class Restaurant_Model extends MY_Model
 		return $this->multipleResults($query);
 	}
 	
-	public function searchByName($name)
+	public function searchByName($name = "%")
 	{
 		$sql = "select r.restaurant_id,r.name,r.address,r.city,r.description,r.logo_photo,rt.rating 
 									from restaurant r join (select restaurant_id,avg(rating) as 'rating' from rating group by restaurant_id) rt 
@@ -83,16 +93,18 @@ class Restaurant_Model extends MY_Model
         return $this->singularResults($query);
 	}
 	
-	public function searchResult($keyword)
+	public function searchResult($keyword = "")
 	{
 		$keyword = '%'.$keyword.'%';
-		$sql = "select r.restaurant_id,r.name,r.address,r.city,r.description,r.logo_photo,rt.rating 
+		$sql = "select * 
 									from restaurant r join (select restaurant_id,avg(rating) as 'rating' from rating group by restaurant_id) rt 
 									on r.restaurant_id = rt.restaurant_id
 									where r.name like ?
 									or r.city like ?
-									or r.cuisine like ?";
-		$query = $this->db->query($sql,array($keyword,$keyword,$keyword));
+									or r.cuisine like ?
+									or r.description like ?
+									or r.address like ?";
+		$query = $this->db->query($sql,array($keyword,$keyword,$keyword,$keyword,$keyword));
 		return $this->multipleResults($query);
 	}
 	

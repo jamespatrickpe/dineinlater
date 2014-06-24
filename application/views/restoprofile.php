@@ -1,3 +1,15 @@
+<?php
+
+	if(isset($validationErrors) == "TRUE")
+	{
+		?>
+		<script>
+			alert($validationErrors);
+		</script>
+		<?php		
+	}
+	
+?>
 <div class="row">
   <div id="content-container">		
 		<div id="body-container">
@@ -6,7 +18,9 @@
 					<div class="blurb-header"><h2><?php echo $restaurant[0]->name; ?></h2></div>
 						<div id="greeting">
 							<span class="username"><img src="<?php echo $restaurant[0]->logo_photo; ?>" width="200" height="200"></span>
-							<span class="rate"><?php echo $restoRating[0]->rating; ?>.0</span></p><br>
+							<span class="rate">
+								<?php echo round($restoRating[0]->rating,0).".0"; ?>
+							</span></p><br>
 						</div>
 												<?php
 							$stat = $this->input->get("stat");
@@ -20,7 +34,11 @@
 						<a class="action" id="resto_reviews-trigger">Reviews</a> 
 						<a class="action" id="resto_reservation-trigger"> DINE-IN-LATER! ( Reserve ) </a><!--view your written reviews? will return stubs-->
 						<?php
-							if(!empty($this->session->userdata('checkTime'))){echo $this->session->userdata('checkTime').'</br>';}
+							$varCheckTime = $this->session->userdata('checkTime');
+							if( !empty( $varCheckTime ))
+							{
+								echo $this->session->userdata('checkTime').'</br>';
+							}
 						?>
 					</div>
 					<div id="resto_reservation" class="rsvp_form">
@@ -52,7 +70,7 @@
 					<blurb class="half2" id="resto_home">
 						<div class="blurb-header"><h2>Description</h2></div>
 							<div class="info">
-								<span>
+								<span style="width:350px;">
 									<ul>
 										<li class="restaurant-info" id="cuisine"><?php echo $restaurant[0]->cuisine; ?></li>
 										<li class="restaurant-info" id="operating-hours"><?php echo $restaurant[0]->open_time." to ".$restaurant[0]->close_time; ?></li>
@@ -60,10 +78,10 @@
 										<li class="restaurant-info" id="phone-number">Landline <?php echo $restaurant[0]->landline; ?></li>  
 										<li class="restaurant-info" id="address"><?php echo $restaurant[0]->address.",".$restaurant[0]->city; ?></li>
 									</ul>
-									<p><?php echo $restaurant[0]->description; ?></p>
+									<p style="width:400px; padding:10px;"><?php echo $restaurant[0]->description; ?></p>
 								</span>
 								<span>
-									<iframe src="http://wikimapia.org/#lat=<?php echo $restaurant[0]->google_lat; ?>&lon=<?php echo $restaurant[0]->google_long; ?>&z=18&l=&ifr=1&m=b" width="300" height="300" frameborder="0"></iframe>
+									<iframe style="padding:100px; float:right;" src="http://wikimapia.org/#lat=<?php echo $restaurant[0]->google_lat; ?>&lon=<?php echo $restaurant[0]->google_long; ?>&z=18&l=&ifr=1&m=b" width="300" height="300" frameborder="0"></iframe>
 								</span>
 							</br></br></br>
 							</div>
@@ -92,21 +110,22 @@
 							?><br>
 					</blurb>
 					<blurb class="half2" id="resto_reviews"><div class="blurb-header"><h2>Reviews</h2></div>
-						<p>
 							<?php
 								foreach($restoReview as $review)
 								{
-									echo "<h3>".$review->title."</h3>".$review->datetime."<br>";
+									$customerName = $this->Customer_Model->getUsernameByID($review->customer_id);
+									echo "<h3>".$review->title."</h3>".$review->datetime." by ".$customerName[0]->username;
 									echo "<p class='reviews'>".$review->review."</p>";
-									
-									$this->load->library('session');
-									$userid = $this->session->userdata('id');
-									$usertype = $this->session->userdata('usertype');
 								}
+								
+								$this->load->library('session');
+								$userid = $this->session->userdata('id');
+								$usertype = $this->session->userdata('usertype');
 								
 								if(isset($userid) == TRUE && $usertype == "CUSTOMER")
 									{
-										echo form_open('customer/attemptCreateReview');
+										
+										echo form_open('customer/attemptCreateReview', array('style' => 'text-align:left') );
 										echo form_hidden("restaurant_id",$restaurant[0]->restaurant_id);
 										
 										$options = array(
@@ -116,20 +135,28 @@
 							                  4  => '4 STAR',
 							                  5  => '5 STAR',
 							                );
-										echo form_dropdown('rating', $options)."<br>";
+										echo "<table style='vertical-align: bottom;'>";
+										echo "<tr>";
+										echo "<tr><td>RATING :</td><td>".form_dropdown('rating', $options)."</td>";
 										
-										echo "title : ".form_input("title","")."<br>";
-										echo "Review : ".form_textarea("review","")."<br>";
-										echo form_reset("reset","RESET")."<br>";
-										echo form_submit("submit","ADD")."<br>";
+										echo "<tr><td>TITLE :</td><td>".form_input("","title","")."</td>";
+										echo "<tr><td>REVIEW :</td><td>".form_textarea("review","")."</td>";
+										
+										echo "</table>";
+										
+										$optionsTwo = array(
+											"class" => "searchButton",
+										);
+										echo form_reset($options, "reset","Reset");
+										echo form_submit($options, "submit","Review this!")."<br>";
 										echo form_close();
+										
 									}
 									else 
 									{
 										echo "<h4>YOU MUST BE LOGGED IN TO REVIEW!</h4>";
 									}
-							?>
-						</p><br>						
+							?>					
 					</blurb>
 			</div>
 		</div>

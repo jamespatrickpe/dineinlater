@@ -3,14 +3,14 @@
 		<div id="body-container">
 			<div class="blurb-rows">
 				<blurb class="small" id="filter">
-					<?php form_open('dashboard') ?>
+					<?php	$attributes = array( "method" => "GET"); echo form_open("dashboard",$attributes); ?>
 						<div class="blurb-header"><h2>Filter Results</h2></div>
 							<h3>City</h3>
 							<div class="options">
 								<?php
 									foreach($cityResults as $city)
 									{
-										echo "<input name='city' type='checkbox' class='check' id='American' value=".$city->city."><label for='American'>".$city->city."</label><br>";
+										echo "<input name='filterTag[]' type='checkbox' class='check' id='American' value=".$city->city."><label for='American'>".$city->city."</label><br>";
 									}
 								?> 
 							</div>
@@ -20,11 +20,26 @@
 								<?php
 									foreach($cuisineResults as $cuisine)
 									{
-										echo "<input name='cuisine' type='checkbox' class='check' id='American' value=".$cuisine->cuisine."><label for='American'>".$cuisine->cuisine."</label><br>";
+										echo "<input name='filterTag[]' type='checkbox' class='check' id='American' value=".$cuisine->cuisine."><label for='American'>".$cuisine->cuisine."</label><br>";
 									}
 								?> 
 							</div>
-						
+							<br>
+							<div align='center'>
+						<?php
+							echo form_submit(
+							"submit","LOOK FOR RESTOS!", 
+							"style=' background: #d8462d; color: #fffeee; padding:5px; padding-left:10px; padding-right:10px;
+							-webkit-border-radius: 10px;
+						      -moz-border-radius: 10px;
+						           border-radius: 10px; 
+							-webkit-box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
+							      -moz-box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
+							           box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
+							   display: inline-block; -webkit-appearance: none;'"
+							);
+						?>
+						</div>
 					</form>
 				</blurb>				
 				<blurb id="restaurant-listing">
@@ -53,31 +68,37 @@
 					
 					<?php
 					
-					foreach($restaurantResults as $resto)
+					if(isset($restaurantResults) && is_array($restaurantResults))
 					{
-						echo "<div class='restaurant'><div class='restaurant-info'>";
-						echo "<h2 style='background: #ccd7cd;'>".anchor("dashboard/restaurant?id=".$resto->restaurant_id, $resto->name)."</h2>";
-						echo "<ul>";
-						echo "<li class='restaurant-info' id='cuisine'>".$resto->cuisine."</li>";
-						echo "<li class='restaurant-info' id='operating-hours'>".$resto->open_time." to ".$resto->rest_start."</li>";
-						echo "<li class='restaurant-info' id='operating-hours'>".$resto->rest_start." to ".$resto->close_time."</li>";
-						echo "<li class='restaurant-info' id='phone-number'> ".$resto->landline." & ".$resto->mobile." </li>";
-						echo "<li class='restaurant-info' id='address'>".$resto->address."</li>";
-						echo "<li class='restaurant-info' id='restaurant-highlights'>".$resto->description."</li>";
-						echo "<li class='restaurant-info' id='city'>".$resto->city."</li>";
-						echo "</ul>";
-						echo "</div>";
-						echo "<div class='image-rate'>";
-						echo "<img src='".$resto->logo_photo."' width='200' height='200' class='restaurant-image'>"."<div class='rating'>"."<span class='rate'>";
-						$rating = $this->Rating_Model->getRatingByRestaurant($resto->restaurant_id);
-						if(isset($rating) == TRUE)
+						foreach($restaurantResults as $resto)
 						{
-							//echo $rating[0]->rating;
+							echo "<div class='restaurant'><div class='restaurant-info'>";
+							echo "<h2 style='color: #ccd7cd;'>".anchor("dashboard/restaurant?id=".$resto->restaurant_id, $resto->name)."</h2>";
+							echo "<ul>";
+							echo "<li class='restaurant-info' id='cuisine'>".$resto->cuisine."</li>";
+							echo "<li class='restaurant-info' id='operating-hours'>".$resto->open_time." to ".$resto->rest_start."</li>";
+							echo "<li class='restaurant-info' id='operating-hours'>".$resto->rest_start." to ".$resto->close_time."</li>";
+							echo "<li class='restaurant-info' id='phone-number'> ".$resto->landline." & ".$resto->mobile." </li>";
+							echo "<li class='restaurant-info' id='address'>".$resto->address."</li>";
+							echo "<li class='restaurant-info' id='restaurant-highlights'>".$resto->description."</li>";
+							echo "<li class='restaurant-info' id='city'>".$resto->city."</li>";
+							echo "</ul>";
+							echo "</div>";
+							echo "<div class='image-rate'>";
+							echo "<img src='".$resto->logo_photo."' width='200' height='200' class='restaurant-image'>"."<div class='rating'>"."<span class='rate'>";
+							$rating = $this->Rating_Model->getRatingByRestaurant($resto->restaurant_id);
+							if(isset($rating) == TRUE)
+							{
+								//echo $rating[0]->rating;
+							}
+							echo "<span></div></div></div></a>";
+	
 						}
-						echo "<span></div></div></div></a>";
-
 					}
-
+					else
+					{
+							echo "<div class='restaurant' style='min-width: 800px;'><h1> NO RESTOS FOUND :( <br>TRY AGAIN! :) </h1></div>";
+					}
 					?>
 				</blurb>
 			</div>

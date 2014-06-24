@@ -116,8 +116,17 @@
 		<?php echo anchor('welcome/index', ' ', 'class="logo"') ?>
 		<a href="allrestaurants.html"><div class="navigation-stub"><?php echo anchor("dashboard/","All Restaurants","") ?></div></a>
 		<a href="blogger-reviews.html"><div class="navigation-stub"><?php echo anchor("footer/bloggers","Blogger Reviews","") ?></div></a>
-		<div class="navigation-stub"><?php	$attributes = array(); echo form_open("restaurant/search",$attributes); ?>
-			<input id="navigation-search" name="keyword" placeholder="Food/Restaurant/Place"><input type="submit" class="searchButton" value="Search"></form></div>
+			
+		<?php	$attributes = array( "method" => "GET"); echo form_open("dashboard",$attributes); ?>
+		<div class="navigation-stub">
+		<input id="navigation-search" name="aggregate" placeholder="Food/Restaurant/Place">
+		</div>
+		<div class="navigation-stub">
+		<input type="submit" class="searchButton" value="LOOK FOR RESTOS!">
+		</div>
+		
+		</form>
+		
 		<div id="account">
 			<?php 
 				if($this->session->userdata('id'))

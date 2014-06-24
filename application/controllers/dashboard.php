@@ -12,18 +12,42 @@ class Dashboard extends MY_Controller
 		$this->load->model('Bloggers_Model');
 		$this->load->model('Reservation_Model');
 		$this->load->model('Rating_Model');
-		
 	}
 	
 	//loads the customer home page
 	public function index()
 	{
-		$city = $this->input->get('city');
-		$cuisine = $this->input->get('cuisine');
-		
+		//get unique values
 		$data['cityResults'] = $this->Restaurant_Model->getCity();
 		$data['cuisineResults'] = $this->Restaurant_Model->getCuisine();
-		$data['restaurantResults'] = $this->Restaurant_Model->getAll();
+		
+		//get from _GET
+		$filterTag = $this->input->get('filterTag');
+		$aggregate = $this->input->get('aggregate');
+		
+		
+		//search
+		$myArray = array();
+		$data['restaurantResults'] = array();
+		
+		if(is_array($filterTag) || $filterTag != NULL)
+		{
+			foreach($filterTag as $tag)
+			{
+				$myArray = $this->Restaurant_Model->searchResult($tag);
+				if(is_array( $data['restaurantResults'] ) && is_array( $myArray ))
+				{
+					$data['restaurantResults'] = array_merge($data['restaurantResults'] ,$myArray);
+				}
+				
+			}
+		}
+		else
+		{
+			$data['restaurantResults'] = $this->Restaurant_Model->searchResult($aggregate);
+		}
+		
+		
 		$data['css'] = "resources/allrestaurants.css";
 		$this->loadPage("allrestaurants",$data);
 	}

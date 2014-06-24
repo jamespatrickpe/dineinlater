@@ -32,16 +32,20 @@
 
 <h3> Add Blog </h3>
 	<?php
-		echo form_open('administrator/attemptAddBlog',"style='text-align:left;'")."<br>";
-		echo "title : ".form_input("title","")."<br>";	
-		echo "url : ".form_input("url","")."<br>";
-		echo "urlpic : ".form_input("urlpic","")."<br>";
-		echo "blogdate : "."<input name='blogdate' type='datetime-local'>"."<br>";
-		echo "author : ".form_input("author","")."<br>";
-		echo "snippet : ".form_textarea("snippet","")."<br>";
+		echo "<table style='vertical-align: bottom;'>";
+		echo "<tr>";
+		echo form_open('administrator/attemptAddBlog',"style='text-align:left;'")."</td>";
+		echo "<tr><td>title : </td><td>".form_input("title","")."</td>";	
+		echo "<tr><td>url : </td><td>".form_input("url","")."</td>";
+		echo "<tr><td>urlpic : </td><td>".form_input("urlpic","")."</td>";
+		echo "<tr><td>blogdate : </td><td>"."<input name='blogdate' type='datetime-local'>"."</td>";
+		echo "<tr><td>author : </td><td>".form_input("author","")."</td>";
+		echo "<tr><td>snippet : </td><td>".form_textarea("snippet","")."</td>";
+		echo "</table>";
 		echo form_reset("reset","reset");
 		echo form_submit("submit","add")."<br>";
 		echo form_close();
+		
 	?>
 	
 <h3> Delete Blog </h3>
