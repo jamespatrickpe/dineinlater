@@ -39,7 +39,6 @@ class Dashboard extends MY_Controller
 				{
 					$data['restaurantResults'] = array_merge($data['restaurantResults'] ,$myArray);
 				}
-				
 			}
 		}
 		else
@@ -47,19 +46,23 @@ class Dashboard extends MY_Controller
 			$data['restaurantResults'] = $this->Restaurant_Model->searchResult($aggregate);
 		}
 		
-		
 		$data['css'] = "resources/allrestaurants.css";
 		$this->loadPage("allrestaurants",$data);
 	}
 	
 	public function restaurant()
 	{
+		
 		$restaurant_id = $this->input->get('id');
 		$data['restaurant'] = $this->Restaurant_Model->getById($restaurant_id);
 		$data['restoImage'] = $this->Restaurant_Model->getGalleryByResto($restaurant_id);
 		$data['restoReview'] = $this->Rating_Model->getByRestoID($restaurant_id);
 		$data['restoRating'] = $this->Rating_Model->getRatingByRestaurant($restaurant_id);
+		
+		
+		
 		$data['css'] = "resources/restaurant.css";
 		$this->loadPage("restoprofile",$data);
+		
 	}
 }

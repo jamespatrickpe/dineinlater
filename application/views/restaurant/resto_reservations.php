@@ -1,9 +1,4 @@
 <h3> Reservation Confirmation </h3>
-<?php 
-	if(!is_null($this->session->userdata('confirmation')))
-	{echo $this->session->userdata('confirmation');}
-	else{}
-?>
 <table>
 <?php
 	if(is_array($reservations) == TRUE)
@@ -40,3 +35,5 @@
 </br>
 </br>
 <strong><?php echo anchor("restaurant/reservationToday", " RESERVATIONS TODAY "); ?></strong>
+</br>
+<strong><?php echo anchor("restaurant/allReservations", " PRINT ALL RESERVATIONS "); ?></strong>

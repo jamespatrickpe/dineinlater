@@ -13,8 +13,11 @@
 			
 		foreach($reservations as $rows) 
 		{
+			
+			$fullname = $this->Customer_Model->getFullNameByID( $rows->customer_id );
+			
 			echo "<tr>";
-			echo "<td>".$rows->fullname."</td>";
+			echo "<td>".$fullname."</td>";
 			echo "<td>".$rows->time."</td>";
 			echo "<td>".$rows->slots."</td>";
 			echo "<td>".$rows->note."</td>";

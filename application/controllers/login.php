@@ -235,14 +235,14 @@ class Login extends MY_Controller
 				}
 				else
 				{
-					$data['validationErrors'] = "Invalid Username or Password; Please try again!";
+					$data['validationErrors'] = "Invalid Username or Password; Please try again! Wrong Password";
 					$data['formDestination'] = "login/attemptLoginRestaurant";
 					$this->loadpage('login',$data);
 				}
 			}
 			else 
 			{
-				$data['validationErrors'] = "Invalid Username or Password; Please try again!";
+				$data['validationErrors'] = "Invalid Username or Password; Please try again! No username exists";
 				$data['formDestination'] = "login/attemptLoginRestaurant";
 				$this->loadpage('login',$data);
 			}
@@ -250,7 +250,7 @@ class Login extends MY_Controller
 		}
 		else
 		{
-			$data['validationErrors'] = "Invalid Username or Password; Please try again!";
+			$data['validationErrors'] = "Invalid Username or Password; Please try again! Initialization Errors";
 			$data['formDestination'] = "login/attemptLoginRestaurant";
 			$this->loadpage('login',$data);
 		}

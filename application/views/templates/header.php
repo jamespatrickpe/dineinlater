@@ -130,7 +130,7 @@
 		<div id="account">
 			<?php 
 				if($this->session->userdata('id'))
-				{
+				{	
 					$mySession = $this->session->all_userdata();
 					if( isset( $mySession['firstname'] ) == TRUE && isset( $mySession['lastname'] ) == TRUE )
 					{
@@ -140,6 +140,9 @@
 					{
 						echo anchor('customer', "<span>".$mySession['username']."</span> |", 'class="link-class"');
 					}
+					
+					
+					
 					echo anchor('login/logout', 'Log Out', 'class="link-class"');
 				}
 				else 

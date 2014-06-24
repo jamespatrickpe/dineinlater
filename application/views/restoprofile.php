@@ -1,15 +1,3 @@
-<?php
-
-	if(isset($validationErrors) == "TRUE")
-	{
-		?>
-		<script>
-			alert($validationErrors);
-		</script>
-		<?php		
-	}
-	
-?>
 <div class="row">
   <div id="content-container">		
 		<div id="body-container">
@@ -19,7 +7,12 @@
 						<div id="greeting">
 							<span class="username"><img src="<?php echo $restaurant[0]->logo_photo; ?>" width="200" height="200"></span>
 							<span class="rate">
-								<?php echo round($restoRating[0]->rating,0).".0"; ?>
+								<?php 
+									if(isset( $restoRating[0]->rating) )
+									{
+										echo round($restoRating[0]->rating).".0"; 
+									}
+								?>
 							</span></p><br>
 						</div>
 												<?php
@@ -34,10 +27,10 @@
 						<a class="action" id="resto_reviews-trigger">Reviews</a> 
 						<a class="action" id="resto_reservation-trigger"> DINE-IN-LATER! ( Reserve ) </a><!--view your written reviews? will return stubs-->
 						<?php
-							$varCheckTime = $this->session->userdata('checkTime');
+							$varCheckTime = $this->session->flashdata('validationErrors');
 							if( !empty( $varCheckTime ))
 							{
-								echo $this->session->userdata('checkTime').'</br>';
+								echo "<h4 align='center'>".$varCheckTime."</h4>";	
 							}
 						?>
 					</div>
@@ -47,14 +40,15 @@
 								$this->load->library('session');
 								$userid = $this->session->userdata('id');
 								$usertype = $this->session->userdata('usertype');
+								
 								if(isset($userid) == TRUE && $usertype == "CUSTOMER")
 								{
 									echo form_open('customer/checkCreateReservation');
 									echo form_hidden("restaurant_id",$restaurant[0]->restaurant_id);
-									echo "For How Many? : ".form_input("slots","")."<br>";
-									echo "Reserve Time: "."<input type='time' name='reservetime'>"."<br>";
-									echo "Reserve Date: "."<input type='date' name='reservedate'>"."<br>";
-									echo "Note : ".form_input("note","")."<br>";
+									echo "For How Many? : <input type='number' name='slots'> <br>";
+									echo "Reserve Time: "."<input type='time' name='reservetime' required='required'>"."<br>";
+									echo "Reserve Date: "."<input type='date' name='reservedate' required='required'>"."<br>";
+									echo "Note : <input type='text' name='note'> <br>";
 									echo form_reset("reset","RESET");
 									echo form_submit("submit","ADD")."<br>";
 									echo form_close();
@@ -88,10 +82,6 @@
 					</br>
 						<div class="blurb-header"><h2>Gallery</h2></div>
 						<?php
-								if(is_array($restoImage)){$restoImage='';}
-								
-								try
-								{
 									if(is_array($restoImage))
 									{
 										foreach($restoImage as $image)
@@ -103,11 +93,7 @@
 									{
 										echo "No Photo Uploaded";
 									}
-								}catch(Exception $e)
-								{
-									echo "No Photo Uploaded";
-								}
-							?><br>
+							?>
 					</blurb>
 					<blurb class="half2" id="resto_reviews"><div class="blurb-header"><h2>Reviews</h2></div>
 							<?php
@@ -137,18 +123,22 @@
 							                );
 										echo "<table style='vertical-align: bottom;'>";
 										echo "<tr>";
-										echo "<tr><td>RATING :</td><td>".form_dropdown('rating', $options)."</td>";
-										
-										echo "<tr><td>TITLE :</td><td>".form_input("","title","")."</td>";
-										echo "<tr><td>REVIEW :</td><td>".form_textarea("review","")."</td>";
+										echo "<tr><td>RATING :</td><td>".form_dropdown('rating',$options)."</td>";
+										$title = array(
+											"name"=>"title",
+											"required"=>"required"
+										);
+										$review = array(
+											"name"=>"review",
+											"required"=>"required"
+										);
+										echo "<tr><td>TITLE :</td><td>".form_input($title)."</td>";
+										echo "<tr><td>REVIEW :</td><td>".form_textarea($review)."</td>";
 										
 										echo "</table>";
 										
-										$optionsTwo = array(
-											"class" => "searchButton",
-										);
-										echo form_reset($options, "reset","Reset");
-										echo form_submit($options, "submit","Review this!")."<br>";
+										echo form_reset("reset","Reset", "class=searchButton");
+										echo form_submit("submit","Review this!", "class=searchButton")."<br>";
 										echo form_close();
 										
 									}

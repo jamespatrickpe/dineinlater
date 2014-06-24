@@ -24,6 +24,18 @@ class Reservation_Model extends MY_Model
 	// adds row
 	public function addReservation($resto_ID, $customer_ID , $slots, $note, $date, $time)
 	{
+		//autoaccept check
+		$this->load->model('Restaurant_Model');
+		$nVal = $this->Restaurant_Model->isAutoAccept($resto_ID);
+		if($nVal == true)
+		{
+			$confirmed = 1;
+		}
+		else 
+		{
+			$confirmed = 0;
+		}
+		
 		$data = array(
 			   'restaurant_id' => $resto_ID,
 			   'customer_ID' => $customer_ID,
@@ -119,12 +131,22 @@ class Reservation_Model extends MY_Model
 	
 	public function reservationRestoToday($resto_ID)
 	{
+		/*
 		$sql = "SELECT r.reservation_id, CONCAT(c.firstname,' ',c.lastname) as fullname,  r.time, r.date, r.slots, r.reservationmade, r.note
 				FROM reservation r JOIN customer c
 				ON r.customer_id = c.customer_id
 				WHERE r.confirmed = 1
 				AND r.restaurant_id = ?
 				AND r.date = CURDATE()";
+		 * 
+		 */
+		$sql = "
+				SELECT * 
+				FROM  `reservation` 
+				WHERE date = CURDATE() 
+				AND restaurant_id = ?
+				AND confirmed = 1;
+		";
 		$query = $this->db->query($sql,array($resto_ID));
         return $this->multipleResults($query);
 	}
@@ -146,6 +168,23 @@ class Reservation_Model extends MY_Model
 				ORDER BY r.reservationmade desc";
 		$query = $this->db->query($sql,array($customer_ID));
         return $this->multipleResults($query);
+	}
+	
+	public function allReservationsByCustomerID($customer_ID)
+	{
+		$this->db->where('customer_id', $customer_ID);
+		$this->db->where('status', 'O');
+		$query = $this->db->get('reservation');
+        return $this->multipleResults($query);
+	}
+	
+	public function cancelReservationById($reservation_ID)
+	{
+		$data = array(
+               'status' => 'C',
+            );
+		$this->db->where('reservation_id', $reservation_ID);
+		$this->db->update('reservation',$data);
 	}
 	
 	public function reservationByHQ($hqid, $limit = 250)

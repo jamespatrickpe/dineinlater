@@ -22,19 +22,21 @@ class Restogallery_Model extends MY_Model
 	{
 		$data = array(
 			   'picURL' => $picURL,
-			   'restaurant_id' => $restoID
+			   'restoID' => $restoID
 			);
 		$this->db->insert('restogallery', $data); 
 	}
 	
 	public function deletePicture($id)
 	{
-		$this->db->delete('restogallery', array('restotag_id' => $id)); 
+		$this->db->delete('restogallery', array('restogallery_id' => $id)); 
 	}
 	
 	// Gets all restaurants by ID
 	public function getAllByRestaurantID($id)
 	{
-		
+		$this->db->where('restoID', $id);
+		$query = $this->db->get('restogallery');
+        return $this->multipleResults($query);
 	}
 }

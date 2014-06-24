@@ -1,20 +1,20 @@
 <h3> Reviews </h3>
-<table>
+<table align="left" cellpadding=5px;>
 <?php
 	if(is_array($reviews) == TRUE)
 	{
 		echo "<tr>";
    		echo "<th>Review Title</th>";
    		echo "<th>Review Details</th>";
-   		echo "<th></th>";
+   		echo "<th>Rating! </th>";
    		echo "</tr>";
 			
 		foreach($reviews as $rows) 
 		{
-			echo "<tr>";
+			echo "<tr align='center'>";
 			echo "<td>".$rows->title."</td>";
 			echo "<td>".$rows->review."</td>";
-			echo "<td><h3 class='rate'>".$rows->rating.".0</h3></td>";
+			echo "<td>".$rows->rating."</td>";
 			echo "</tr>";
 		}
 	}else

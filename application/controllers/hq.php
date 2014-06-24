@@ -39,5 +39,27 @@ class HQ extends MY_Controller
 		$data['reservationsByHQ'] = $this->Reservation_Model->reservationByHQ($id);
 		$this->load->view("hq/hq_home",$data);
 	}
+
+	public function hq_restaurantdashboard()
+	{
+		$data['css'] = 'resources/account.css';
+		$id = $this->session->userdata('id');
+		$data['allRestaurantsByHQ'] = $this->Restaurant_Model->getByHQ($id);
+		$this->loadPageHQ("hq/hq_restaurantdashboard", $data);
+	}
 	
+	public function accessRestaurant()
+	{
+		$restaurant_id = $this->input->post('restaurant_id');
+		$username = $this->input->post('username');
+		
+		$newdata = array(
+			'id'  => $dataObjectArray[0]->restaurant_id,
+			'username'  => $dataObjectArray[0]->username,
+			'usertype' => "RESTAURANT"
+               );
+
+		$this->session->set_userdata($newdata);
+		redirect("restaurant","refresh");	
+	}
 }

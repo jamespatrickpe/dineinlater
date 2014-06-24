@@ -67,7 +67,6 @@
 					</a>-->
 					
 					<?php
-					
 					if(isset($restaurantResults) && is_array($restaurantResults))
 					{
 						foreach($restaurantResults as $resto)
@@ -77,7 +76,7 @@
 							echo "<ul>";
 							echo "<li class='restaurant-info' id='cuisine'>".$resto->cuisine."</li>";
 							echo "<li class='restaurant-info' id='operating-hours'>".$resto->open_time." to ".$resto->rest_start."</li>";
-							echo "<li class='restaurant-info' id='operating-hours'>".$resto->rest_start." to ".$resto->close_time."</li>";
+							echo "<li class='restaurant-info' id='operating-hours'>".$resto->rest_end." to ".$resto->close_time."</li>";
 							echo "<li class='restaurant-info' id='phone-number'> ".$resto->landline." & ".$resto->mobile." </li>";
 							echo "<li class='restaurant-info' id='address'>".$resto->address."</li>";
 							echo "<li class='restaurant-info' id='restaurant-highlights'>".$resto->description."</li>";

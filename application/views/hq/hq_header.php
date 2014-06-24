@@ -3,6 +3,7 @@
 <h2>
 	<?php
 	echo anchor("hq/", " DASHBOARD");
+	echo anchor("hq/hq_restaurantdashboard", "| ACCESS OWNED RESTOS");
 	?>
 </h2>
 

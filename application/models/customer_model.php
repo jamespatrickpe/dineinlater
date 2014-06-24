@@ -21,6 +21,15 @@ class Customer_Model extends MY_Model
         return $this->singularResults($query);
 	}
 	
+	// gets cellphone by Id
+	public function getCellphoneById($id)
+	{
+		$this->db->select('cellphone');
+		$this->db->where('customer_id', $id);
+		$query = $this->db->get('customer');
+        return $this->singularResults($query);
+	}
+	
 	public function getUsernameByID($id)
 	{
 		$this->db->select('username');
@@ -35,6 +44,16 @@ class Customer_Model extends MY_Model
 		$this->db->where('username', $username);
 		$query = $this->db->get('customer');
         return $this->singularResults($query);
+	}
+	
+		// get customer by username
+	public function getFullNameByID($id)
+	{
+		$this->db->where('customer_id', $id);
+		$query = $this->singularResults( $this->db->get('customer') );
+		$firstname = $query[0]->firstname;
+		$lastname = $query[0]->lastname;
+        return $firstname." ".$lastname;
 	}
 	
 	// get customer by email

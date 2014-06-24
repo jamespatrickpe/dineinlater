@@ -11,7 +11,7 @@ class Restaurant_Model extends MY_Model
 		$query = $this->db->get('restaurant');
         return $this->multipleResults($query);
 	}
-	
+
 	public function getByHQ($id)
 	{
 		$this->db->where('hq_id', $id);
@@ -96,8 +96,9 @@ class Restaurant_Model extends MY_Model
 	public function searchResult($keyword = "")
 	{
 		$keyword = '%'.$keyword.'%';
-		$sql = "select * 
-									from restaurant r join (select restaurant_id,avg(rating) as 'rating' from rating group by restaurant_id) rt 
+		
+		$sql = "select r.restaurant_id, r.name, r.cuisine, r.open_time, r.close_time, r.rest_start, r.rest_end, r.landline, r.mobile, r.address, r.description, r.city, r.logo_photo, r.menu_photo, rt.rating
+									from restaurant r left join (select restaurant_id,avg(rating) as 'rating' from rating group by restaurant_id) rt 
 									on r.restaurant_id = rt.restaurant_id
 									where r.name like ?
 									or r.city like ?
@@ -203,11 +204,19 @@ class Restaurant_Model extends MY_Model
 	
 	public function checkBlockTime($id,$time)
 	{
+		/*
 		$sql = "SELECT * 
 				FROM dineinlater.restaurant
 				WHERE restaurant_id = ?
 				AND ? BETWEEN open_time AND close_time
-				AND ? NOT BETWEEN rest_start AND rest_end;";
+				AND ? NOT BETWEEN rest_start AND rest_end;";*/
+				
+		// RAYMS WALA NAMAN KASING LUNCH BREAK YUN RESTO! hindi hardware store. EDI DI NA TAYO KUMAIN NG LUNCH!
+		$sql = "SELECT * 
+				FROM dineinlater.restaurant
+				WHERE restaurant_id = ?
+				AND ? BETWEEN open_time AND close_time";
+				
 		$query = $this->db->query($sql,array($id,$time,$time));
         return $this->singularResults($query);
 	}
@@ -228,5 +237,21 @@ class Restaurant_Model extends MY_Model
 		$this->db->where('restoID', $restaurant_id);
 		$query = $this->db->get('restogallery');
         return $this->multipleResults($query);
+	}
+	
+	public function isAutoAccept($restaurant_id)
+	{
+		$this->db->where('restaurant_id', $restaurant_id);
+		$query = $this->db->get('restaurant');
+		$myQuery = $this->singularResults($query);
+		$qVal = $myQuery[0]->autoaccept;
+		if($qVal == 1)
+		{
+			return TRUE;
+		}
+		else
+		{
+			return FALSE;
+		}
 	}
 }
